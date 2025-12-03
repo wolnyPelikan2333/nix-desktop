@@ -26,19 +26,20 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+
             home-manager.users.michal.home.stateVersion = "25.05";
           }
 
-          # NH — z nixpkgs (działa, nie kompiluje)
+          # NH z nixpkgs → tu używamy pkgs.nh (DOSTĘPNE tylko w module!)
           {
             environment.systemPackages = [
-              nixpkgs.pkgs.nh
+              pkgs.nh
             ];
           }
         ];
       };
 
-      # Fix for nh (required for flake-only systems)
+      # Wymagane przez NH dla flake-only systemów
       packages.${system}.default =
         self.nixosConfigurations.desktop.config.system.build.toplevel;
     };

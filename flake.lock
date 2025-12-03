@@ -21,26 +21,6 @@
         "type": "github"
       }
     },
-    "nh": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1764645781,
-        "narHash": "sha256-+rEb55Uuz5GEwJXf9nWwNTDvWjDCGTzux68wgnnZLO8=",
-        "owner": "viperML",
-        "repo": "nh",
-        "rev": "674a055cbde02796048f3c82a8b4b426884a33d6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "viperML",
-        "repo": "nh",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1764560356,
@@ -60,7 +40,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nh": "nh",
         "nixpkgs": "nixpkgs"
       }
     }
