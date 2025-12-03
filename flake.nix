@@ -3,11 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # NH — najnowsza wersja (5.x)
+    nh.url = "github:viperML/nh";
+    nh.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nh, ... }@inputs:
     let
       system = "x86_64-linux";
     in
@@ -31,10 +36,21 @@
               home.stateVersion = "25.05";
             };
           }
+
+          # NH dostępny systemowo
+          {
+            environment.systemPackages = [
+              nh.packages.${system}.default
+            ];
+          }
         ];
       };
 
-      # ---- Fix for nh ----
+      # ---- Wymagane przez NH ----
+      packages.${system}.default =
+        self.nixosConfigurations.desktop.config.system.build.toplevel;
+
+      # Dodatkowe aliasy na życzenie
       packages.${system}.desktop =
         self.nixosConfigurations.desktop.config.system.build.toplevel;
     };
