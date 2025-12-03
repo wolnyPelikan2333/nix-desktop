@@ -6,12 +6,9 @@
 
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-     nixpkgs.pkgs.nh
-    nh.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nh, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
     in
@@ -29,25 +26,21 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-
-            home-manager.users.michal = {
-              home.stateVersion = "25.05";
-            };
+            home-manager.users.michal.home.stateVersion = "25.05";
           }
 
+          # NH — z nixpkgs (działa, nie kompiluje)
           {
             environment.systemPackages = [
-              nh.packages.${system}.default
+              nixpkgs.pkgs.nh
             ];
           }
         ];
       };
 
-      # NH potrzebuje attributes.packages.${system}.default
-      packages.${system} = {
-        default = self.nixosConfigurations.desktop.config.system.build.toplevel;
-        desktop = self.nixosConfigurations.desktop.config.system.build.toplevel;
-      };
+      # Fix for nh (required for flake-only systems)
+      packages.${system}.default =
+        self.nixosConfigurations.desktop.config.system.build.toplevel;
     };
 }
 
