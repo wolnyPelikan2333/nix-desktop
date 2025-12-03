@@ -14,7 +14,6 @@
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
-  programs.zsh.enableLsColors = true;
   programs.zsh.dotDir = ".config/zsh";
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.enableSyntaxHighlighting = true;
