@@ -7,7 +7,6 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # NH — najnowsza wersja (5.x)
     nh.url = "github:viperML/nh";
     nh.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -17,7 +16,6 @@
       system = "x86_64-linux";
     in
     {
-      # ---- NixOS configuration ----
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         inherit system;
 
@@ -37,7 +35,6 @@
             };
           }
 
-          # NH dostępny systemowo
           {
             environment.systemPackages = [
               nh.packages.${system}.default
@@ -46,13 +43,11 @@
         ];
       };
 
-      # ---- Wymagane przez NH ----
-      packages.${system}.default =
-        self.nixosConfigurations.desktop.config.system.build.toplevel;
-
-      # Dodatkowe aliasy na życzenie
-      packages.${system}.desktop =
-        self.nixosConfigurations.desktop.config.system.build.toplevel;
+      # NH potrzebuje attributes.packages.${system}.default
+      packages.${system} = {
+        default = self.nixosConfigurations.desktop.config.system.build.toplevel;
+        desktop = self.nixosConfigurations.desktop.config.system.build.toplevel;
+      };
     };
 }
 
