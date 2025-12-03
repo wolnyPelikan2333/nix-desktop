@@ -7,7 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nh.url = "github:viperML/nh";
+     nixpkgs.pkgs.nh
     nh.inputs.nixpkgs.follows = "nixpkgs";
   };
 
