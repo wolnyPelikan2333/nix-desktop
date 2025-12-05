@@ -41,7 +41,7 @@
     krita
   ];
 
-   ##############################################
+##############################################
 # WezTerm – pełna konfiguracja + Twoje skróty
 ##############################################
 xdg.configFile."wezterm/wezterm.lua".text = ''
@@ -207,7 +207,38 @@ return config
     zstyle ':fzf-tab:*' switch-group ',' '.'
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
+    
+          # -------------------------------------------------------
+      # 📌 Snapshot systemu, rollback, lista commitów
+      # -------------------------------------------------------
+
+      # 🔥 Save snapshot z komentarzem
+      sys-save() {
+        cd /etc/nixos || return
+        git add -A
+        git commit -m "snapshot $(date +%F_%H-%M) - $1"
+        git push
+        echo "📦 Snapshot zapisany i wysłany do repo"
+      }
+
+      # 🔄 Rollback — cofnięcie do snapshotu
+      rollback() {
+        if [ -z "$1" ]; then
+          echo "Użycie: rollback <commit|tag|hash>"
+          return 1
+        fi
+        cd /etc/nixos || return
+        git checkout "$1"
+        nh os switch /etc/nixos#desktop
+        echo "🔙 Przywrócono wersję: $1"
+      }
+
+      # 📜 Lista snapshotów z opisem
+      sys-list() {
+        git --no-pager log --pretty=format:"%h | %ad | %s" --date=format:"%F_%H-%M" --graph
+      }
   '';
+
 };
  
 
