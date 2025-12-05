@@ -190,7 +190,7 @@ return config
   };
 
   ## 🔥 tu funkcja nhs() z auto-commit + push
-  initExtra = ''
+  initContent = ''
     nhs() {
       cd /etc/nixos || return
       nh os switch /etc/nixos#desktop
