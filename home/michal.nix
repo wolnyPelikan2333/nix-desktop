@@ -29,10 +29,10 @@
 
     # Plugins do GIMP (testowane na nixos-25.05)
     gmic
-    gimpPlugins.resynthesizer
-    gimpPlugins.lqrPlugin          # Liquid Rescale
-    gimpPlugins.gimplensfun
-
+     # gimpPlugins.resynthesizer
+     # gimpPlugins.lqr-plugin
+     # gimpPlugins.gimplensfun
+     
     # Format support & tools
     libwebp libheif libraw imagemagick openexr jasper libavif
 
@@ -204,5 +204,7 @@ return config
   ##############################################
   home.stateVersion = "25.05";
   ##############################################
+  home.sessionVariables.TEST_NS = "works";
+
 }
 
