@@ -92,7 +92,7 @@
   users.users.michal = {
     isNormalUser = true;
     description = "michal";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxusers"];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
@@ -137,7 +137,14 @@
     zoxide
     nh
     discord
+    lutris
+    wineWowPackages.full
+    winetricks
+
+
   ];
+  virtualisation.virtualbox.host.enable = true;
+
 
   ###############################################
   ## ZSH + STARSHIP + FZF + ZOXIDE
