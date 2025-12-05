@@ -155,46 +155,61 @@ return config
   ##############################################
   # ZSH
   ##############################################
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    dotDir = "${config.xdg.configHome}/zsh";
+   programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  dotDir = "${config.xdg.configHome}/zsh";
 
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+  autosuggestion.enable = true;
+  syntaxHighlighting.enable = true;
 
-    history = {
-      size = 50000;
-      save = 50000;
-      share = true;
-      expireDuplicatesFirst = true;
-    };
-
-    plugins = [
-      {
-        name = "zsh-history-substring-search";
-        src = pkgs.zsh-history-substring-search;
-      }
-      {
-        name = "zsh-fzf-tab";
-        src = pkgs.zsh-fzf-tab;
-      }
-    ];
-
-    shellAliases = {
-      ns = "nh os switch /etc/nixos#desktop";
-      ll = "eza -al --icons";
-    };
-
-    # ! masz ostrzeżenie o deprecacji -> poprawiamy
-    initContent = ''
-      zstyle ':completion:*' menu yes select
-      zstyle ':fzf-tab:*' switch-group ',' '.'
-
-      bindkey '^[[A' history-substring-search-up
-      bindkey '^[[B' history-substring-search-down
-    '';
+  history = {
+    size = 50000;
+    save = 50000;
+    share = true;
+    expireDuplicatesFirst = true;
   };
+
+  plugins = [
+    { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
+    { name = "zsh-fzf-tab"; src = pkgs.zsh-fzf-tab; }
+  ];
+
+  ## 🔥 tu aliasy działające trwałe – bez .zshrc
+  shellAliases = {
+    ns = ''sudo nixos-rebuild switch --flake /etc/nixos#desktop &&
+           git -C /etc/nixos add -A &&
+           (git -C /etc/nixos diff --cached --quiet ||
+           (git -C /etc/nixos commit -m "update $(date +%F_%H-%M)" &&
+           git -C /etc/nixos push))'';
+
+    nhs = "nh os switch /etc/nixos#desktop";   # fallback gdy funkcja nie zadziała
+    ll = "eza -al --icons";
+    clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
+    clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
+  };
+
+  ## 🔥 tu funkcja nhs() z auto-commit + push
+  initExtra = ''
+    nhs() {
+      cd /etc/nixos || return
+      nh os switch /etc/nixos#desktop
+      if [[ $? -eq 0 ]]; then
+        git add -A
+        if ! git diff --cached --quiet; then
+          git commit -m "nh update $(date +%F_%H-%M)"
+          git push
+        fi
+      fi
+    }
+
+    zstyle ':completion:*' menu yes select
+    zstyle ':fzf-tab:*' switch-group ',' '.'
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+  '';
+};
+ 
 
   ##############################################
   programs.fzf.enable = true;
