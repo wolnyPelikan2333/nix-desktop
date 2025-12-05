@@ -205,6 +205,7 @@ return config
   home.stateVersion = "25.05";
   ##############################################
   home.sessionVariables.TEST_NS = "works";
+  home.sessionVariables.SNAPSHOT_TEST = "ok";
 
 }
 
