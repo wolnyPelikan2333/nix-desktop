@@ -151,160 +151,73 @@ table.insert(config.keys, { key="4", mods="ALT", action=wezterm.action.ActivateT
 
 return config
 '';
+    ##############################################
+  # ZSH + snapshot manager
   ##############################################
-  # ZSH
-  ##############################################
-   programs.zsh = {
-  enable = true;
-  enableCompletion = true;
-  dotDir = "${config.xdg.configHome}/zsh";
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    dotDir = "${config.xdg.configHome}/zsh";
 
-  autosuggestion.enable = true;
-  syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
-  history = {
-    size = 50000;
-    save = 50000;
-    share = true;
-    expireDuplicatesFirst = true;
-  };
+    history = {
+      size = 50000;
+      save = 50000;
+      share = true;
+      expireDuplicatesFirst = true;
+    };
 
     plugins = [
-    { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
-    { name = "zsh-fzf-tab"; src = pkgs.zsh-fzf-tab; }
-  ];
+      { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
+      { name = "zsh-fzf-tab"; src = pkgs.zsh-fzf-tab; }
+    ];
 
-  shellAliases = {
-    nhs = "nh os switch /etc/nixos#desktop";   # fallback
-    ll = "eza -al --icons";
-    clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
-    clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
-    ns = "ns";   # <-- alias wskazuje na funkcję z initContent
-  };
+    shellAliases = {
+      nhs = "nh os switch /etc/nixos#desktop";
+      ll = "eza -al --icons";
+      clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
+      clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
+    };
 
-  ## 🔥 tu funkcja nhs() z auto-commit + push
-  initContent = ''
-    nhs() {
-      cd /etc/nixos || return
-      nh os switch /etc/nixos#desktop
-      if [[ $? -eq 0 ]]; then
-        git add -A
-        if ! git diff --cached --quiet; then
-          git commit -m "nh update $(date +%F_%H-%M)"
-          git push
-        fi
-      fi
-    }
+    initContent = ''
+      zstyle ":completion:*" menu yes select
+      zstyle ":fzf-tab:*" switch-group "," "."
+      bindkey "^[[A" history-substring-search-up
+      bindkey "^[[B" history-substring-search-down
 
-    zstyle ':completion:*' menu yes select
-    zstyle ':fzf-tab:*' switch-group ',' '.'
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
-      
-      # -------------------------------------------------------
-      # 🔥 System Snapshot Manager PRO
-      # -------------------------------------------------------
-
-      _sys_cd_etc_nixos() {
-        cd /etc/nixos || { echo "❌ Brak /etc/nixos"; return 1; }
-      }
-
-      sys-status() {
-        _sys_cd_etc_nixos || return
-        echo "📂 Repo: /etc/nixos"
-        git status -sb
-        echo; echo "🕒 Ostatnie snapshoty:"
-        git --no-pager log -n 5 --pretty=format:'%C(yellow)%h%Creset | %Cgreen%ad%Creset | %s' --date=format:'%F %H:%M'
-      }
-
-      sys-save() {
-        _sys_cd_etc_nixos || return
-        git add -A
-        if git diff --cached --quiet; then
-          echo "⚠️ Brak zmian — snapshot pominięty."
-          return
-        fi
-        local msg="$*"
-        [ -z "$msg" ] && read "msg?Opis snapshotu: "
-        git commit -m "snapshot $(date +%F_%H-%M) - $msg" && git push
-        echo "📦 Snapshot zapisany: $msg"
-      }
+      _sys_cd_etc_nixos() { cd /etc/nixos || { echo "❌ Brak /etc/nixos"; return 1; }; }
 
       sys-save-os() {
         local msg="$*"
         _sys_cd_etc_nixos || return
-        echo "🛠 Buduję system..."
-        sudo nixos-rebuild switch --flake /etc/nixos#desktop || {
-          echo "❌ Build nieudany — snapshot anulowany."
-          return
-        }
+        sudo nixos-rebuild switch --flake /etc/nixos#desktop || { echo "❌ Build failed"; return; }
         git add -A
-        if git diff --cached --quiet; then
-          echo "⚠️ System zbudowany — brak zmian."
-          return
-        fi
         [ -z "$msg" ] && read "msg?Opis snapshotu: "
         git commit -m "os $(date +%F_%H-%M) - $msg" && git push
-        echo "🚀 System zapisany + wypchnięty."
+        echo "🚀 snapshot zapisany → $msg"
       }
 
-      sys-list() {
-        _sys_cd_etc_nixos || return
-        git --no-pager log --graph --oneline --decorate --date=format:'%F %H:%M'
-      }
+      nss() { sys-save-os "$*"; }
+    '';
 
-      sys-compare() {
-        _sys_cd_etc_nixos || return
-        if [ "$1" = "last" ]; then
-          local a=$(git log --pretty=%h -n1)
-          local b=$(git log --pretty=%h -n2 | tail -n1)
-          echo "🔍 Porównuję: $b ↔ $a"; git diff "$b" "$a"; return
-        fi
-        case "$#" in
-          1) echo "🔍 Porównuję: $1 ↔ HEAD"; git diff "$1" HEAD;;
-          2) echo "🔍 Porównuję: $1 ↔ $2"; git diff "$1" "$2";;
-          *) echo "Użycie: sys-compare <commit1> <commit2> | <commit> | last";;
-        esac
-      }
+    initExtra = ''
+      unalias ns 2>/dev/null
+      alias ns="nss"
+    '';
+  };
+##############################################
+programs.fzf.enable = true;
+programs.bat.enable = true;
+programs.eza.enable = true;
 
-      sys-rollback() {
-        _sys_cd_etc_nixos || return
-        local t="$1"
-        if [ "$t" = "pick" ]; then
-          t=$(git log --oneline | fzf | awk '{print $1}')
-        fi
-        [ -z "$t" ] && { echo "⛔ anulowano"; return; }
-        git checkout "$t"
-        nh os switch /etc/nixos#desktop
-        echo "🔙 Przywrócono snapshot: $t"
-      }
+##############################################
+home.stateVersion = "25.05";
 
-      # -------------------------------------------------------
-      # 🔥 NS PRO → rebuild + snapshot z opisem
-      # -------------------------------------------------------
-      ns() {
-        local msg="$*"
-        if [ -z "$msg" ]; then
-          read "msg?Opis snapshotu: "
-        fi
-        sys-save-os "$msg"
-      }
-  '';
-
-};
- 
-
-  ##############################################
-  programs.fzf.enable = true;
-  programs.bat.enable = true;
-  programs.eza.enable = true;
-
-  ##############################################
-  home.stateVersion = "25.05";
-  ##############################################
-  home.sessionVariables.TEST_NS = "works";
-  home.sessionVariables.SNAPSHOT_TEST = "ok";
+##############################################
+home.sessionVariables.TEST_NS = "works";
+home.sessionVariables.SNAPSHOT_TEST = "ok";
 
 }
 
-# test
