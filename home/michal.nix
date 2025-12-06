@@ -14,7 +14,7 @@
     fastfetch
     wezterm
     pkgs.nerd-fonts.jetbrains-mono
-
+    copyq
     # --- GAMING ---
     lutris
     wineWowPackages.full
