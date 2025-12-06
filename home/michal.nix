@@ -52,14 +52,14 @@ local config = {}
 -- Wygląd
 ------------------------------------------------------------
 config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font_size = 12.0
+config.font_size = 14.0
 config.color_scheme = "Dracula"
 config.hide_tab_bar_if_only_one_tab = true
 
 ------------------------------------------------------------
 -- ✨ Tryb LEADER (bez konfliktów z KDE)
 ------------------------------------------------------------
-config.disable_default_key_bindings = true
+-- config.disable_default_key_bindings = true
 config.leader = { key="Space", mods="CTRL", timeout_milliseconds=800 }
 
 config.keys = {
