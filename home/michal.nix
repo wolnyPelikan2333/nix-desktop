@@ -285,25 +285,7 @@ return config
         echo "🔙 Przywrócono snapshot: $t"
       }
 
-      rollback(){ sys-rollback "$@"; }
-       cd /etc/nixos || return
-        if [ "$1" = "last" ]; then
-          # ostatnie dwa snapshoty
-          local a=$(git log --pretty=%h -n1)
-          local b=$(git log --pretty=%h -n2 | tail -n1)
-          echo "🔍 Porównuję: $b ↔ $a"
-          git diff $b $a
-        elif [ -n "$2" ]; then
-          echo "🔍 Porównuję: $1 ↔ $2"
-          git diff "$1" "$2"
-        else
-          echo "Użycie:"
-          echo "  sys-compare <commit1> <commit2>"
-          echo "  sys-compare <commit>          # vs HEAD"
-          echo "  sys-compare last              # dwa ostatnie snapshoty"
-        fi
-      }
- 
+       
   '';
 
 };
