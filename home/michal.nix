@@ -206,42 +206,87 @@ return config
     zstyle ':fzf-tab:*' switch-group ',' '.'
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
-    
-          # -------------------------------------------------------
-      # 📌 Snapshot systemu, rollback, lista commitów
+      
+             # -------------------------------------------------------
+      # 🔥 System Snapshot Manager PRO
       # -------------------------------------------------------
 
-      # 🔥 Save snapshot z komentarzem
+      _sys_cd_etc_nixos() {
+        cd /etc/nixos || { echo "❌ Brak /etc/nixos"; return 1; }
+      }
+
+      sys-status() {
+        _sys_cd_etc_nixos || return
+        echo "📂 Repo: /etc/nixos"
+        git status -sb
+        echo; echo "🕒 Ostatnie snapshoty:"
+        git --no-pager log -n 5 --pretty=format:'%C(yellow)%h%Creset | %Cgreen%ad%Creset | %s' --date=format:'%F %H:%M'
+      }
+
       sys-save() {
-        cd /etc/nixos || return
+        _sys_cd_etc_nixos || return
         git add -A
-        git commit -m "snapshot $(date +%F_%H-%M) - $1"
-        git push
-        echo "📦 Snapshot zapisany i wysłany do repo"
-      }
-
-      # 🔄 Rollback — cofnięcie do snapshotu
-      rollback() {
-        if [ -z "$1" ]; then
-          echo "Użycie: rollback <commit|tag|hash>"
-          return 1
+        if git diff --cached --quiet; then
+          echo "⚠️ Brak zmian — snapshot pominięty."
+          return
         fi
-        cd /etc/nixos || return
-        git checkout "$1"
-        nh os switch /etc/nixos#desktop
-        echo "🔙 Przywrócono wersję: $1"
+        local msg="$*"
+        [ -z "$msg" ] && read "msg?Opis snapshotu: "
+        git commit -m "snapshot $(date +%F_%H-%M) - $msg" && git push
+        echo "📦 Snapshot zapisany: $msg"
       }
 
-      # 📜 Lista snapshotów z opisem
+      sys-save-os() {
+        local msg="$*"
+        _sys_cd_etc_nixos || return
+        echo "🛠 Buduję system..."
+        sudo nixos-rebuild switch --flake /etc/nixos#desktop || {
+          echo "❌ Build nieudany — snapshot anulowany."
+          return
+        }
+        git add -A
+        if git diff --cached --quiet; then
+          echo "⚠️ System zbudowany — brak zmian."
+          return
+        fi
+        [ -z "$msg" ] && read "msg?Opis snapshotu: "
+        git commit -m "os $(date +%F_%H-%M) - $msg" && git push
+        echo "🚀 System zapisany + wypchnięty."
+      }
+
       sys-list() {
-        git --no-pager log --pretty=format:"%h | %ad | %s" --date=format:"%F_%H-%M" --graph
+        _sys_cd_etc_nixos || return
+        git --no-pager log --graph --oneline --decorate --date=format:'%F %H:%M'
       }
 
-            # -------------------------------------------------------
-      # 🔍 Compare sys snapshots
-      # -------------------------------------------------------
       sys-compare() {
-        cd /etc/nixos || return
+        _sys_cd_etc_nixos || return
+        if [ "$1" = "last" ]; then
+          local a=$(git log --pretty=%h -n1)
+          local b=$(git log --pretty=%h -n2 | tail -n1)
+          echo "🔍 Porównuję: $b ↔ $a"; git diff "$b" "$a"; return
+        fi
+        case "$#" in
+          1) echo "🔍 Porównuję: $1 ↔ HEAD"; git diff "$1" HEAD;;
+          2) echo "🔍 Porównuję: $1 ↔ $2"; git diff "$1" "$2";;
+          *) echo "Użycie: sys-compare <commit1> <commit2> | <commit> | last";;
+        esac
+      }
+
+      sys-rollback() {
+        _sys_cd_etc_nixos || return
+        local t="$1"
+        if [ "$t" = "pick" ]; then
+          t=$(git log --oneline | fzf | awk '{print $1}')
+        fi
+        [ -z "$t" ] && { echo "⛔ anulowano"; return; }
+        git checkout "$t"
+        nh os switch /etc/nixos#desktop
+        echo "🔙 Przywrócono snapshot: $t"
+      }
+
+      rollback(){ sys-rollback "$@"; }
+       cd /etc/nixos || return
         if [ "$1" = "last" ]; then
           # ostatnie dwa snapshoty
           local a=$(git log --pretty=%h -n1)
