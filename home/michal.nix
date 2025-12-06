@@ -131,8 +131,7 @@ config.window_frame = {
 }
 
 config.colors = {
-  focused_pane_border = "#ff79c6",      -- aktywny
-  inactive_pane_border = "#6272a4"      -- nieaktywny
+  split = "#ff79c6", -- kolor borderów (zastępuje focused/inactive)
 }
 
 config.enable_tab_bar = true
