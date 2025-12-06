@@ -45,50 +45,58 @@
 # WezTerm – pełna konfiguracja + Twoje skróty
 ##############################################
 xdg.configFile."wezterm/wezterm.lua".text = ''
- local wezterm = require "wezterm"
+local wezterm = require "wezterm"
 local config = {}
 
+------------------------------------------------------------
+-- Wygląd
+------------------------------------------------------------
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12.0
 config.color_scheme = "Dracula"
 config.hide_tab_bar_if_only_one_tab = true
 
+------------------------------------------------------------
+-- ✨ Tryb LEADER (bez konfliktów z KDE)
+------------------------------------------------------------
 config.disable_default_key_bindings = true
+config.leader = { key="Space", mods="CTRL", timeout_milliseconds=800 }
 
 config.keys = {
-  -- SPLITS
-  {key="v", mods="SUPER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
-  {key="s", mods="SUPER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
+  -- SPLIT
+  {key="v", mods="LEADER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
+  {key="s", mods="LEADER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
 
-  -- RUCH
-  {key="h", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Left"},
-  {key="j", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Down"},
-  {key="k", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Up"},
-  {key="l", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Right"},
+  -- NAWIGACJA
+  {key="h", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Left"},
+  {key="j", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Down"},
+  {key="k", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Up"},
+  {key="l", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Right"},
 
   -- RESIZE
-  {key="h", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Left", 3}},
-  {key="j", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Down", 3}},
-  {key="k", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Up", 3}},
-  {key="l", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Right", 3}},
+  {key="H", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Left", 5}},
+  {key="J", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Down", 5}},
+  {key="K", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Up", 5}},
+  {key="L", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Right", 5}},
 
-  -- ZOOM + FULLSCREEN
-  {key="z", mods="SUPER", action=wezterm.action.TogglePaneZoomState},
-  {key="f", mods="SUPER", action=wezterm.action.ToggleFullScreen},
+  -- ZOOM / FULLSCREEN
+  {key="z", mods="LEADER", action=wezterm.action.TogglePaneZoomState},
+  {key="f", mods="LEADER", action=wezterm.action.ToggleFullScreen},
 
   -- COPY/PASTE
-  {key="C", mods="CTRL|SHIFT", action=wezterm.action.CopyTo "Clipboard"},
-  {key="V", mods="CTRL|SHIFT", action=wezterm.action.PasteFrom "Clipboard"},
+  {key="c", mods="LEADER", action=wezterm.action.CopyTo "Clipboard"},
+  {key="v", mods="CTRL|SHIFT", action=wezterm.action.PasteFrom "Clipboard"},
 
-  -- TABS SUPER+1..4
-  {key="1", mods="SUPER", action=wezterm.action.ActivateTab(0)},
-  {key="2", mods="SUPER", action=wezterm.action.ActivateTab(1)},
-  {key="3", mods="SUPER", action=wezterm.action.ActivateTab(2)},
-  {key="4", mods="SUPER", action=wezterm.action.ActivateTab(3)},
+  -- TABS
+  {key="1", mods="LEADER", action=wezterm.action.ActivateTab(0)},
+  {key="2", mods="LEADER", action=wezterm.action.ActivateTab(1)},
+  {key="3", mods="LEADER", action=wezterm.action.ActivateTab(2)},
+  {key="4", mods="LEADER", action=wezterm.action.ActivateTab(3)},
 }
 
 return config
-'';   ##############################################
+'';  
+  ##############################################
   # ZSH + snapshot manager
   ##############################################
   programs.zsh = {
@@ -150,7 +158,8 @@ return config
         git commit -m "os $(date +%F_%H-%M) - $msg" && git push
         echo "🚀 OS snapshot zapisany → $msg"
       }
-            sys-list() {
+
+      sys-list() {
         _sys_cd_etc_nixos || return
         git --no-pager log --graph --oneline --decorate --date=format:'%F %H:%M'
       }
