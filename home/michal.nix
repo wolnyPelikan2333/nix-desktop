@@ -45,57 +45,50 @@
 # WezTerm – pełna konfiguracja + Twoje skróty
 ##############################################
 xdg.configFile."wezterm/wezterm.lua".text = ''
-local wezterm = require 'wezterm'
+ local wezterm = require "wezterm"
 local config = {}
 
-------------------------------------------------------------
--- Wygląd
-------------------------------------------------------------
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12.0
 config.color_scheme = "Dracula"
 config.hide_tab_bar_if_only_one_tab = true
 
-------------------------------------------------------------
--- Skróty – LEVEL A (stabilne podstawy)
-------------------------------------------------------------
 config.disable_default_key_bindings = true
 
 config.keys = {
   -- SPLITS
-  {key="v", mods="ALT", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
-  {key="s", mods="ALT", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
+  {key="v", mods="SUPER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
+  {key="s", mods="SUPER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
 
   -- RUCH
-  {key="h", mods="ALT", action=wezterm.action.ActivatePaneDirection "Left"},
-  {key="j", mods="ALT", action=wezterm.action.ActivatePaneDirection "Down"},
-  {key="k", mods="ALT", action=wezterm.action.ActivatePaneDirection "Up"},
-  {key="l", mods="ALT", action=wezterm.action.ActivatePaneDirection "Right"},
+  {key="h", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Left"},
+  {key="j", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Down"},
+  {key="k", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Up"},
+  {key="l", mods="SUPER", action=wezterm.action.ActivatePaneDirection "Right"},
 
   -- RESIZE
-  {key="h", mods="CTRL", action=wezterm.action.AdjustPaneSize {"Left", 3}},
-  {key="j", mods="CTRL", action=wezterm.action.AdjustPaneSize {"Down", 3}},
-  {key="k", mods="CTRL", action=wezterm.action.AdjustPaneSize {"Up", 3}},
-  {key="l", mods="CTRL", action=wezterm.action.AdjustPaneSize {"Right", 3}},
+  {key="h", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Left", 3}},
+  {key="j", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Down", 3}},
+  {key="k", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Up", 3}},
+  {key="l", mods="CTRL|SUPER", action=wezterm.action.AdjustPaneSize {"Right", 3}},
 
   -- ZOOM + FULLSCREEN
-  {key="z", mods="ALT", action=wezterm.action.TogglePaneZoomState},
-  {key="f", mods="ALT", action=wezterm.action.ToggleFullScreen},
+  {key="z", mods="SUPER", action=wezterm.action.TogglePaneZoomState},
+  {key="f", mods="SUPER", action=wezterm.action.ToggleFullScreen},
 
   -- COPY/PASTE
   {key="C", mods="CTRL|SHIFT", action=wezterm.action.CopyTo "Clipboard"},
   {key="V", mods="CTRL|SHIFT", action=wezterm.action.PasteFrom "Clipboard"},
 
-  -- TABS ALT+1..4
-  {key="1", mods="ALT", action=wezterm.action.ActivateTab(0)},
-  {key="2", mods="ALT", action=wezterm.action.ActivateTab(1)},
-  {key="3", mods="ALT", action=wezterm.action.ActivateTab(2)},
-  {key="4", mods="ALT", action=wezterm.action.ActivateTab(3)},
+  -- TABS SUPER+1..4
+  {key="1", mods="SUPER", action=wezterm.action.ActivateTab(0)},
+  {key="2", mods="SUPER", action=wezterm.action.ActivateTab(1)},
+  {key="3", mods="SUPER", action=wezterm.action.ActivateTab(2)},
+  {key="4", mods="SUPER", action=wezterm.action.ActivateTab(3)},
 }
 
 return config
-'';
-    ##############################################
+'';   ##############################################
   # ZSH + snapshot manager
   ##############################################
   programs.zsh = {
