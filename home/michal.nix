@@ -169,23 +169,17 @@ return config
     expireDuplicatesFirst = true;
   };
 
-  plugins = [
+    plugins = [
     { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
     { name = "zsh-fzf-tab"; src = pkgs.zsh-fzf-tab; }
   ];
 
-  ## 🔥 tu aliasy działające trwałe – bez .zshrc
   shellAliases = {
-    ns = ''sudo nixos-rebuild switch --flake /etc/nixos#desktop &&
-           git -C /etc/nixos add -A &&
-           (git -C /etc/nixos diff --cached --quiet ||
-           (git -C /etc/nixos commit -m "update $(date +%F_%H-%M)" &&
-           git -C /etc/nixos push))'';
-
-    nhs = "nh os switch /etc/nixos#desktop";   # fallback gdy funkcja nie zadziała
+    nhs = "nh os switch /etc/nixos#desktop";   # fallback
     ll = "eza -al --icons";
     clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
     clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
+    ns = "ns";   # <-- alias wskazuje na funkcję z initContent
   };
 
   ## 🔥 tu funkcja nhs() z auto-commit + push
@@ -207,7 +201,7 @@ return config
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
       
-             # -------------------------------------------------------
+      # -------------------------------------------------------
       # 🔥 System Snapshot Manager PRO
       # -------------------------------------------------------
 
@@ -285,7 +279,16 @@ return config
         echo "🔙 Przywrócono snapshot: $t"
       }
 
-       
+      # -------------------------------------------------------
+      # 🔥 NS PRO → rebuild + snapshot z opisem
+      # -------------------------------------------------------
+      ns() {
+        local msg="$*"
+        if [ -z "$msg" ]; then
+          read "msg?Opis snapshotu: "
+        fi
+        sys-save-os "$msg"
+      }
   '';
 
 };
