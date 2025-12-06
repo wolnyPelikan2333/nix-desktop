@@ -144,8 +144,9 @@
 
   ];
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 
-
+  
   ###############################################
   ## ZSH + STARSHIP + FZF + ZOXIDE
   ###############################################
