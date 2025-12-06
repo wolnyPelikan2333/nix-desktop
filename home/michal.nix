@@ -45,7 +45,7 @@
 # WezTerm – pełna konfiguracja + Twoje skróty
 ##############################################
 xdg.configFile."wezterm/wezterm.lua".text = ''
-'local wezterm = require 'wezterm'
+local wezterm = require 'wezterm'
 local config = {}
 
 ------------------------------------------------------------
