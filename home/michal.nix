@@ -12,55 +12,35 @@
   ];
 
   ##############################################
-  # WezTerm – pełna konfiguracja + Twoje skróty
-  ##############################################
-    ##############################################
   # WezTerm — działający czysty config + skróty
   ##############################################
-  xdg.configFile."wezterm/wezterm.lua".text = ''
-local wezterm = require "wezterm"
+    xdg.configFile."wezterm/wezterm.lua" = {
+    force = true;
+    text = ''
+      local wezterm = require "wezterm"
+      local config = {}
 
-local config = {
-  font = wezterm.font("JetBrainsMono Nerd Font"),
-  font_size = 14.0,
-  color_scheme = "Dracula",
-  hide_tab_bar_if_only_one_tab = true,
+      config.font = wezterm.font("JetBrainsMono Nerd Font")
+      config.font_size = 14.0
+      config.color_scheme = "Dracula"
+      config.hide_tab_bar_if_only_one_tab = true
 
-  leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 800 },
+      config.leader = { key="Space", mods="CTRL", timeout_milliseconds=800 }
 
-  keys = {
-    -- Split windows
-    {key="v", mods="LEADER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
-    {key="s", mods="LEADER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
+      config.keys = {
+        {key="v", mods="LEADER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
+        {key="s", mods="LEADER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
+        {key="x", mods="LEADER", action=wezterm.action.CloseCurrentPane{confirm=true}},
 
-    -- Move between panes
-    {key="h", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Left"},
-    {key="j", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Down"},
-    {key="k", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Up"},
-    {key="l", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Right"},
+        {key="h", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Left"},
+        {key="j", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Down"},
+        {key="k", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Up"},
+        {key="l", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Right"},
+      }
 
-    -- Resize
-    {key="H", mods="LEADER", action=wezterm.action.AdjustPaneSize{"Left", 5}},
-    {key="J", mods="LEADER", action=wezterm.action.AdjustPaneSize{"Down", 5}},
-    {key="K", mods="LEADER", action=wezterm.action.AdjustPaneSize{"Up", 5}},
-    {key="L", mods="LEADER", action=wezterm.action.AdjustPaneSize{"Right", 5}},
-
-    -- Other
-    {key="z", mods="LEADER", action=wezterm.action.TogglePaneZoomState},
-    {key="f", mods="LEADER", action=wezterm.action.ToggleFullScreen},
-    {key="c", mods="LEADER", action=wezterm.action.CopyTo "Clipboard"},
-    {key="v", mods="CTRL|SHIFT", action=wezterm.action.PasteFrom "Clipboard"},
-
-    -- Tabs
-    {key="1", mods="LEADER", action=wezterm.action.ActivateTab(0)},
-    {key="2", mods="LEADER", action=wezterm.action.ActivateTab(1)},
-    {key="3", mods="LEADER", action=wezterm.action.ActivateTab(2)},
-    {key="4", mods="LEADER", action=wezterm.action.ActivateTab(3)},
-  }
-}
-
-return config
-'';
+      return config
+    '';
+  };
 
   #####################################################################
   programs.zsh = {
@@ -117,9 +97,57 @@ return config
       }
 
       ########################################################
+      ########################################################
       sys-status(){
-        echo "===== STATUS ====="
-        uptime
+        echo "========== SYSTEM STATUS =========="
+
+        echo "Uptime:"
+        uptime | sed 's/^/  /'
+        echo
+
+        echo "Disk usage /:"
+        df -h / | sed '1d;s/^/  /'
+        echo
+
+        _sys_cd_etc_nixos || return
+        echo "Git repo:"
+        if [ -z "$(git status --porcelain)" ]; then
+          echo "  CLEAN — brak zmian"
+          CLEAN=true
+        else
+          echo "  DIRTY — są zmiany lokalne"
+          CLEAN=false
+        fi
+        echo
+
+        echo "Last snapshots (git log):"
+        git --no-pager log --oneline -7 | sed 's/^/  /'
+        echo
+
+        echo "System generations:"
+        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 8 | sed 's/^/  /'
+        echo
+
+        echo "Home-manager generations:"
+        if command -v home-manager >/dev/null; then
+          home-manager generations | head -n 5 | sed 's/^/  /'
+        else
+          nix run home-manager/master -- generations | head -n 5 | sed 's/^/  /'
+        fi
+        echo
+
+        echo "Garbage dry-run:"
+        nix-collect-garbage -d --dry-run 2>/dev/null | sed 's/^/  /' || echo "  brak danych"
+        echo
+
+        echo "Recommendation:"
+        if [ "$CLEAN" = false ]; then
+          echo "  → zrób: ns \"opis zmian\" (snapshot + build + push)"
+        else
+          echo "  ✔ repo clean — możesz działać dalej"
+        fi
+
+        echo "==================================="
       }
     '';
   };
@@ -130,4 +158,4 @@ return config
 
   home.stateVersion = "25.05";
 }
-
+ 
