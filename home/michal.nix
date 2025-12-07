@@ -209,6 +209,72 @@ return config
         nh os switch /etc/nixos#desktop
         echo "🔙 cofnięto → $t"
       }
+      #######################################
+# 🔐 ROLLBACK / PANIC-RECOVERY TOOLS
+#######################################
+
+# 🧽 anuluj lokalne zmiany (z plików wraca stan ostatniego commitu)
+sys-abort() {
+  cd /etc/nixos || return
+  echo "⚠️  Usuwam niezacommitowane zmiany → powrót do HEAD"
+  git restore .
+  echo "🧹 Wrócono do stanu ostatniego commitu"
+}
+
+# 🚨 pełny „panic button” – powrót 1:1 do GitHub z potwierdzeniem
+sys-abort-hard() {
+  cd /etc/nixos || return
+  echo "🚨 UWAGA: To przywróci repo do stanu origin/master i usunie lokalne zmiany."
+  read "ok?Czy na pewno? (y/N): "
+  [[ "$ok" == "y" ]] || { echo "❌ przerwano"; return; }
+
+  git fetch
+  git reset --hard origin/master
+  echo "🔄 Przywrócono stan identyczny jak GitHub"
+  echo "💡 Zrób 'ns \"restore\"' aby aktywować konfigurację"
+}
+
+# 🔙 cofnięcie ostatniego commitu (bez utraty push)
+sys-undo-last() {
+  cd /etc/nixos || return
+  git reset --hard HEAD~1
+  echo "↩️  Cofnięto ostatni commit lokalny"
+}
+
+#######################################
+# 📜 system pamięci i notatek zmian
+#######################################
+
+# Dodaj notatkę dlaczego wprowadzasz zmiany
+sys-note() {
+  echo "$(date '+%F %H:%M') — $*" >> /etc/nixos/.changes.log
+  echo "📝 Dodano notatkę:"
+  tail -n 1 /etc/nixos/.changes.log
+}
+
+# Zobacz historię notatek
+sys-history() {
+  echo "📜 Historia zmian:"
+  nl -ba /etc/nixos/.changes.log
+}
+
+# Szybki diff repo vs pliki lokalne
+sys-diff() {
+  cd /etc/nixos || return
+  echo "🔍 Zmiany względem ostatniego commitu:"
+  git --no-pager diff
+}
+
+#######################################
+# 🔎 compare ułatwiony
+#######################################
+sys-compare-last() {
+  cd /etc/nixos || return
+  local a=$(git log --pretty=%h -n1)
+  local b=$(git log --pretty=%h -n2 | tail -n1)
+  echo "🔍 diff: $b ↔ $a"
+  git diff "$b" "$a"
+}
 
       nss() { sys-save-os "$*"; }
 
