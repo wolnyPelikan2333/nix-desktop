@@ -99,7 +99,7 @@ return config
   ##############################################
   # ZSH + snapshot manager
   ##############################################
-  programs.zsh = {
+    programs.zsh = {
     enable = true;
     enableCompletion = true;
     dotDir = "${config.xdg.configHome}/zsh";
@@ -133,10 +133,7 @@ return config
       bindkey "^[[B" history-substring-search-down
 
       _sys_cd_etc_nixos() {
-        cd /etc/nixos || { 
-          echo "❌ brak repo /etc/nixos"; 
-          return 1; 
-        }
+        cd /etc/nixos || { echo "❌ brak repo /etc/nixos"; return 1; }
       }
 
       sys-save() {
@@ -159,203 +156,77 @@ return config
         echo "🚀 OS snapshot zapisany → $msg"
       }
 
-      sys-list() {
-        _sys_cd_etc_nixos || return
-        git --no-pager log --graph --oneline --decorate --date=format:'%F %H:%M'
-      }
-            sys-status() {
-        echo "========== 🖥 System Status =========="
-        echo "--- Uptime ---"
-        uptime
-        echo
-
-        echo "--- Disk Usage / ---"
-        df -h / | sed 1d
-        echo
-
-        echo "--- NixOS Generations (system) ---"
-        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 10
-        echo
-
-        echo "--- Git status w /etc/nixos ---"
-        (cd /etc/nixos && git status -s)
-        echo
-
-        echo "--- Ostatnie snapshoty (git log) ---"
-        (cd /etc/nixos && git --no-pager log --oneline -10)
-        echo
-
-        echo "--- Śmieci do odzyskania (dry-run) ---"
-        nix-collect-garbage -d --dry-run 2>/dev/null || echo "brak danych"
-        echo "======================================"
-      }
-
-      sys-compare() {
-        _sys_cd_etc_nixos || return
-        if [ "$1" = "last" ]; then
-          local a=$(git log --pretty=%h -n1)
-          local b=$(git log --pretty=%h -n2 | tail -n1)
-          echo "🔍 diff: $b ↔ $a"; git diff "$b" "$a"; return
-        fi
-        [ $# -ge 2 ] && git diff "$1" "$2" || git diff "$1" HEAD
-      }
-
+      sys-list() { _sys_cd_etc_nixos && git --no-pager log --graph --oneline --decorate --date=format:'%F %H:%M'; }
+      sys-compare() { _sys_cd_etc_nixos && git diff "$1" "$2"; }
       sys-rollback() {
         _sys_cd_etc_nixos || return
         local t="$1"
         [ "$t" = "pick" ] && t=$(git log --oneline | fzf | awk '{print $1}')
         [ -z "$t" ] && { echo "❌ anulowano"; return; }
         git checkout "$t"
-        nh os switch /etc/nixos#desktop
+        nhs
         echo "🔙 cofnięto → $t"
       }
-      #######################################
-# 🔐 ROLLBACK / PANIC-RECOVERY TOOLS
-#######################################
 
-# 🧽 anuluj lokalne zmiany (z plików wraca stan ostatniego commitu)
-sys-abort() {
-  cd /etc/nixos || return
-  echo "⚠️  Usuwam niezacommitowane zmiany → powrót do HEAD"
-  git restore .
-  echo "🧹 Wrócono do stanu ostatniego commitu"
-}
+      # --- NOTE SYSTEM ---
+      NOTEFILE="$HOME/.config/nixos-notes.log"
+      sys-note() { mkdir -p "$HOME/.config"; echo "$(date '+%F %H:%M') — $*" >> "$NOTEFILE"; echo "📝"; tail -n1 "$NOTEFILE"; }
+      sys-history() { [ -f "$NOTEFILE" ] && nl -ba "$NOTEFILE" || echo "📜 Brak historii — użyj sys-note"; }
+      sys-diff() { _sys_cd_etc_nixos && git --no-pager diff; }
+      sys-compare-last() {
+        cd /etc/nixos || return
+        local a=$(git log --pretty=%h -n1)
+        local b=$(git log --pretty=%h -n2 | tail -n1)
+        echo "🔍 diff $b ↔ $a"
+        git diff "$b" "$a"
+      }
 
-# 🚨 pełny „panic button” – powrót 1:1 do GitHub z potwierdzeniem
-sys-abort-hard() {
-  cd /etc/nixos || return
-  echo "🚨 UWAGA: To przywróci repo do stanu origin/master i usunie lokalne zmiany."
-  read "ok?Czy na pewno? (y/N): "
-  [[ "$ok" == "y" ]] || { echo "❌ przerwano"; return; }
-
-  git fetch
-  git reset --hard origin/master
-  echo "🔄 Przywrócono stan identyczny jak GitHub"
-  echo "💡 Zrób 'ns \"restore\"' aby aktywować konfigurację"
-}
-
-# 🔙 cofnięcie ostatniego commitu (bez utraty push)
-sys-undo-last() {
-  cd /etc/nixos || return
-  git reset --hard HEAD~1
-  echo "↩️  Cofnięto ostatni commit lokalny"
-}
-
-#######################################
-# 📜 system pamięci i notatek zmian
-#######################################
-
-NOTEFILE="$HOME/.config/nixos-notes.log"
-
-sys-note() {
-  mkdir -p "$HOME/.config"
-  echo "$(date '+%F %H:%M') — $*" >> "$NOTEFILE"
-  echo "📝 Dodano notatkę:"
-  tail -n 1 "$NOTEFILE"
-}
-
-sys-history() {
-  if [ ! -f "$NOTEFILE" ]; then
-    echo "📜 Brak historii — dodaj pierwszą notatkę: sys-note \"...\""
-    return
-  fi
-
-  echo "📜 Historia zmian:"
-  nl -ba "$NOTEFILE"
-}
-
-# Szybki diff repo vs pliki lokalne
-sys-diff() {
-  cd /etc/nixos || return
-  echo "🔍 Zmiany względem ostatniego commitu:"
-  git --no-pager diff
-}
-
-#######################################
-# 🔎 compare ułatwiony
-#######################################
-sys-compare-last() {
-  cd /etc/nixos || return
-  local a=$(git log --pretty=%h -n1)
-  local b=$(git log --pretty=%h -n2 | tail -n1)
-  echo "🔍 diff: $b ↔ $a"
-  git diff "$b" "$a"
-}
-# ===========================
-#   SYS-STATUS v2  DASHBOARD
-# ===========================
-sys-status() {
-  echo "========== 🖥 System Status =========="
-
-  echo "--- Uptime ---"
-  uptime
-
-  echo "--- Disk Usage / ---"
-  df -h / | sed 1d
-
-  echo "--- Git State ---"
-  cd /etc/nixos || return
-  if [ -z "$(git status --porcelain)" ]; then
-    echo "📁 Repo: CLEAN"
-  else
-    echo "📁 Repo: DIRTY (masz zmiany lokalne)"
-  fi
-
-  echo
-  echo "--- Last Snapshots (5) ---"
-  git --no-pager log --oneline -5
-
-  echo
-  echo "--- System Generations ---"
-  sudo ls -l /nix/var/nix/profiles/system | grep -E 'system-.*-link' | wc -l | xargs echo "Total snapshots:"
-  sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 10
-
-  echo
-  echo "--- Home-Manager Generations ---"
-  home-manager generations | head -n 5
-
-  echo
-  echo "--- Garbage dry-run ---"
-  nix-collect-garbage -d --dry-run 2>/dev/null || echo "no data"
-
-  echo "======================================"
-}
-
-# ************* FULL MODE ***************
-sys-status-full() {
-  sys-status
-  echo
-  echo "--- Full Git log ---"
-  git --no-pager log --graph --decorate --all --oneline -10
-  echo
-  echo "--- Detailed Disk ---"
-  df -h
-  echo
-  echo "--- Home-Manager ALL Generations ---"
-  home-manager generations
-  echo
-  echo "--- Active system profile ---"
-  readlink /run/current-system
-}
+      # --- ABORT / RECOVERY ---
+      sys-abort() { _sys_cd_etc_nixos && git restore . && echo "🧹 Cofnięto lokalne zmiany"; }
+      sys-abort-hard() {
+        _sys_cd_etc_nixos || return
+        read "ok?⚠️ Przywrócić z origin/master? (y/N): "
+        [[ "$ok" == "y" ]] || { echo "❌ anulowano"; return; }
+        git fetch && git reset --hard origin/master && echo "🔄 Przywrócono stan z GitHub"
+      }
+      sys-undo-last() { git reset --hard HEAD~1 && echo "↩️ cofnięto ostatni commit"; }
 
       nss() { sys-save-os "$*"; }
 
-      unalias ns 2>/dev/null
-    # ---------- NS + SYS-NOTE INTEGRATION (variant C) ----------
-# ns "opis" = sys-note + build + snapshot only if successful
-ns() {
-  # zapis intencji przed budowaniem
-  sys-note "$*"
+      # ns = zapis intencji + snapshot po udanym buildzie
+      ns() { sys-note "$*"; echo "⚙️ buduję → $*"; nss "$@"; }
 
-  echo "⚙️ Buduję system i snapshot → $*"
-  # uruchamiamy Twoją istniejącą funkcję snapshotową (sys-save-os)
-  nss "$@"
-}
+      # --- SYS STATUS v2 ---
+      sys-status() {
+        echo "========== 🖥 System Status =========="
+        echo "--- Uptime ---"; uptime
+        echo "--- Disk Usage / ---"; df -h / | sed 1d
+        echo "--- Git State ---"; _sys_cd_etc_nixos
+        if [ -z "$(git status --porcelain)" ]; then echo "📁 Repo: CLEAN"; else echo "📁 Repo: DIRTY"; fi
+        echo "--- Last Snapshots (5) ---"; git --no-pager log --oneline -5
+        echo "--- System Generations ---"; sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 10
+        echo "--- Home-Manager Generations ---"
+        if command -v home-manager &>/dev/null; then home-manager generations | head -n 5
+        else nix run home-manager/master -- generations | head -n 5
+        fi
+        echo "--- Garbage dry-run ---"; nix-collect-garbage -d --dry-run 2>/dev/null
+        echo "======================================"
+      }
 
-'';
+      sys-status-full() {
+        sys-status
+        echo "--- Full Git log ---"; git --no-pager log --graph --decorate --all --oneline -10
+        echo "--- Disk ---"; df -h
+        echo "--- All HM generations ---"
+        if command -v home-manager &>/dev/null; then home-manager generations
+        else nix run home-manager/master -- generations
+        fi
+        echo "--- Active system ---"; readlink /run/current-system
+      }
 
+    '';   # <---- KONIEC initContent (jedyne prawidłowe miejsce)
   };
- 
+
       
 ############################################
 programs.fzf.enable = true;
