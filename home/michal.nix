@@ -163,6 +163,32 @@ return config
         _sys_cd_etc_nixos || return
         git --no-pager log --graph --oneline --decorate --date=format:'%F %H:%M'
       }
+            sys-status() {
+        echo "========== 🖥 System Status =========="
+        echo "--- Uptime ---"
+        uptime
+        echo
+
+        echo "--- Disk Usage / ---"
+        df -h / | sed 1d
+        echo
+
+        echo "--- NixOS Generations (system) ---"
+        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 10
+        echo
+
+        echo "--- Git status w /etc/nixos ---"
+        (cd /etc/nixos && git status -s)
+        echo
+
+        echo "--- Ostatnie snapshoty (git log) ---"
+        (cd /etc/nixos && git --no-pager log --oneline -10)
+        echo
+
+        echo "--- Śmieci do odzyskania (dry-run) ---"
+        nix-collect-garbage -d --dry-run 2>/dev/null || echo "brak danych"
+        echo "======================================"
+      }
 
       sys-compare() {
         _sys_cd_etc_nixos || return
