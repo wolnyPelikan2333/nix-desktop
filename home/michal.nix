@@ -281,6 +281,62 @@ sys-compare-last() {
   echo "🔍 diff: $b ↔ $a"
   git diff "$b" "$a"
 }
+# ===========================
+#   SYS-STATUS v2  DASHBOARD
+# ===========================
+sys-status() {
+  echo "========== 🖥 System Status =========="
+
+  echo "--- Uptime ---"
+  uptime
+
+  echo "--- Disk Usage / ---"
+  df -h / | sed 1d
+
+  echo "--- Git State ---"
+  cd /etc/nixos || return
+  if [ -z "$(git status --porcelain)" ]; then
+    echo "📁 Repo: CLEAN"
+  else
+    echo "📁 Repo: DIRTY (masz zmiany lokalne)"
+  fi
+
+  echo
+  echo "--- Last Snapshots (5) ---"
+  git --no-pager log --oneline -5
+
+  echo
+  echo "--- System Generations ---"
+  sudo ls -l /nix/var/nix/profiles/system | grep -E 'system-.*-link' | wc -l | xargs echo "Total snapshots:"
+  sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 10
+
+  echo
+  echo "--- Home-Manager Generations ---"
+  home-manager generations | head -n 5
+
+  echo
+  echo "--- Garbage dry-run ---"
+  nix-collect-garbage -d --dry-run 2>/dev/null || echo "no data"
+
+  echo "======================================"
+}
+
+# ************* FULL MODE ***************
+sys-status-full() {
+  sys-status
+  echo
+  echo "--- Full Git log ---"
+  git --no-pager log --graph --decorate --all --oneline -10
+  echo
+  echo "--- Detailed Disk ---"
+  df -h
+  echo
+  echo "--- Home-Manager ALL Generations ---"
+  home-manager generations
+  echo
+  echo "--- Active system profile ---"
+  readlink /run/current-system
+}
 
       nss() { sys-save-os "$*"; }
 
