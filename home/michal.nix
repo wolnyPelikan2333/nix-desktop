@@ -245,17 +245,23 @@ sys-undo-last() {
 # 📜 system pamięci i notatek zmian
 #######################################
 
-# Dodaj notatkę dlaczego wprowadzasz zmiany
+NOTEFILE="$HOME/.config/nixos-notes.log"
+
 sys-note() {
-  echo "$(date '+%F %H:%M') — $*" >> /etc/nixos/.changes.log
+  mkdir -p "$HOME/.config"
+  echo "$(date '+%F %H:%M') — $*" >> "$NOTEFILE"
   echo "📝 Dodano notatkę:"
-  tail -n 1 /etc/nixos/.changes.log
+  tail -n 1 "$NOTEFILE"
 }
 
-# Zobacz historię notatek
 sys-history() {
+  if [ ! -f "$NOTEFILE" ]; then
+    echo "📜 Brak historii — dodaj pierwszą notatkę: sys-note \"...\""
+    return
+  fi
+
   echo "📜 Historia zmian:"
-  nl -ba /etc/nixos/.changes.log
+  nl -ba "$NOTEFILE"
 }
 
 # Szybki diff repo vs pliki lokalne
