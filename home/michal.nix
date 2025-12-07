@@ -285,8 +285,19 @@ sys-compare-last() {
       nss() { sys-save-os "$*"; }
 
       unalias ns 2>/dev/null
-      alias ns="nss"
-    '';
+    # ---------- NS + SYS-NOTE INTEGRATION (variant C) ----------
+# ns "opis" = sys-note + build + snapshot only if successful
+ns() {
+  # zapis intencji przed budowaniem
+  sys-note "$*"
+
+  echo "⚙️ Buduję system i snapshot → $*"
+  # uruchamiamy Twoją istniejącą funkcję snapshotową (sys-save-os)
+  nss "$@"
+}
+
+'';
+
   };
  
       
