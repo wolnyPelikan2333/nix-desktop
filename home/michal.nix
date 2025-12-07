@@ -101,35 +101,37 @@
        ########################################
       # SYS-STATUS PRO — wersja czysta, bez kolorów
       ########################################
-      sys-status() {
-        echo "========== SYSTEM STATUS =========="
-
+       sys-status() {
+        echo "===== SYSTEM STATUS ====="
+        echo
         echo "Uptime:"
         uptime | sed 's/^/  /'
         echo
 
-        echo "Dysk root (/):"
+        echo "Disk /:"
         df -h / | sed '1d;s/^/  /'
         echo
 
-        echo "Repo /etc/nixos:"
         _sys_cd_etc_nixos || return
+        echo "Repo status:"
         if [ -z "$(git status --porcelain)" ]; then
-          echo "  ✔ CLEAN (brak lokalnych zmian)"
+          echo "  CLEAN ✔"
+          CLEAN=true
         else
-          echo "  ✖ DIRTY — masz lokalne zmiany"
+          echo "  DIRTY ✖ (masz zmiany)"
+          CLEAN=false
         fi
         echo
 
-        echo "Ostatnie snapshoty:"
+        echo "Last snapshots:"
         git --no-pager log --oneline -7 | sed 's/^/  /'
         echo
 
-        echo "Generacje systemu:"
-        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 8 | sed 's/^/  /'
+        echo "System generations:"
+        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 7 | sed 's/^/  /'
         echo
 
-        echo "Generacje Home-Manager:"
+        echo "Home generations:"
         if command -v home-manager >/dev/null; then
           home-manager generations | head -n 5 | sed 's/^/  /'
         else
@@ -137,17 +139,18 @@
         fi
         echo
 
-        echo "Garbage dry-run (co zostanie usunięte):"
-        nix-collect-garbage -d --dry-run 2>/dev/null | sed 's/^/  /' || echo "  brak danych"
+        echo "Garbage (dry-run):"
+        nix-collect-garbage -d --dry-run | sed 's/^/  /' || echo "  brak danych"
         echo
 
-        echo "Rekomendacja:"
-        if [ -z "$(git status --porcelain)" ]; then
-          echo "  ✔ repo czyste – możesz pracować dalej"
+        echo "Recommendation:"
+        if [ "$CLEAN" = false ]; then
+          echo "  Użyj → ns \"opis\"  (build + snapshot tylko jeśli OK)"
         else
-          echo "  ➤ użyj:  ns \"opis\"  aby zrobić snapshot + push"
-        fi
-       echo "==================================="
+          echo "  Repo czyste — możesz działać dalej."
+        fi      
+
+	echo "==================================="
       }
     '';
   };
