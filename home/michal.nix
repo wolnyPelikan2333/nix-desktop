@@ -11,39 +11,62 @@
     inkscape krita
   ];
 
-  #####################################################################
+  ##############################################
+  # WezTerm – pełna konfiguracja + Twoje skróty
+  ##############################################
   xdg.configFile."wezterm/wezterm.lua".text = ''
-  -- <<< już skrócone — tu nic nie dotykamy >>>
   local wezterm = require "wezterm"
   local config = {}
-  config.font = wezterm.font("JetBrainsMono Nerd Font")
+
+  -- ====== Wygląd ======
+  config.font = wezterm.font_with_fallback({
+    "JetBrainsMono Nerd Font",
+    "Monospace",
+})
   config.font_size = 14.0
   config.color_scheme = "Dracula"
+  config.window_decorations = "RESIZE"
+  config.window_padding = { left = 3, right = 3, top = 1, bottom = 1 }
   config.hide_tab_bar_if_only_one_tab = true
-  config.leader = { key="Space", mods="CTRL", timeout_milliseconds=800 }
+  config.use_fancy_tab_bar = true
+  config.scrollback_lines = 5000
+
+  -- ====== Leader ======
+  config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 800 }
 
   config.keys = {
-    {key="v", mods="LEADER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
-    {key="s", mods="LEADER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
-    {key="h", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Left"},
-    {key="j", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Down"},
-    {key="k", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Up"},
-    {key="l", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Right"},
-    {key="H", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Left", 5}},
-    {key="J", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Down", 5}},
-    {key="K", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Up", 5}},
-    {key="L", mods="LEADER", action=wezterm.action.AdjustPaneSize {"Right", 5}},
-    {key="z", mods="LEADER", action=wezterm.action.TogglePaneZoomState},
-    {key="f", mods="LEADER", action=wezterm.action.ToggleFullScreen},
-    {key="c", mods="LEADER", action=wezterm.action.CopyTo "Clipboard"},
-    {key="v", mods="CTRL|SHIFT", action=wezterm.action.PasteFrom "Clipboard"},
-    {key="1", mods="LEADER", action=wezterm.action.ActivateTab(0)},
-    {key="2", mods="LEADER", action=wezterm.action.ActivateTab(1)},
-    {key="3", mods="LEADER", action=wezterm.action.ActivateTab(2)},
-    {key="4", mods="LEADER", action=wezterm.action.ActivateTab(3)},
-  }
-  return config
-  '';
+  -- SPLIT
+  { key = "v", mods = "LEADER", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } },
+  { key = "s", mods = "LEADER", action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" } },
+
+  -- NAWIGACJA
+  { key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection "Left" },
+  { key = "j", mods = "LEADER", action = wezterm.action.ActivatePaneDirection "Down" },
+  { key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection "Up" },
+  { key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection "Right" },
+
+  -- RESIZE
+  { key = "H", mods = "LEADER", action = wezterm.action.AdjustPaneSize { "Left", 5 } },
+  { key = "J", mods = "LEADER", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
+  { key = "K", mods = "LEADER", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
+  { key = "L", mods = "LEADER", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
+
+  -- ZOOM + FULLSCREEN
+  { key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
+  { key = "f", mods = "LEADER", action = wezterm.action.ToggleFullScreen },
+
+  -- COPY/PASTE
+  { key = "c", mods = "LEADER", action = wezterm.action.CopyTo "Clipboard" },
+  { key = "v", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
+
+  -- TABS
+  { key = "1", mods = "LEADER", action = wezterm.action.ActivateTab(0) },
+  { key = "2", mods = "LEADER", action = wezterm.action.ActivateTab(1) },
+  { key = "3", mods = "LEADER", action = wezterm.action.ActivateTab(2) },
+  { key = "4", mods = "LEADER", action = wezterm.action.ActivateTab(3) },
+}
+ return config
+ '';
 
   #####################################################################
   programs.zsh = {
