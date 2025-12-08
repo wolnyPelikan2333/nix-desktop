@@ -81,6 +81,7 @@ end)
       nhs = "nh os switch /etc/nixos#desktop";
       ll = "eza -al --icons";
       clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
+      sys-snapshots = "git -C /etc/nixos log --oneline --graph --decorate";   # ← DODANE
     };
 
     history = { size = 50000; save = 50000; share = true; };
@@ -110,7 +111,47 @@ end)
         echo "⚙️ build..."
         sudo nixos-rebuild switch --flake /etc/nixos#desktop || { echo "❌ FAIL"; return;}
         git add -A
-        git commit -m "os $(date +%F_%H-%M) - $*" && git push
+ sys-status
+===== SYSTEM STATUS =====
+
+Uptime:
+   16:19:30  działa  5:42,  1 użytkownik,  średnie obciążenie: 0,98, 1,07, 1,03
+
+Disk /:
+  /dev/nvme0n1p1  424G   35G  368G   9% /
+
+Repo status:
+  CLEAN ✔
+
+Last snapshots:
+  2b652c1 os 2025-12-08_16-07 - wezterm force-philips
+  938b375 os 2025-12-08_16-04 - wezterm philips
+  a31a3c2 os 2025-12-08_16-02 - wezterm move to DP-1
+  c4f4af3 os 2025-12-08_15-57 - wezterm move to DP-1
+  4c79606 os 2025-12-08_15-54 - wezterm left monitor
+  b8b18d8 os 2025-12-08_15-45 - wezterm update
+  5676b39 os 2025-12-08_15-39 - wezterm update
+
+System generations:
+[sudo] hasło użytkownika michal:
+    78   2025-12-08 15:39:05
+    79   2025-12-08 15:45:48
+    80   2025-12-08 15:54:33
+    81   2025-12-08 15:57:18
+    82   2025-12-08 16:02:35
+    83   2025-12-08 16:04:43
+    84   2025-12-08 16:07:06   (current)
+
+Home generations:
+  2025-12-04 22:51 : id 13 -> /nix/store/ml3plqs0bzjdw0i6sv4c4jf7ahycxdwm-home-manager-generation (current)
+
+Garbage (dry-run):
+removing old generations of profile /home/michal/.local/state/nix/profiles/profile
+removing old generations of profile /home/michal/.local/state/nix/profiles/home-manager
+
+Recommendation:
+  Repo czyste — możesz działać dalej.
+===================================
         echo "🚀 snapshot → $*"
       }
 
