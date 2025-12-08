@@ -70,30 +70,28 @@ end)
   };
 
   #####################################################################
-    programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    dotDir = "${config.xdg.configHome}/zsh";
+     programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  autosuggestion.enable = true;
+  syntaxHighlighting.enable = true;
+  dotDir = "${config.xdg.configHome}/zsh";
 
-    shellAliases = {
-      ll = "eza -al --icons";
-      clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
-      clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
-      sys-snapshots = "git -C /etc/nixos log --oneline --graph --decorate";
-    };
+  shellAliases = {
+    ll = "eza -al --icons";
+    clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
+    clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
+    sys-snapshots = "git -C /etc/nixos log --oneline --graph --decorate";
+  };
 
-    history = { size = 50000; save = 50000; share = true; };
+  history = { size = 50000; save = 50000; share = true; };
 
-
-    ############################################################
-    initContent = ''
-      # --- blokada aliasu ns z systemowych pluginów Nix ---
-      unalias ns 2>/dev/null
-      unset -f ns 2>/dev/null
-      alias ns="" 2>/dev/null
-      unalias nss 2>/dev/null
+    initExtra = ''
+      # --- wyłącz alias ns z pluginów nix ---
+      unalias ns 2>/dev/null || true
+      unset -f ns 2>/dev/null || true
+      alias ns="" 2>/dev/null || true
+      unalias nss 2>/dev/null || true
 
       zstyle ":completion:*" menu yes select
 
@@ -126,54 +124,22 @@ end)
         nss "$*"
       }
 
-      sys-status() {
+      sys-status(){
         echo "===== SYSTEM STATUS ====="
         echo
-        echo "Uptime:"
-        uptime | sed 's/^/  /'
-        echo
-
-        echo "Disk /:"
-        df -h / | sed '1d;s/^/  /'
-        echo
-
+        echo "Uptime:"; uptime | sed 's/^/  /'; echo
+        echo "Disk /:"; df -h / | sed '1d;s/^/  /'; echo
         _sys_cd_etc_nixos || return
-        echo "Repo status:"
-        if [ -z "$(git status --porcelain)" ]; then
-          echo "  CLEAN ✔"
-          CLEAN=true
-        else
-          echo "  DIRTY ✖ (masz zmiany)"
-          CLEAN=false
-        fi
-        echo
-
-        echo "Last snapshots:"
-        git --no-pager log --oneline -7 | sed 's/^/  /'
-        echo
-
-        echo "System generations:"
-        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 7 | sed 's/^/  /'
-        echo
-
-        echo "Home generations:"
-        home-manager generations | head -n 5 | sed 's/^/  /'
-        echo
-
-        echo "Garbage (dry-run):"
-        nix-collect-garbage -d --dry-run | sed 's/^/  /' || echo "  brak danych"
-        echo
-
-        echo "Recommendation:"
-        if [ "$CLEAN" = false ]; then
-          echo "  Użyj → ns \"opis\""
-        else
-          echo "  Repo czyste — możesz działać dalej."
-        fi
-        echo "==================================="
+        echo "Repo status:"; if [ -z "$(git status --porcelain)" ]; then echo "  CLEAN ✔"; CLEAN=true; else echo "  DIRTY ✖"; CLEAN=false; fi; echo
+        echo "Last snapshots:"; git --no-pager log --oneline -7 | sed 's/^/  /'; echo
+        echo "System generations:"; sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | tail -n 7 | sed 's/^/  /'; echo
+        echo "Home generations:"; home-manager generations | head -n 5 | sed 's/^/  /'; echo
+        echo "Garbage (dry-run):"; nix-collect-garbage -d --dry-run | sed 's/^/  /'; echo
+        echo "Recommendation:"; if [ "$CLEAN" = false ]; then echo "  Użyj → ns \"opis\""; else echo "  Repo czyste — możesz działać dalej."; fi
+        echo "===================================" 
       }
-    '';
-  };
+  '';
+};
 
   programs.fzf.enable = true;
   programs.eza.enable = true;
