@@ -51,12 +51,12 @@
         -- 🔥 Fullscreen
         {key="f", mods="LEADER", action="ToggleFullScreen"},
       }
-
-       wezterm.on("gui-startup", function(cmd)
-      local _, _, window = wezterm.mux.spawn_window(cmd or {})
-      window:gui_window():set_position(0, 0)    -- lewy monitor (HDMI-A-1)
-      window:gui_window():maximize()           -- pełne okno na starcie
-    end)
+      
+      wezterm.on("gui-startup", function(cmd)
+  local _, _, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():set_position(1920, 0)   -- DP-1 (drugi monitor)
+  window:gui_window():maximize()
+end)
 
       return config
     '';
