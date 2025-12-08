@@ -14,10 +14,11 @@
   ##############################################
   # WezTerm — działający czysty config + skróty
   ##############################################
-    xdg.configFile."wezterm/wezterm.lua" = {
+      xdg.configFile."wezterm/wezterm.lua" = {
     force = true;
     text = ''
       local wezterm = require "wezterm"
+      local act = wezterm.action
       local config = {}
 
       config.font = wezterm.font("JetBrainsMono Nerd Font")
@@ -25,17 +26,30 @@
       config.color_scheme = "Dracula"
       config.hide_tab_bar_if_only_one_tab = true
 
-      config.leader = { key="Space", mods="CTRL", timeout_milliseconds=800 }
+      -- Leader zmieniony na Ctrl+a (działa u Ciebie)
+      config.leader = { key="a", mods="CTRL", timeout_milliseconds=800 }
 
       config.keys = {
-        {key="v", mods="LEADER", action=wezterm.action.SplitVertical{domain="CurrentPaneDomain"}},
-        {key="s", mods="LEADER", action=wezterm.action.SplitHorizontal{domain="CurrentPaneDomain"}},
-        {key="x", mods="LEADER", action=wezterm.action.CloseCurrentPane{confirm=true}},
+        -- 🧩 Splity
+        {key="v", mods="LEADER", action=act.SplitVertical{domain="CurrentPaneDomain"}},
+        {key="s", mods="LEADER", action=act.SplitHorizontal{domain="CurrentPaneDomain"}},
 
-        {key="h", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Left"},
-        {key="j", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Down"},
-        {key="k", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Up"},
-        {key="l", mods="LEADER", action=wezterm.action.ActivatePaneDirection "Right"},
+        -- 🧭 Ruch między panelami
+        {key="h", mods="LEADER", action=act.ActivatePaneDirection "Left"},
+        {key="j", mods="LEADER", action=act.ActivatePaneDirection "Down"},
+        {key="k", mods="LEADER", action=act.ActivatePaneDirection "Up"},
+        {key="l", mods="LEADER", action=act.ActivatePaneDirection "Right"},
+
+        -- ❌ Zamknij panel
+        {key="x", mods="LEADER", action=act.CloseCurrentPane{confirm=true}},   -- pyta przed zamknięciem
+        {key="X", mods="LEADER", action=act.CloseCurrentPane{confirm=false}}, -- natychmiast (Shift+X)
+
+        -- ➕ taby
+        {key="t", mods="LEADER", action=act.SpawnTab "CurrentPaneDomain"},
+        {key="w", mods="LEADER", action=act.CloseCurrentTab{confirm=true}},
+
+        -- 🔥 Fullscreen
+        {key="f", mods="LEADER", action="ToggleFullScreen"},
       }
 
       return config
