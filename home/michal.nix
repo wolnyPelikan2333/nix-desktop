@@ -52,10 +52,11 @@
         {key="f", mods="LEADER", action="ToggleFullScreen"},
       }
       
-     wezterm.on("gui-startup", function(cmd)
+    wezterm.on("gui-startup", function(cmd)
   local _, _, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():set_position(0, 0)    -- Philips (lewy, primary)
-  window:gui_window():maximize()            -- pełne okno na starcie
+  local gui = window:gui_window()
+  gui:set_position(0, 0)
+  gui:set_inner_size(1800, 1000)  -- duże okno bez maximize
 end)
 
       return config
