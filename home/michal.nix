@@ -78,9 +78,9 @@ end)
     dotDir = "${config.xdg.configHome}/zsh";
 
     shellAliases = {
-      nhs = "nh os switch /etc/nixos#desktop";
       ll = "eza -al --icons";
       clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
+      clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
       sys-snapshots = "git -C /etc/nixos log --oneline --graph --decorate";   # ← DODANE
     };
 
