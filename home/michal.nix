@@ -143,6 +143,12 @@ end)
   programs.fzf.enable = true;
   programs.eza.enable = true;
   programs.bat.enable = true;
+  
+   programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-systems 10 --keep-homes 10 --max-disk-usage 12G";
+   }; 
 
   home.stateVersion = "25.05";
 }
