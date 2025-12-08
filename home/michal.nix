@@ -27,7 +27,7 @@
       config.hide_tab_bar_if_only_one_tab = true
 
       -- Leader zmieniony na Ctrl+a (działa u Ciebie)
-      config.leader = { key="a", mods="CTRL", timeout_milliseconds=800 }
+      config.leader = { key="a", mods="CTRL", timeout_milliseconds=2000 }
 
       config.keys = {
         -- 🧩 Splity
