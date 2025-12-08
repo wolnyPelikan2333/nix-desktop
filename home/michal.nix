@@ -52,11 +52,17 @@
         {key="f", mods="LEADER", action="ToggleFullScreen"},
       }
       
-    wezterm.on("gui-startup", function(cmd)
+   -- 🔥 Wymuszenie startu na monitorze Philips (HDMI-A-1 +0+0)
+wezterm.on("gui-startup", function(cmd)
   local _, _, window = wezterm.mux.spawn_window(cmd or {})
   local gui = window:gui_window()
-  gui:set_position(0, 0)
-  gui:set_inner_size(1800, 1000)  -- duże okno bez maximize
+
+  -- czekamy aż okno wstanie, potem je przenosimy
+  wezterm.sleep_ms(250)
+
+  gui:set_position(0, 0)        -- Lewy ekran, Philips
+  gui:set_inner_size(1800, 1000) -- Ustaw duże okno (pewne przeniesienie)
+  -- jeżeli chcesz fullscreen zamiast window mode, powiem Ci poniżej
 end)
 
       return config
