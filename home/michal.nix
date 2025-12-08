@@ -52,10 +52,10 @@
         {key="f", mods="LEADER", action="ToggleFullScreen"},
       }
       
-      wezterm.on("gui-startup", function(cmd)
+     wezterm.on("gui-startup", function(cmd)
   local _, _, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():set_position(1920, 0)   -- DP-1 (drugi monitor)
-  window:gui_window():maximize()
+  window:gui_window():set_position(0, 0)    -- Philips (lewy, primary)
+  window:gui_window():maximize()            -- pełne okno na starcie
 end)
 
       return config
