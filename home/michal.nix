@@ -86,11 +86,10 @@ end)
 
   history = { size = 50000; save = 50000; share = true; };
 
-    initExtra = ''
+    initContent = ''
       # --- wyłącz alias ns z pluginów nix ---
       unalias ns 2>/dev/null || true
       unset -f ns 2>/dev/null || true
-      alias ns="" 2>/dev/null || true
       unalias nss 2>/dev/null || true
 
       zstyle ":completion:*" menu yes select
