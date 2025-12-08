@@ -70,30 +70,51 @@ end)
   };
 
   #####################################################################
-     programs.zsh = {
-  enable = true;
-  enableCompletion = true;
-  autosuggestion.enable = true;
-  syntaxHighlighting.enable = true;
-  dotDir = "${config.xdg.configHome}/zsh";
+    programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
 
-  shellAliases = {
-    ll = "eza -al --icons";
-    clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
-    clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
-    sys-snapshots = "git -C /etc/nixos log --oneline --graph --decorate";
-  };
+    # ─────────────────────────────────────────────
+    # 🔹 Alias-y + workflow
+    shellAliases = {
+      # Twoje stare aliasy
+      ll = "eza -al --icons";
+      clean-system = "sudo nix-collect-garbage -d && sudo nix store optimise";
+      clean-weekly = "sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
+      sys-snapshots = "git -C /etc/nixos log --oneline --graph --decorate";
 
-  history = { size = 50000; save = 50000; share = true; };
+      # Workflow — NOWE
+      nht = "nh os build /etc/nixos#desktop";     # test kompilacji
+      nhs = "nh os switch /etc/nixos#desktop";    # switch systemu
+      nsc = "ns";                                 # snapshot (commit+push)
+    };
+
+    history = { size = 50000; save = 50000; share = true; };
 
     initContent = ''
+      # ==========================================================
+      # 🧭 WORKFLOW NIXOS – krok po kroku
+      #
+      # 1) Edytuj pliki w /etc/nixos
+      # 2) Test build:     nht
+      # 3) Switch systemu: nhs
+      # 4) Snapshot:       nsc "opis"
+      #
+      # rollback: nh os rollback
+      # diff   : git diff
+      # ==========================================================
+      # (Twoje funkcje ns/sys-note itd zostają poniżej)
+      
       # --- wyłącz alias ns z pluginów nix ---
       unalias ns 2>/dev/null || true
       unset -f ns 2>/dev/null || true
       unalias nss 2>/dev/null || true
 
       zstyle ":completion:*" menu yes select
-
+      
       _sys_cd_etc_nixos(){ cd /etc/nixos || { echo "❌ brak repo"; return 1;} }
 
       NOTEFILE="$HOME/.config/nixos-notes.log"
@@ -135,10 +156,10 @@ end)
         echo "Home generations:"; home-manager generations | head -n 5 | sed 's/^/  /'; echo
         echo "Garbage (dry-run):"; nix-collect-garbage -d --dry-run | sed 's/^/  /'; echo
         echo "Recommendation:"; if [ "$CLEAN" = false ]; then echo "  Użyj → ns \"opis\""; else echo "  Repo czyste — możesz działać dalej."; fi
-        echo "===================================" 
+        echo "==================================="
       }
-  '';
-};
+    '';
+  };
 
   programs.fzf.enable = true;
   programs.eza.enable = true;
