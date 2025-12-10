@@ -20,5 +20,8 @@
   programs.home-manager.enable = true;
   home.packages = [ pkgs.home-manager ];
 
+  
+
+
   home.stateVersion = "25.05";
 }
