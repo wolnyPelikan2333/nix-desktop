@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -26,6 +26,9 @@
     libavif
     inkscape
     krita
+
+     # --- dodatki ---
+    binutils   # <─ **nowe**
   ];
 }
 

@@ -5,8 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
@@ -15,19 +13,20 @@
   in {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       inherit system;
-         
-    modules = [
-      ./nixos/configuration.nix
-      ./plasma.nix  # <-- moduł systemowy, OK
 
-   # Home Manager w trybie systemowym
-      home-manager.nixosModules.home-manager
-  {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
+      modules = [
+        ./nixos/configuration.nix
+        ./plasma.nix
 
-      home-manager.users.michal = import ./home/michal.nix;
+        # Home Manager jako moduł systemowy
+        home-manager.nixosModules.home-manager
 
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          # podłączenie konfiguracji użytkownika
+          home-manager.users.michal = import ./home/michal.nix;
         }
       ];
     };
