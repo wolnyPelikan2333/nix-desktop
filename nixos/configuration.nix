@@ -133,7 +133,7 @@
 
   programs.nh.enable = true;
   programs.nh.clean = {
-    enable = true;
+    enable = false;
     dates = "weekly";
   };
 
