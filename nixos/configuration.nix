@@ -146,6 +146,18 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
 
+  ###############################################
+  ## AUTO ROTACJA GENERACJI — zostaw 10 ostatnich
+  ###############################################
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";                   # harmonogram: daily/weekly/monthly
+    options = "--delete-generations +10"; # zachowaj ostatnie 10 generacji
+  };
+
+  nix.settings.auto-optimise-store = true; # opcjonalnie — lepsze sprzątanie
+
+
   
   ###############################################
   ## ZSH + STARSHIP + FZF + ZOXIDE
