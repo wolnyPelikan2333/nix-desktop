@@ -56,6 +56,11 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+
+  services.xserver.windowManager.i3.enable = true;
+  programs.hyprland.enable = true;
+
+
   services.xserver.xkb = {
     layout = "pl";
     variant = "";
@@ -88,7 +93,7 @@
     packages = with pkgs; [ kdePackages.kate ];
   };
 
-  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = false;
   services.displayManager.autoLogin.user = "michal";
 
   ###############################################
