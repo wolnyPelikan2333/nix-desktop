@@ -33,20 +33,25 @@
       v     = "nvim";
       conf  = "cd /etc/nixos && nvim flake.nix";
 
+      # zoxide
+      z  = "zoxide query";
+      zi = "zoxide interactive";
+
       ########################################
       ## 3) NH WORKFLOW — FULL POWER
       ########################################
 
       # --- Podstawy ---
-      nht   = "nh os test /etc/nixos#desktop";     
-      nhs   = "nh os switch /etc/nixos#desktop";   
-      nhb   = "nh os boot /etc/nixos#desktop";     
+      nht   = "nh os test /etc/nixos#desktop";
+      nhs   = "nh os switch /etc/nixos#desktop";
+      nhb   = "nh os boot /etc/nixos#desktop";
       nhg   = "nh os generations";
-      nhd   = "nh os diff /etc/nixos#desktop";
-
-      # --- NOWOŚĆ: build bez switch ---
-      nhbuild = "nh os build /etc/nixos#desktop --show-trace";  # ⬅⬅⬅ tylko build, bez zmian systemu
-
+      nhd = ''
+	nix store diff-closures /run/current-system \
+	$(nix build /etc/nixos#desktop --no-link --print-out-paths)
+'';
+      # --- Build bez switch ---
+      nhbuild = "nh os build /etc/nixos#desktop --show-trace";
 
       # --- Debug ---
       nhcheck   = "nh os test /etc/nixos#desktop --show-trace";
@@ -64,7 +69,7 @@
       nhstash = "git -C /etc/nixos stash -u";
       nhapply = "git -C /etc/nixos stash apply";
 
-      # --- Automatyzacje ---
+      # --- Synchronizacja ---
       nhsync = ''
         git -C /etc/nixos pull &&
         nh os test /etc/nixos#desktop &&
@@ -74,7 +79,7 @@
       nhr = "nh os switch /etc/nixos#desktop && systemctl --user daemon-reload";
 
       # --- Build + snapshot + push ---
-                    nhpr = let
+      nhpr = let
         msg = "auto: switch + snapshot $(date +%F_%H-%M)";
       in ''
         nh os switch /etc/nixos#desktop &&
@@ -83,10 +88,8 @@
         git -C /etc/nixos push &&
         echo "🚀 nhpr: switch + snapshot + push — done!"
       '';
-     
-     
 
-      # --- Rollback całego systemu ---
+      # --- Rollback ---
       nhrollback = ''
         sudo nixos-rebuild switch --rollback &&
         git -C /etc/nixos reset --hard HEAD~1 &&
@@ -94,7 +97,7 @@
       '';
 
       ##############################
-      ## 4) Git branches – power
+      ## 4) Git branches
       ##############################
       nhbranch = ''
         git -C /etc/nixos checkout -b fix-$(date +%F_%H-%M) &&
@@ -102,7 +105,7 @@
       '';
 
       ##############################
-      ## 5) Clean / Maintenance
+      ## 5) Maintenance
       ##############################
       clean     = "sudo nix-collect-garbage -d";
       clean-big = "sudo nix-collect-garbage -d && sudo nix store optimise";

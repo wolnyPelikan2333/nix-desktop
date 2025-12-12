@@ -82,6 +82,45 @@ Wybierz opcję: "
           *) echo "Nieprawidłowa opcja" ;;
         esac
       }
+
+      ###########################################
+# Funkcja nhlog — diagnostyka systemu
+###########################################
+nhlog() {
+  mode="$1"
+
+  echo "===== 🔍 NixOS DIAGNOSTICS ====="
+  echo
+  echo "► System: $(uname -a)"
+  echo "► Host: $(hostname)"
+  echo "► Kernel: $(uname -r)"
+  echo
+
+  echo "===== 📦 Flake path ====="
+  echo "/etc/nixos"
+  echo
+
+  echo "===== 📜 Generacje ====="
+  nh os generations
+  echo
+
+  if [[ "$mode" == "--full" ]]; then
+    echo "===== 🧊 Flake metadata ====="
+    nix flake metadata /etc/nixos
+    echo
+
+    echo "===== 🧮 Full system evaluation ====="
+    nh os test /etc/nixos#desktop --show-trace
+    echo
+
+    echo "===== 🗂 Repo status ====="
+    git -C /etc/nixos status -s
+    echo
+  fi
+
+  echo "===== ✔ nhlog done ====="
+}
+
     '';
   };
 }
