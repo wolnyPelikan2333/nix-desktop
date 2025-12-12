@@ -1,27 +1,28 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Ten plik jest teraz przygotowany jako modulka dla Home-Managera.
-  # Nie powinien być ładowany jako programs.zsh w NixOS.
   programs.zsh = {
     enable = true;
+
+    # NOWY format opcji (poprawny)
     enableCompletion = true;
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
 
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
+    # gdzie trzymać pliki .zshrc
     dotDir = "${config.xdg.configHome}/zsh";
 
-    # PROMPT – poprawna wersja dla Home-Manager
+    ############################################
+    ## PROMPT + EXTRA INIT
+    ############################################
     initExtraBeforeCompInit = ''
       autoload -Uz colors && colors
       PROMPT="%{$fg[yellow]%}%~%{$reset_color%} %{$fg[cyan]%}>%{$reset_color%} "
     '';
 
-    # funkcje i helpery użytkownika
     initExtra = ''
       ###########################################
-      # Funkcja ns — workflow Git + NH
+      # Funkcja ns — test + commit + push + switch
       ###########################################
       ns() {
         MSG="$@"
@@ -58,7 +59,7 @@
       }
 
       ###########################################
-      # Funkcja nh_menu
+      # Menu NH
       ###########################################
       nh_menu() {
         printf "\n===== 🧊 NixOS Menu =====\n
