@@ -5,7 +5,7 @@
 
   config = lib.mkIf config.my.aliases.enable {
 
-     programs.zsh.shellAliases = {
+    programs.zsh.shellAliases = {
 
       ##############################
       ## 0) System check
@@ -33,17 +33,26 @@
       v     = "nvim";
       conf  = "cd /etc/nixos && nvim flake.nix";
 
-      ##############################
-      ## 3) NH workflow (proste skróty)
-      ##############################
-      nht = "nh os test /etc/nixos#desktop";
-      nhs = "nh os switch /etc/nixos#desktop";
-      nhb = "nh os boot /etc/nixos#desktop";
-      nhg = "nh os generations";
+      ########################################
+      ## 3) NH WORKFLOW — FULL POWER
+      ########################################
 
-      ##############################
-      ## 5) Snapshot systemu
-      ##############################
+      # --- Podstawy ---
+      nht   = "nh os test /etc/nixos#desktop";     
+      nhs   = "nh os switch /etc/nixos#desktop";   
+      nhb   = "nh os boot /etc/nixos#desktop";     
+      nhg   = "nh os generations";
+      nhd   = "nh os diff /etc/nixos#desktop";
+
+      # --- NOWOŚĆ: build bez switch ---
+      nhbuild = "nh os build /etc/nixos#desktop --show-trace";  # ⬅⬅⬅ tylko build, bez zmian systemu
+
+
+      # --- Debug ---
+      nhcheck   = "nh os test /etc/nixos#desktop --show-trace";
+      nhrebuild = "sudo nixos-rebuild switch --flake /etc/nixos#desktop --show-trace";
+
+      # --- Snapshoty / Git ---
       nhsnap = ''
         git -C /etc/nixos add -A &&
         git -C /etc/nixos commit -m "snapshot $(date +%F_%H-%M)" &&
@@ -51,10 +60,49 @@
         echo "📦 Snapshot zapisany"
       '';
 
-      nhundo = "git -C /etc/nixos reset --hard HEAD~1";
+      nhundo  = "git -C /etc/nixos reset --hard HEAD~1";
+      nhstash = "git -C /etc/nixos stash -u";
+      nhapply = "git -C /etc/nixos stash apply";
+
+      # --- Automatyzacje ---
+      nhsync = ''
+        git -C /etc/nixos pull &&
+        nh os test /etc/nixos#desktop &&
+        nh os switch /etc/nixos#desktop
+      '';
+
+      nhr = "nh os switch /etc/nixos#desktop && systemctl --user daemon-reload";
+
+      # --- Build + snapshot + push ---
+                    nhpr = let
+        msg = "auto: switch + snapshot $(date +%F_%H-%M)";
+      in ''
+        nh os switch /etc/nixos#desktop &&
+        git -C /etc/nixos add -A &&
+        git -C /etc/nixos commit -m "${msg}" &&
+        git -C /etc/nixos push &&
+        echo "🚀 nhpr: switch + snapshot + push — done!"
+      '';
+     
+     
+
+      # --- Rollback całego systemu ---
+      nhrollback = ''
+        sudo nixos-rebuild switch --rollback &&
+        git -C /etc/nixos reset --hard HEAD~1 &&
+        echo "↩ System i repo cofnięte o jedną generację"
+      '';
 
       ##############################
-      ## 7) Clean / Maintenance
+      ## 4) Git branches – power
+      ##############################
+      nhbranch = ''
+        git -C /etc/nixos checkout -b fix-$(date +%F_%H-%M) &&
+        echo "🌿 Nowy branch utworzony!"
+      '';
+
+      ##############################
+      ## 5) Clean / Maintenance
       ##############################
       clean     = "sudo nix-collect-garbage -d";
       clean-big = "sudo nix-collect-garbage -d && sudo nix store optimise";
@@ -62,7 +110,9 @@
 
       g3 = "nix-env --delete-generations +3 && sudo nix-collect-garbage -d";
       g5 = "nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
+
       nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
+
     };
   };
 }
