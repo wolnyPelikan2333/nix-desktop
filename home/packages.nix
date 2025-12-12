@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    neovim
     btop
     fastfetch
     wezterm

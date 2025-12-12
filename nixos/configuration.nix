@@ -4,6 +4,8 @@
   imports = [
     ./hardware-configuration.nix
   ];
+    
+     programs.zsh.enable = true;
 
   ###############################################
   ## GLOBALNE ZMIENNE ŚRODOWISKOWE
@@ -13,6 +15,7 @@
     EDITOR = "nvim";
     VISUAL = "nvim";
     SUDO_EDITOR = "nvim";
+
   };
 
   environment.shells = [ pkgs.zsh ];
@@ -107,7 +110,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    kdePackages.okular vim wget google-chrome neovim yazi ranger steam zathura
+    kdePackages.okular vim wget google-chrome yazi ranger steam zathura
     tree-sitter tree-sitter-grammars.tree-sitter-bash
     tree-sitter-grammars.tree-sitter-lua tree-sitter-grammars.tree-sitter-nix
     tree-sitter-grammars.tree-sitter-json tree-sitter-grammars.tree-sitter-markdown
@@ -118,7 +121,6 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
 
-  programs.zsh.enable = true;
 
   ###############################################
   ## GC auto 10 generations
@@ -142,20 +144,7 @@
     dates = "weekly";
   };
 
-  ###############################################
-  ## SYSTEM ALIASES
-  ###############################################
-
-  environment.shellAliases = {
-    ns = "nh os switch /etc/nixos#desktop";
-    nt = "nh os test /etc/nixos#desktop";
-    nb = "nh os boot /etc/nixos#desktop";
-    nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
-
-    g3 = "nix-env --delete-generations +3 && sudo nix-collect-garbage -d";
-    g5 = "nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
-  };
-
+  
   ###############################################
   ## WEEKLY system cleanup
   ###############################################

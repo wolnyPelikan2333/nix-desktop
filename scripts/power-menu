@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+choice=$(printf "Uśpij\nWyłącz\nRestart\nWyloguj" | rofi -dmenu -i -p "System")
+
+case "$choice" in
+  "Uśpij") systemctl suspend ;;
+  "Wyłącz") systemctl poweroff ;;
+  "Restart") systemctl reboot ;;
+  "Wyloguj") i3-msg exit ;;
+esac
+
