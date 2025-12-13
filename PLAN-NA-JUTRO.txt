@@ -1,0 +1,31 @@
+PLAN NA JUTRO — SKRÓTY BOJOWE (i3)
+
+0. START
+   cd /etc/nixos
+   git status
+   (ma być czysto)
+
+1. TEORIA (bez edycji)
+   - skróty i3 = Home Manager
+   - osobny moduł: i3-keys.nix
+
+2. STRUKTURA
+   /etc/nixos/home/
+   - michal.nix (importy)
+   - i3-prod.nix
+   - i3-keys.nix
+
+3. MINIMUM
+   - tylko kilka bindsym
+   - zero refactorów
+
+4. KOLEJNOŚĆ
+   nh build
+   nh switch
+   git commit
+   git push
+
+5. STOP
+   - gdy głowa siada
+   - albo po pierwszym działającym zestawie
+

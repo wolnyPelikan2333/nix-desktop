@@ -1,0 +1,19 @@
+📜 REGUŁA PRACY (do zapamiętania / README)
+
+Skopiuj to 1:1 (to jest esencja):
+
+Reguła i3 (prod/test):
+
+i3-keys-base zawiera tylko sprawdzone, stabilne skróty
+
+i3-keys-test służy wyłącznie do eksperymentów
+
+środowisko test = prod + nakładka testowa
+
+w danym momencie aktywny jest tylko jeden wariant: i3-prod albo i3-test
+
+skrót awansuje z test → base dopiero po realnym użyciu
+
+produkcja nigdy nie importuje skrótów testowych
+
+To jest twoje prawo systemowe. Trzymasz się go → nie ma chaosu.
