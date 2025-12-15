@@ -111,8 +111,8 @@
     discord lutris wineWowPackages.full winetricks
   ];
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  
+  
 
   programs.zsh.enable = true;
 
