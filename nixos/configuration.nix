@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs,lib, ... }:
 
 {
   imports = [
@@ -21,6 +21,8 @@
   ## BOOTLOADER
   ###############################################
 
+  systemd.defaultUnit = "graphical.target";
+  
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
@@ -65,17 +67,17 @@
   console.keyMap = "pl2";
 
   ###############################################
-  ## AUDIO
-  ###############################################
+  ## AUDIO – GOLDEN (PipeWire)
+ ###############################################
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+       services.pipewire = {
+	  enable = true;
+	  alsa.enable = true;
+	  pulse.enable = true;
+	  jack.enable = false;
+      };
+
+	security.rtkit.enable = true;
 
   ###############################################
   ## USER
