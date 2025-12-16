@@ -169,6 +169,17 @@
     timerConfig.OnCalendar = "weekly";
   };
 
+  fileSystems."/mnt/steam" = {
+  device = "/dev/disk/by-uuid/8fbe63e6-58f2-4609-905a-5f2365318224";
+  fsType = "ext4";
+  options = [
+    "defaults"
+    "nofail"
+  ];
+};
+
+
+
   ###############################################
   ## END
   ###############################################
