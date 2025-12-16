@@ -8,7 +8,14 @@
     syntaxHighlighting.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
 
+    
     initContent = ''
+      autoload -Uz colors
+      colors
+
+      # Czytelny, kontrastowy prompt
+      PROMPT=$'\n%{\e[38;5;220m%}%~%{\e[0m%}\n%{\e[38;5;81m%}❯%{\e[0m%} '
+    
       unalias ns 2>/dev/null
       unalias nss 2>/dev/null
       unalias sys-status 2>/dev/null
