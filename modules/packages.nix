@@ -29,6 +29,10 @@
 
      # --- dodatki ---
     binutils   # <─ **nowe**
+    ripgrep    # rg
+    fd
+    tree
+    jq
   ];
 }
 
