@@ -165,8 +165,11 @@
       clean-weekly="sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
       sys-snapshots="git -C /etc/nixos log --oneline --graph --decorate";
 
-    # 🚑 PANIC MODE
-      panic = "nvim /etc/ściągi/nix/panic-index.md";
+      # 🧠 Vim cheat sheet
+       vh = "nvim /etc/nixos/docs/ściągi/shell/vim.md";
+
+     # 🚑 PANIC MODE
+      panic = "nvim /etc/nixos/docs/ściągi/nix/panic-index.md";
     };
 
     history = { size = 50000; save = 50000; share = true; };
