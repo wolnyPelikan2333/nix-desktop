@@ -37,7 +37,7 @@
         [ -z "$msg" ] && msg="update"
 
         echo "⚙ build + switch..."
-        sudo nixos-rebuild switch --flake /etc/nixos#desktop || { echo "❌ FAIL"; return; }
+        sudo nixos-rebuild switch --flake /etc/nixos#nixos || { echo "❌ FAIL"; return; }
 
         git -C /etc/nixos add -A
         git -C /etc/nixos commit -m "snapshot: $(date +%F_%H-%M) — $msg" && git -C /etc/nixos push
@@ -116,30 +116,30 @@
       ##########################################################
       nh-menu(){
         local choice=$(printf "
-🛠 System
-  🔄 switch
-  🚀 update
-  🌐 flake-update
-  📸 snapshot
+	🛠 System
+	  🔄 switch
+	  🚀 update
+	  🌐 flake-update
+	  📸 snapshot
 
-⏪ Bezpieczeństwo
-  ⏪ rollback
-  🔥 rollback-pro
-  📦 show-gens
+	⏪ Bezpieczeństwo
+	  ⏪ rollback
+	  🔥 rollback-pro
+	  📦 show-gens
 
-🧹 Porządki
-  🗑 clean
-  📊 status
-" | fzf --prompt="≡ NixOS menu > " --ansi --height=85% --border --header="📦 zarządzanie systemem")
+	🧹 Porządki
+	  🗑 clean
+	  📊 status
+	" | fzf --prompt="≡ NixOS menu > " --ansi --height=85% --border --header="📦 zarządzanie systemem")
 
-        choice=$(echo "$choice" | sed 's/^[[:space:]]*//')
+		choice=$(echo "$choice" | sed 's/^[[:space:]]*//')
 
         case "$choice" in
-          "🔄 switch")        nh os switch /etc/nixos#desktop ;;
-          "🚀 update")        sudo nixos-rebuild switch --flake /etc/nixos#desktop ;;
-          "🌐 flake-update")  nix flake update /etc/nixos && nh os switch /etc/nixos#desktop ;;
+          "🔄 switch")        nh os switch /etc/nixos#nixos ;;
+          "🚀 update")        sudo nixos-rebuild switch --flake /etc/nixos#nixos ;;
+          "🌐 flake-update")  nix flake update /etc/nixos && nh os switch /etc/nixos#nixos ;;
           "📸 snapshot")      read "?Opis snapshotu: " msg; ns "$msg" ;;
-          "⏪ rollback")       sudo nixos-rebuild switch --flake /etc/nixos#desktop --rollback ;;
+          "⏪ rollback")       sudo nixos-rebuild switch --flake /etc/nixos#nixos --rollback ;;
           "🔥 rollback-pro")  nh-rollback-pro ;;
           "📦 show-gens")     sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | less ;;
           "🗑 clean")         sudo nix-collect-garbage -d && sudo nix store optimise ;;
@@ -157,13 +157,16 @@
       g3 = "nix-env --delete-generations +3 && sudo nix-collect-garbage -d";
       g5 = "nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
       l = "ls -alh"; la = "eza -a"; ll="eza -l"; lla="eza -la"; ls="eza"; lt="eza --tree";
-      nb = "nh os boot /etc/nixos#desktop";
+      nb = "nh os boot /etc/nixos#nixos";
       nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
-      nt="nh os test /etc/nixos#desktop"; nht="nh os build /etc/nixos#desktop"; nhs="nh os switch /etc/nixos#desktop";
+      nt="nh os test /etc/nixos#nixos"; nht="nh os build /etc/nixos#nixos"; nhs="nh os switch /etc/nixos#nixos";
       run-help="man"; se="sudoedit"; which-command="whence";
       clean-system="sudo nix-collect-garbage -d && sudo nix store optimise";
       clean-weekly="sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
       sys-snapshots="git -C /etc/nixos log --oneline --graph --decorate";
+
+    # 🚑 PANIC MODE
+      panic = "nvim /etc/ściągi/nix/panic-index.md";
     };
 
     history = { size = 50000; save = 50000; share = true; };
