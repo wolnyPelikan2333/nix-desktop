@@ -29,6 +29,7 @@
         n  = "nvim";
         v  = "nvim";
         conf = "cd /etc/nixos && nvim flake.nix";
+	sc = "nvim /etc/nixos/docs/ściągi";
       }
 
       # ===========================
