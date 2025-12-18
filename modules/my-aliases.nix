@@ -66,23 +66,25 @@
       # ===========================
       # 5) Clean & Maintenance
       # ===========================
-      {
+            {
         clean      = "sudo nix-collect-garbage -d";
         clean-big  = "sudo nix-collect-garbage -d && sudo nix store optimise";
         sys-free   = "df -h";
+      }
+    ];
 
-	      # --- NH Interactive Menu (Snapshot Manager) ---
-      nh-menu = ''
+    programs.zsh.initExtra = ''
+      nh-menu() {
         printf "\n===== 🧊 NixOS Snapshot Menu =====\n
-1) 📦 Snapshot (git commit + push)
-2) ↩️ Rollback system (nh os rollback)
-3) 🏠 Rollback Home Manager
-4) 🔍 Diff zmian konfiguracji
-5) 📜 Lista generacji
-6) ⏪ Cofnij ostatni snapshot (undo)
-0) ❌ Wyjście\n
-Wybierz opcje: "
-        read -r choice
+	1) 📦 Snapshot (git commit + push)
+	2) ↩️ Rollback system (nh os rollback)
+	3) 🏠 Rollback Home Manager
+	4) 🔍 Diff zmian konfiguracji
+	5) 📜 Lista generacji
+	6) ⏪ Cofnij ostatni snapshot (undo)
+	0) ❌ Wyjście\n
+	Wybierz opcje: "
+		read -r choice
 
         case "$choice" in
           1) nhsnap ;;
@@ -94,10 +96,8 @@ Wybierz opcje: "
           0) echo "zamknięto menu" ;;
           *) echo "❗ Nieprawidłowa opcja" ;;
         esac
-      '';
-
       }
-    ];
+    '';
   };
 }
 
