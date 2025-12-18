@@ -7,7 +7,7 @@
     ../modules/zsh.nix
     ../modules/my-aliases.nix
   ];
-
+  my.aliases.enable = true;
 
   home.username = "michal";
   home.homeDirectory = "/home/michal";
