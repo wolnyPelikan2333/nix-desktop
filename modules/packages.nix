@@ -13,7 +13,6 @@
     winetricks
     protontricks
     mangohud
-    gamemode
     steam-run
     gimp-with-plugins
     gmic
@@ -26,6 +25,10 @@
     libavif
     inkscape
     krita
+    vulkan-tools
+    vulkan-loader
+    vulkan-validation-layers
+    spotify
 
      # --- dodatki ---
     binutils   # <─ **nowe**

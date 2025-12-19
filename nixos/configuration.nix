@@ -135,13 +135,15 @@
     tree-sitter-grammars.tree-sitter-lua tree-sitter-grammars.tree-sitter-nix
     tree-sitter-grammars.tree-sitter-json tree-sitter-grammars.tree-sitter-markdown
     tree-sitter-grammars.tree-sitter-python firefox git starship fzf zoxide nh
-    discord lutris wineWowPackages.full winetricks
+    discord lutris wineWowPackages.full winetricks libreoffice
   ];
-
-  
-  
-
   programs.zsh.enable = true;
+
+  fonts.packages = with pkgs; [
+  carlito
+  caladea
+  liberation_ttf
+];
 
   ###############################################
   ## GC auto 10 generations
@@ -170,9 +172,9 @@
   ###############################################
 
   environment.shellAliases = {
-    ns = "nh os switch /etc/nixos#desktop";
-    nt = "nh os test /etc/nixos#desktop";
-    nb = "nh os boot /etc/nixos#desktop";
+    ns = "nh os switch /etc/nixos#nixos";
+    nt = "nh os test /etc/nixos#nixos";
+    nb = "nh os boot /etc/nixos#nixos";
     nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
 
     g3 = "nix-env --delete-generations +3 && sudo nix-collect-garbage -d";
