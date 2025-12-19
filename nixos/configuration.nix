@@ -74,6 +74,24 @@
   console.keyMap = "pl2";
 
   ###############################################
+  ## NVIDIA RTX 3050
+  ###############################################
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;          # zamknięty sterownik – stabilniejszy dla Steam
+    nvidiaSettings = true;
+  };
+
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true; # 🔴 WYMAGANE dla Steama
+  };
+
+
+  ###############################################
   ## AUDIO – GOLDEN (PipeWire)
  ###############################################
 
