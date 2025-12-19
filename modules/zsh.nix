@@ -20,6 +20,8 @@
       unalias nss 2>/dev/null
       unalias sys-status 2>/dev/null
       unalias nh-menu 2>/dev/null
+      unalias g3 2>/dev/null
+      unalias g5 2>/dev/null 
 
       NOTEFILE="$HOME/.config/nixos-notes.log"
 
