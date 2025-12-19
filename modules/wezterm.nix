@@ -42,7 +42,7 @@
       { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
       -- Powiększ panel: Ctrl+A Space
-      { key = " ", mods = "LEADER", action = "TogglePaneZoomState" },
+      { key = " ", mods = "LEADER", action = act.TogglePaneZoomState },
     }
 
     return config
