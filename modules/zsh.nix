@@ -147,6 +147,25 @@
         esac
       }
 
+      ##########################################################
+      # GC helpers — system generations
+      ##########################################################
+
+      g3() {
+        echo "🧹 Keeping last 3 system generations"
+        sudo nix-env --delete-generations +3 \
+          --profile /nix/var/nix/profiles/system
+        sudo nix-collect-garbage -d
+      }
+
+      g5() {
+        echo "🧹 Keeping last 5 system generations"
+        sudo nix-env --delete-generations +5 \
+          --profile /nix/var/nix/profiles/system
+        sudo nix-collect-garbage -d
+      }
+
+
       alias nm="nh-menu"
     '';
 
@@ -154,8 +173,6 @@
     # ALIASY
     ##########################################################
     shellAliases = {
-      g3 = "nix-env --delete-generations +3 && sudo nix-collect-garbage -d";
-      g5 = "nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
       l = "ls -alh"; la = "eza -a"; ll="eza -l"; lla="eza -la"; ls="eza"; lt="eza --tree";
       nb = "nh os boot /etc/nixos#nixos";
       nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";

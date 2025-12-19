@@ -40,8 +40,8 @@
         # nht → test build
         # nhs → switch (system+home)
 
-        nhu = "nh os switch --upgrade /etc/nixos#desktop";   # upgrade + switch
-        nhb = "nh os boot /etc/nixos#desktop";               # przygotuj generację do GRUB
+        nhu = "nh os switch --upgrade /etc/nixos#nixos";   # upgrade + switch
+        nhb = "nh os boot /etc/nixos#nixos";               # przygotuj generację do GRUB
         nhg = "nh os generations";                           # generacje
       }
 
