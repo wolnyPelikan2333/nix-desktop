@@ -28,7 +28,6 @@
     vulkan-tools
     vulkan-loader
     vulkan-validation-layers
-    spotify
 
      # --- dodatki ---
     binutils   # <─ **nowe**
