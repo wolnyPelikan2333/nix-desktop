@@ -130,7 +130,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    kdePackages.okular vim wget google-chrome neovim yazi ranger steam zathura
+    kdePackages.okular vim wget google-chrome yazi ranger steam zathura
     tree-sitter tree-sitter-grammars.tree-sitter-bash
     tree-sitter-grammars.tree-sitter-lua tree-sitter-grammars.tree-sitter-nix
     tree-sitter-grammars.tree-sitter-json tree-sitter-grammars.tree-sitter-markdown
