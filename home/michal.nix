@@ -12,6 +12,11 @@
   home.username = "michal";
   home.homeDirectory = "/home/michal";
 
+  home.sessionVariables = {
+  EDITOR = "nvim";
+  VISUAL = "nvim";
+};
+
  
   programs.fzf.enable = true;
   programs.bat.enable = true;
