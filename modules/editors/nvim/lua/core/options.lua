@@ -21,3 +21,10 @@ vim.o.smartcase = true
 vim.o.updatetime = 300
 vim.o.timeoutlen = 500
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.opt.number = true
+    vim.opt.relativenumber = true
+  end,
+})
+

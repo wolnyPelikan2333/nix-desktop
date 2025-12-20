@@ -1,4 +1,5 @@
 vim.opt.runtimepath:prepend("/etc/nixos/modules/editors/nvim")
+
 -- core
 require("core.options")
 require("core.keymaps")

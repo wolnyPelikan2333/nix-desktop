@@ -19,6 +19,13 @@
     VISUAL = "nvim";
   };
 
+    xdg.configFile."nvim/init.lua".text = ''
+    -- bootstrap loader (HM-managed, read-only by design)
+    vim.opt.runtimepath:prepend("/etc/nixos/modules/editors/nvim")
+    require("init")
+  '';
+
+
   programs.fzf.enable = true;
   programs.bat.enable = true;
   programs.eza.enable = true;
