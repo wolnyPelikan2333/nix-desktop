@@ -2,7 +2,6 @@
 
 {
  imports = [
-    ../modules/packages.nix
     ../modules/wezterm.nix
     ../modules/zsh.nix
     ../modules/my-aliases.nix
