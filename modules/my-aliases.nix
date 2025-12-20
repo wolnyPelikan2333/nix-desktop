@@ -12,6 +12,7 @@
       {
         g   = "git";
         ga  = "git add .";
+        gs = "git status";
         gc  = "git commit -m";
         gca = "git commit -am";
         gp  = "git push";
@@ -29,7 +30,9 @@
         n  = "nvim";
         v  = "nvim";
         conf = "cd /etc/nixos && nvim flake.nix";
-	sc = "nvim /etc/nixos/docs/ściągi";
+	      sc = "nvim /etc/nixos/docs/ściągi";
+        sen = "sudo -E nvim";
+
       }
 
       # ===========================
