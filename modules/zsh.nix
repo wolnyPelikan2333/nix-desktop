@@ -168,28 +168,9 @@
       }
 
 
-      alias nm="nh-menu"
     '';
 
-    ##########################################################
-    # ALIASY
-    ##########################################################
-    shellAliases = {
-      l = "ls -alh"; la = "eza -a"; ll="eza -l"; lla="eza -la"; ls="eza"; lt="eza --tree";
-      nb = "nh os boot /etc/nixos#nixos";
-      nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
-      nt="nh os test /etc/nixos#nixos"; nht="nh os build /etc/nixos#nixos"; nhs="nh os switch /etc/nixos#nixos";
-      run-help="man"; se="sudoedit"; which-command="whence";
-      clean-system="sudo nix-collect-garbage -d && sudo nix store optimise";
-      clean-weekly="sudo nix-env --delete-generations +7 && sudo nix-collect-garbage -d";
-      sys-snapshots="git -C /etc/nixos log --oneline --graph --decorate";
-
-      # 🧠 Vim cheat sheet
-       vh = "nvim /etc/nixos/docs/ściągi/shell/vim.md";
-
-     # 🚑 PANIC MODE
-      panic = "nvim /etc/nixos/docs/ściągi/nix/panic-index.md";
-    };
+    
 
     history = { size = 50000; save = 50000; share = true; };
   };
