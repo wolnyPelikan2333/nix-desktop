@@ -1,15 +1,10 @@
-return {
-  "neovim/nvim-lspconfig",
-  config = function()
-    local lspconfig = require("lspconfig")
+-- LSP configuration (pure Nix, no plugin manager)
 
-    lspconfig.nil_ls.setup({})
-    lspconfig.tsserver.setup({})
+local lspconfig = require("lspconfig")
 
-    local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  end,
-}
+-- Nix
+lspconfig.nil_ls.setup({})
+
+-- JavaScript / TypeScript
+lspconfig.tsserver.setup({})
 

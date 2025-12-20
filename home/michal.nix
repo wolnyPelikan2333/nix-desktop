@@ -1,7 +1,10 @@
-{ config, pkgs,inputs, ... }:
-
 {
- imports = [
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
     ../modules/wezterm.nix
     ../modules/zsh.nix
     ../modules/my-aliases.nix
@@ -12,24 +15,16 @@
   home.homeDirectory = "/home/michal";
 
   home.sessionVariables = {
-  EDITOR = "nvim";
-  VISUAL = "nvim";
-};
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
- 
   programs.fzf.enable = true;
   programs.bat.enable = true;
   programs.eza.enable = true;
 
   programs.home-manager.enable = true;
-  home.packages = [ pkgs.home-manager ];
-
-   
-
-   home.file.".config/nvim".source =
-     config.lib.file.mkOutOfStoreSymlink
-       "${inputs.self}/modules/editors/nvim";
-
+  home.packages = [pkgs.home-manager];
 
   home.stateVersion = "25.05";
 }

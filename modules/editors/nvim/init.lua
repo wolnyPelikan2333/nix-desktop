@@ -1,19 +1,11 @@
--- Entry point for Neovim configuration (SSOC)
--- All logic is delegated to lua/ modules
-
+-- core
 require("core.options")
 require("core.keymaps")
 
--- Minimal plugin loader (lazy.nvim)
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git", "clone", "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+-- plugins (bez managera)
+require("plugins.treesitter")
+require("plugins.lsp")
+require("plugins.cmp")
+require("plugins.autopairs")
+require("plugins.format")
 
-require("lazy").setup("plugins")
