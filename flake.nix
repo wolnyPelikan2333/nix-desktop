@@ -3,16 +3,24 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
   let
     system = "x86_64-linux";
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
+
+      # 👇 teraz inputs i self ISTNIEJĄ
+      specialArgs = {
+        inherit inputs self;
+      };
 
       modules = [
         ./nixos/configuration.nix
@@ -25,7 +33,11 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
-          # podłączenie konfiguracji użytkownika
+          # 👇 przekazanie inputs/self do Home-Managera
+          home-manager.extraSpecialArgs = {
+            inherit inputs self;
+          };
+
           home-manager.users.michal = import ./home/michal.nix;
         }
       ];

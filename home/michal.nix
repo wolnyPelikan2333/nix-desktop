@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs,inputs, ... }:
 
 {
  imports = [
@@ -20,7 +20,11 @@
   programs.home-manager.enable = true;
   home.packages = [ pkgs.home-manager ];
 
-  
+   
+
+   home.file.".config/nvim".source =
+     config.lib.file.mkOutOfStoreSymlink
+       "${inputs.self}/modules/editors/nvim";
 
 
   home.stateVersion = "25.05";
