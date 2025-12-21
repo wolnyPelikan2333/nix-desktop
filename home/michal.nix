@@ -8,6 +8,8 @@
     ../modules/wezterm.nix
     ../modules/zsh.nix
     ../modules/my-aliases.nix
+    ../modules/editors/nvim/module.nix
+
      ./zsh/core.nix
      ./zsh/vi-mode.nix
      ./zsh/vim-indicator.nix
