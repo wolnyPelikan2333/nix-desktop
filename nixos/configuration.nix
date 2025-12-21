@@ -170,36 +170,38 @@
   ## NEOVIM (systemowy) + TREE-SITTER (NixOS way)
   ###############################################
 
-  programs.neovim = {
-    enable = true;
+   programs.neovim = {
+  enable = true;
 
-    configure = {
-      packages.myPlugins = {
-        start = with pkgs.vimPlugins; [
-          nvim-treesitter
-        ];
-      };
-
-      customRC = ''
-        lua << EOF
-        require("nvim-treesitter.configs").setup({
-          highlight = { enable = true },
-          indent    = { enable = true },
-          scope     = {
-            enable = true,
-            show_start = true,
-            show_end   = true,
-          },
-        })
-
-        -- numery linii
-        vim.opt.number = true
-        vim.opt.relativenumber = true
-        EOF
-      '';
+  configure = {
+    packages.myPlugins = {
+      start = with pkgs.vimPlugins; [
+        nvim-treesitter
+      ];
     };
-  };
 
+    customRC = ''
+      lua << EOF
+      require("nvim-treesitter.configs").setup({
+        highlight = { enable = true },
+        indent    = { enable = true },
+        scope     = {
+          enable = true,
+          show_start = true,
+          show_end   = true,
+        },
+      })
+      EOF
+    '';
+
+    # 🔒 TO JEST OSTATNIE SŁOWO
+    extraConfig = ''
+      set number
+      set relativenumber
+    '';
+  };
+};
+ 
   ###############################################
   ## ZSH
   ###############################################
