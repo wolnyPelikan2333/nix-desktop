@@ -8,6 +8,12 @@
       nvim-treesitter
     ];
 
+    extraLuaConfig = ''
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "nix" },
+        highlight = { enable = true },
+      })
+    '';
   };
 }
 
