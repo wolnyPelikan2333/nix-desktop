@@ -195,9 +195,12 @@
     '';
 
     # 🔒 TO JEST OSTATNIE SŁOWO
-    extraConfig = ''
-      set number
-      set relativenumber
+       extraConfig = ''
+      augroup ForceLineNumbers
+        autocmd!
+        autocmd VimEnter * set number
+        autocmd VimEnter * set relativenumber
+      augroup END
     '';
   };
 };
