@@ -161,11 +161,7 @@
     tree-sitter-grammars.tree-sitter-python
   ];
 
-  ###############################################
-  ## NEOVIM (SYSTEMOWY) + NVIM-TREESITTER
-  ###############################################
-
-  
+    
   ###############################################
   ## NEOVIM (systemowy) + TREE-SITTER (NixOS way)
   ###############################################
@@ -195,13 +191,13 @@
     '';
 
     # 🔒 TO JEST OSTATNIE SŁOWO
-       extraConfig = ''
-      augroup ForceLineNumbers
-        autocmd!
-        autocmd VimEnter * set number
-        autocmd VimEnter * set relativenumber
-      augroup END
-    '';
+        extraConfig = ''
+	  augroup ForceLineNumbersEverywhere
+	    autocmd!
+	    autocmd VimEnter,BufEnter,WinEnter * set number
+	    autocmd VimEnter,BufEnter,WinEnter * set relativenumber
+	  augroup END 
+     '';
   };
 };
  
