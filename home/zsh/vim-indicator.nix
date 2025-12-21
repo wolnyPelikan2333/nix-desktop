@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     # ===============================
     # VIM MODE INDICATOR (state only)
     # ===============================

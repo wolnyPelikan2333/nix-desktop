@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     # ===============================
     # ZSH VI MODE (foundation)
     # ===============================

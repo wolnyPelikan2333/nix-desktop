@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     # ===============================
     # ZSH RPROMPT — vim mode indicator
     # ===============================
