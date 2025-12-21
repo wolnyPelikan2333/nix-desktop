@@ -1,13 +1,17 @@
-{ config, pkgs,lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  ###############################################
+  ## IMPORTY
+  ###############################################
+
   imports = [
     ./hardware-configuration.nix
     ../modules/packages.nix
   ];
 
   ###############################################
-  ## GLOBALNE ZMIENNE ŚRODOWISKOWE
+  ## GLOBALNE ZMIENNE
   ###############################################
 
   environment.variables = {
@@ -19,32 +23,27 @@
   environment.shells = [ pkgs.zsh ];
 
   ###############################################
-  ## BOOTLOADER
+  ## BOOT
   ###############################################
 
   systemd.defaultUnit = "graphical.target";
-  
-    boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 10;
-    };
 
-    efi = {
-      canTouchEfiVariables = true;
-    };
+  boot.loader = {
+    systemd-boot.enable = true;
+    systemd-boot.configurationLimit = 10;
+
+    efi.canTouchEfiVariables = true;
   };
 
   boot.loader.timeout = 3;
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  ###############################################
+  ## NETWORK / LOCALE
+  ###############################################
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
 
   time.timeZone = "Europe/Warsaw";
 
@@ -62,7 +61,7 @@
   };
 
   ###############################################
-  ## KDE + GRAFIKA
+  ## GRAFIKA / KDE
   ###############################################
 
   services.xserver.enable = true;
@@ -77,35 +76,34 @@
   console.keyMap = "pl2";
 
   ###############################################
-  ## NVIDIA RTX 3050
+  ## NVIDIA
   ###############################################
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;          # zamknięty sterownik – stabilniejszy dla Steam
+    open = false;
     nvidiaSettings = true;
   };
 
   hardware.opengl = {
     enable = true;
-    driSupport32Bit = true; # 🔴 WYMAGANE dla Steama
+    driSupport32Bit = true;
   };
 
-
   ###############################################
-  ## AUDIO – GOLDEN (PipeWire)
- ###############################################
+  ## AUDIO
+  ###############################################
 
-       services.pipewire = {
-	  enable = true;
-	  alsa.enable = true;
-	  pulse.enable = true;
-	  jack.enable = false;
-      };
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+    jack.enable = false;
+  };
 
-	security.rtkit.enable = true;
+  security.rtkit.enable = true;
 
   ###############################################
   ## USER
@@ -129,28 +127,76 @@
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [
-    "nix-command" "flakes"
+    "nix-command"
+    "flakes"
   ];
 
   environment.systemPackages = with pkgs; [
-    kdePackages.okular vim wget google-chrome yazi ranger steam zathura
-    tree-sitter tree-sitter-grammars.tree-sitter-bash
-    tree-sitter-grammars.tree-sitter-lua tree-sitter-grammars.tree-sitter-nix
-    tree-sitter-grammars.tree-sitter-json tree-sitter-grammars.tree-sitter-markdown
-    tree-sitter-grammars.tree-sitter-python firefox git starship fzf zoxide nh
-    discord lutris wineWowPackages.full winetricks libreoffice
-  ];
-  programs.zsh.enable = true;
+    kdePackages.okular
+    wget
+    firefox
+    google-chrome
+    git
+    nh
+    fzf
+    zoxide
+    starship
+    yazi
+    ranger
+    steam
+    zathura
+    discord
+    lutris
+    wineWowPackages.full
+    winetricks
+    libreoffice
 
-  fonts.packages = with pkgs; [
-  carlito
-  caladea
-  liberation_ttf
-  nerd-fonts.jetbrains-mono
-];
+    # tree-sitter CLI / grammars (NIE plugin)
+    tree-sitter
+    tree-sitter-grammars.tree-sitter-bash
+    tree-sitter-grammars.tree-sitter-lua
+    tree-sitter-grammars.tree-sitter-nix
+    tree-sitter-grammars.tree-sitter-json
+    tree-sitter-grammars.tree-sitter-markdown
+    tree-sitter-grammars.tree-sitter-python
+  ];
 
   ###############################################
-  ## GC auto 10 generations
+  ## NEOVIM (SYSTEMOWY) + NVIM-TREESITTER
+  ###############################################
+
+  
+  programs.neovim = {
+    enable = true;
+
+    configure = {
+      packages.myPlugins = {
+        start = with pkgs.vimPlugins; [
+          nvim-treesitter
+        ];
+      };
+    };
+  };
+
+  ###############################################
+  ## ZSH
+  ###############################################
+
+  programs.zsh.enable = true;
+
+  ###############################################
+  ## FONTS
+  ###############################################
+
+  fonts.packages = with pkgs; [
+    carlito
+    caladea
+    liberation_ttf
+    nerd-fonts.jetbrains-mono
+  ];
+
+  ###############################################
+  ## GC
   ###############################################
 
   nix.gc = {
@@ -162,7 +208,7 @@
   nix.settings.auto-optimise-store = true;
 
   ###############################################
-  ## NH helper
+  ## NH
   ###############################################
 
   programs.nh.enable = true;
@@ -172,7 +218,7 @@
   };
 
   ###############################################
-  ## SYSTEM ALIASES
+  ## ALIASES
   ###############################################
 
   environment.shellAliases = {
@@ -180,39 +226,20 @@
     nt = "nh os test /etc/nixos#nixos";
     nb = "nh os boot /etc/nixos#nixos";
     nh-clean = "nh clean all && sudo nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
-
-    g3 = "nix-env --delete-generations +3 && sudo nix-collect-garbage -d";
-    g5 = "nix-env --delete-generations +5 && sudo nix-collect-garbage -d";
   };
 
   ###############################################
-  ## WEEKLY system cleanup
+  ## FILESYSTEMS
   ###############################################
-
-  systemd.services.nix-clean-generations = {
-    description = "Weekly cleanup of old NixOS generations";
-    serviceConfig.ExecStart = "${pkgs.nix}/bin/nix-env --delete-generations +10";
-    unitConfig.ConditionACPower = true;
-  };
-
-  systemd.timers.nix-clean-generations = {
-    wantedBy = [ "timers.target" ];
-    timerConfig.OnCalendar = "weekly";
-  };
 
   fileSystems."/mnt/steam" = {
-  device = "/dev/disk/by-uuid/8fbe63e6-58f2-4609-905a-5f2365318224";
-  fsType = "ext4";
-  options = [
-    "defaults"
-    "nofail"
-  ];
-};
-
-
+    device = "/dev/disk/by-uuid/8fbe63e6-58f2-4609-905a-5f2365318224";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
 
   ###############################################
-  ## END
+  ## STATE
   ###############################################
 
   system.stateVersion = "25.05";
