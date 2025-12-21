@@ -26,14 +26,7 @@
   };
 
    xdg.configFile."nvim/init.lua".text = ''
-  -- HM-managed Neovim bootstrap (DO NOT EDIT MANUALLY)
-
-  -- 1. dodaj systemowy config do runtimepath
-  vim.opt.runtimepath:prepend("/etc/nixos/modules/editors/nvim")
-
-  -- 2. załaduj główny init.lua z /etc
-  vim.cmd("source /etc/nixos/modules/editors/nvim/init.lua")
-'';
+  '';
 
 
   programs.fzf.enable = true;
