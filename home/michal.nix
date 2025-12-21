@@ -33,6 +33,10 @@
   programs.bat.enable = true;
   programs.eza.enable = true;
 
+  programs.neovim = {
+  enable = true;
+};
+
   programs.home-manager.enable = true;
   home.packages = [pkgs.home-manager];
 
