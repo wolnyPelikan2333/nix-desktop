@@ -25,8 +25,6 @@
     VISUAL = "nvim";
   };
 
-   xdg.configFile."nvim/init.lua".text = ''
-  '';
 
 
   programs.fzf.enable = true;
