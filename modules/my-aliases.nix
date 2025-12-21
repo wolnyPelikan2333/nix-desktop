@@ -109,7 +109,7 @@
       }
     ];
 
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       nh-menu() {
         printf "\n===== 🧊 NixOS Snapshot Menu =====\n
         1) 📦 Snapshot (git commit + push)
