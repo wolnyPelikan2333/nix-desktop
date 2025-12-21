@@ -146,6 +146,7 @@
   carlito
   caladea
   liberation_ttf
+  nerd-fonts.jetbrains-mono
 ];
 
   ###############################################
