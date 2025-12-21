@@ -192,6 +192,9 @@
 
     # 🔒 TO JEST OSTATNIE SŁOWO
         extraConfig = ''
+	" 🔒 Nie przywracaj opcji okna z widoków / sesji
+        set viewoptions-=options
+        set sessionoptions-=options
 	  augroup ForceLineNumbersEverywhere
 	    autocmd!
 	    autocmd VimEnter,BufEnter,WinEnter * set number
