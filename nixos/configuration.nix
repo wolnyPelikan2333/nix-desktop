@@ -191,17 +191,14 @@
     '';
 
     # 🔒 TO JEST OSTATNIE SŁOWO
-        extraConfig = ''
-	" 🔒 Nie przywracaj opcji okna z widoków / sesji
-        set viewoptions-=options
-        set sessionoptions-=options
-	  augroup ForceLineNumbersEverywhere
+         extraConfig = ''
+	  augroup ForceLineNumbersAfterFtplugin
 	    autocmd!
-	    autocmd VimEnter,BufEnter,WinEnter * set number
-	    autocmd VimEnter,BufEnter,WinEnter * set relativenumber
-	  augroup END 
-     '';
-  };
+	    autocmd FileType * setlocal number
+	    autocmd FileType * setlocal relativenumber
+	  augroup END
+       '';
+   };
 };
  
   ###############################################
