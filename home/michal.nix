@@ -8,6 +8,9 @@
     ../modules/wezterm.nix
     ../modules/zsh.nix
     ../modules/my-aliases.nix
+     ./zsh/core.nix
+     ./zsh/vi-mode.nix
+     ./zsh/vim-indicator.nix
   ];
   my.aliases.enable = true;
 
