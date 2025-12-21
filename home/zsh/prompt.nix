@@ -5,7 +5,7 @@
     # ===============================
     # ZSH RPROMPT — vim mode indicator
     # ===============================
-
+    setopt PROMPT_SUBST
     autoload -Uz colors && colors
 
     function _vim_mode_rprompt() {
