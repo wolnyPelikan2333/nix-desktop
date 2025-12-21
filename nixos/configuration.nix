@@ -166,6 +166,10 @@
   ###############################################
 
   
+  ###############################################
+  ## NEOVIM (systemowy) + TREE-SITTER (NixOS way)
+  ###############################################
+
   programs.neovim = {
     enable = true;
 
@@ -175,6 +179,24 @@
           nvim-treesitter
         ];
       };
+
+      customRC = ''
+        lua << EOF
+        require("nvim-treesitter.configs").setup({
+          highlight = { enable = true },
+          indent    = { enable = true },
+          scope     = {
+            enable = true,
+            show_start = true,
+            show_end   = true,
+          },
+        })
+
+        -- numery linii
+        vim.opt.number = true
+        vim.opt.relativenumber = true
+        EOF
+      '';
     };
   };
 
