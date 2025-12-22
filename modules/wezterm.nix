@@ -6,7 +6,7 @@
   xdg.configFile."wezterm/wezterm.lua".text = ''
     local wezterm = require("wezterm")
     local act = wezterm.action
-
+    local mux = wezterm.mux
     local config = {}
 
     -- 🔤 font
