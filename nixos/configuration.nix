@@ -151,56 +151,10 @@
     winetricks
     libreoffice
 
-    # tree-sitter CLI / grammars (NIE plugin)
-    tree-sitter
-    tree-sitter-grammars.tree-sitter-bash
-    tree-sitter-grammars.tree-sitter-lua
-    tree-sitter-grammars.tree-sitter-nix
-    tree-sitter-grammars.tree-sitter-json
-    tree-sitter-grammars.tree-sitter-markdown
-    tree-sitter-grammars.tree-sitter-python
   ];
 
     
-  ###############################################
-  ## NEOVIM (systemowy) + TREE-SITTER (NixOS way)
-  ###############################################
-
-   programs.neovim = {
-  enable = true;
-
-  configure = {
-    packages.myPlugins = {
-      start = with pkgs.vimPlugins; [
-        nvim-treesitter
-      ];
-    };
-
-    customRC = ''
-      lua << EOF
-      require("nvim-treesitter.configs").setup({
-        highlight = { enable = true },
-        indent    = { enable = true },
-        scope     = {
-          enable = true,
-          show_start = true,
-          show_end   = true,
-        },
-      })
-      EOF
-    '';
-
-    # 🔒 TO JEST OSTATNIE SŁOWO
-         extraConfig = ''
-	  augroup ForceLineNumbersAfterFtplugin
-	    autocmd!
-	    autocmd FileType * setlocal number
-	    autocmd FileType * setlocal relativenumber
-	  augroup END
-       '';
-   };
-};
- 
+   
   ###############################################
   ## ZSH
   ###############################################
@@ -260,7 +214,6 @@
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
   };
-
   ###############################################
   ## STATE
   ###############################################

@@ -8,7 +8,6 @@
     ../modules/wezterm.nix
     ../modules/zsh.nix
     ../modules/my-aliases.nix
-    ../modules/editors/nvim/module.nix
 
      ./zsh/core.nix
      ./zsh/vi-mode.nix
@@ -31,9 +30,6 @@
   programs.bat.enable = true;
   programs.eza.enable = true;
 
-  programs.neovim = {
-  enable = true;
-};
 
   programs.home-manager.enable = true;
   home.packages = [pkgs.home-manager];
