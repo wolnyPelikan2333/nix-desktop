@@ -51,6 +51,8 @@ nix-env --list-generations
 
 ```bash
 sudo nix-collect-garbage -d
+
+sudo nix-collect-garbage --dry-run
 ```
 
 * usuwa **nieużywane** generacje
@@ -119,3 +121,8 @@ sudo nix store optimise
 
 ✅ To wystarczy, żeby **opanować puchnący `/nix` bez ryzyka**.
 
+### 🔒 Zamknięcie zadania
+
+```bash
+git add /etc/nixos/docs/ściągi/nix/disk-space.md
+ns "docs: add nix disk space cheatsheet"

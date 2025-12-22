@@ -142,6 +142,10 @@ sudo nixos-rebuild switch --rollback
 ```
 
 ---
+### 🔒 Zamknięcie CAŁOŚCI (3️⃣ + 4️⃣)
 
+```bash
+git add /etc/nixos/docs/ściągi/nix
+ns "docs: add disk space and rollback quick cheatsheets"
 ✅ Jeśli znasz te trzy ruchy — **trudno się naprawdę wyłożyć**.
 

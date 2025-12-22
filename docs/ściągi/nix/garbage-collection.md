@@ -1,17 +1,17 @@
 # Garbage Collection w NixOS — ściąga
 
-Krótka ściąga do bezpiecznego sprzątania magazynu `/nix/store`
+Krótka ściąga do **bezpiecznego sprzątania** `/nix/store`
 bez psucia systemu i bez utraty możliwości rollbacku.
 
 ---
 
 ## Co to jest Garbage Collection
 
-- Nix **nigdy sam nie usuwa** pakietów z `/nix/store`
-- Usuwane są tylko **nieużywane ścieżki**, do których nie prowadzą żadne „rooty”
+- Nix **nigdy sam nie usuwa** danych z `/nix/store`
+- Usuwane są tylko ścieżki, do których **nie prowadzą żadne rooty**
 - Rootami są m.in.:
   - generacje systemu
-  - generacje home-manager
+  - generacje Home Managera
   - profile użytkowników
   - ręczne piny
 
@@ -23,17 +23,17 @@ bez psucia systemu i bez utraty możliwości rollbacku.
 ```bash
 sudo nix-collect-garbage --dry-run
 
-2️⃣ Usuń stare generacje systemu
+Usuń stare generacje systemu
 sudo nix-collect-garbage -d
 
 
 usuwa stare generacje
 
-zostawia aktualną
+zostawia aktualnie uruchomioną
 
 rollback nadal działa
 
-3️⃣ (Opcjonalnie) Optymalizacja magazynu
+Opcjonalnie) Optymalizacja magazynu
 sudo nix store optimise
 
 
@@ -43,20 +43,19 @@ bezpieczne
 
 może zwolnić kilka GB
 
-
-Home-Manager
-Sprawdzenie generacji
+Home Manager
+Lista generacji
 home-manager generations
 
-Usunięcie starych
+Usunięcie starych (np. starsze niż 30 dni)
 home-manager expire-generations "-30 days"
 
-Ile miejsca zajmuje /nix/store
-du -sh /nix/store
+Home Manager
+Lista generacji
+home-manager generations
 
-Lista największych ścieżek:
-
-nix path-info -Sh /run/current-system
+Usunięcie starych (np. starsze niż 30 dni)
+home-manager expire-generations "-30 days"
 
 Minimalny bezpieczny workflow
 sudo nix-collect-garbage --dry-run
@@ -65,4 +64,24 @@ sudo nix store optimise
 
 Złota zasada
 
-Nigdy nie sprzątaj /nix/store, jeśli nie masz działającego systemu i commita w repo.
+Nigdy nie sprzątaj /nix/store, jeśli:
+
+system nie jest stabilny
+
+nie masz działającego rollbacku
+
+nie masz commita w repo /etc/nixos
+
+
+---
+
+## ✅ Następny krok (zamknięcie zadania 3/3)
+
+```bash
+git add /etc/nixos/docs/ściągi/nix/garbage-collection.md
+ns "docs: polish nix garbage collection cheatsheet"
+
+
+✔ czysto
+✔ spójnie
+✔ gotowe

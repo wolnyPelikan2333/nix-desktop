@@ -26,6 +26,22 @@
 
       NOTEFILE="$HOME/.config/nixos-notes.log"
 
+        docs() {
+    DOCS_DIR="/etc/nixos/docs/ściągi"
+
+    if ! command -v fzf >/dev/null; then
+      echo "❌ fzf nie jest zainstalowany"
+      return 1
+    fi
+
+    FILE=$(find "$DOCS_DIR" -type f -name "*.md" | sort | fzf --prompt="📚 docs > ")
+
+    [ -z "$FILE" ] && return 0
+
+    less "$FILE"
+  }
+
+
       ##########################################################
       # SYSTEM SNAPSHOT + AUTO-COMMIT
       ##########################################################
