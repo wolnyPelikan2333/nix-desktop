@@ -149,3 +149,9 @@ Reszta przyjdzie w praktyce.
 
 ✅ To wystarczy, żeby ogarniać 80–90% przypadków w shellu.
 
+## Bezpieczna edycja plików
+sed 's/foo/bar/g' file.txt        # tylko podgląd
+sed -i.bak 's/foo/bar/g' file.txt # z kopią zapasową
+
+awk '{print NR, $1}' file.txt
+

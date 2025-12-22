@@ -97,7 +97,12 @@ fd flake /etc/nixos
 rg nixosConfigurations /etc/nixos
 tree /etc/nixos -L 2
 
+## Typowe kombinacje
+rg foo $(fd . -e nix)
+fd nix /etc/nixos -x rg enable
 
+rg "enable =" /etc/nixos
+fd . /etc/nixos -e nix -x rg wayland
 
 
 
