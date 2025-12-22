@@ -43,6 +43,15 @@
     right:activate()
   end),
 },
+        -- Ctrl+A t → test spawn
+        {
+          key = "t",
+          mods = "LEADER",
+          action = act.SpawnCommandInNewPane {
+            direction = "Right",
+            command = { "zsh", "-lc", "echo TEST && sleep 10" },
+          },
+        },
 
 
       -- Ruch między panelami (tmux-style)
