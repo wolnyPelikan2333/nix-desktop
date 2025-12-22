@@ -29,29 +29,20 @@
       -- Ctrl+A s  → split pionowy (w bok)
       { key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
-      -- Ctrl+A w → split + watch-nix
-    { key = "w", mods = "LEADER", action = wezterm.action_callback(function(window, pane)
-    local right = pane:split {
-      direction = "Right",
-      size = 0.5,
-      command = { 
-         "/run/current-system/sw/bin/zsh", "-lc",
-         "/run/current-system/sw/bin/rg --files /etc/nixos | /run/current-system/sw/bin/entr -c /run/current-system/sw/bin/nix flake check /etc/nixos"
-         
+      -- Ctrl+A w → split right + watch-nix (correct SplitPane)
+    {
+      key = "w",
+      mods = "LEADER",
+      action = act.SplitPane {
+        direction = "Right",
+        size = 0.5,
+        command = {
+          "zsh",
+          "-lc",
+          "rg --files /etc/nixos | entr -c nix flake check /etc/nixos"
         },
-    }
-    right:activate()
-  end),
-},
-        -- Ctrl+A t → test spawn
-        {
-          key = "t",
-          mods = "LEADER",
-          action = act.SpawnCommandInNewPane {
-            direction = "Right",
-            command = { "zsh", "-lc", "echo TEST && sleep 10" },
-          },
-        },
+      },
+    },
 
 
       -- Ruch między panelami (tmux-style)
