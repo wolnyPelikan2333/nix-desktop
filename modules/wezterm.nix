@@ -35,8 +35,9 @@
       direction = "Right",
       size = 0.5,
       command = { 
-         "zsh", "-lc",
-         "rg --files /etc/nixos | entr -c nix flake check /etc/nixos"
+         "/run/current-system/sw/bin/zsh", "-lc",
+         "/run/current-system/sw/bin/rg --files /etc/nixos | /run/current-system/sw/bin/entr -c /run/current-system/sw/bin/nix flake check /etc/nixos"
+         
         },
     }
     right:activate()
