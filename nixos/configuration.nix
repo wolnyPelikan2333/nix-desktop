@@ -106,13 +106,30 @@
   security.rtkit.enable = true;
 
   ###############################################
+  ## BLUETOOTH
+  ###############################################
+  
+  hardware.bluetooth = {
+  enable = true;
+  powerOnBoot = true;
+};
+
+  services.blueman.enable = true;
+
+
+  ###############################################
   ## USER
   ###############################################
 
   users.users.michal = {
     isNormalUser = true;
     description = "michal";
-    extraGroups = [ "networkmanager" "wheel" "vboxusers" ];
+     extraGroups = [
+    "networkmanager"
+    "wheel"
+    "vboxusers"
+    "bluetooth"
+  ];
     shell = pkgs.zsh;
     packages = with pkgs; [ kdePackages.kate ];
   };
