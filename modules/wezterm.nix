@@ -30,7 +30,7 @@
       { key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
       -- Ctrl+A w → split + watch-nix
-{ key = "w", mods = "LEADER", action = wezterm.action_callback(function(window, pane)
+    { key = "w", mods = "LEADER", action = wezterm.action_callback(function(window, pane)
     local right = pane:split {
       direction = "Right",
       size = 0.5,
