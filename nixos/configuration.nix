@@ -168,6 +168,7 @@
     wineWowPackages.full
     winetricks
     libreoffice
+    entr
 
   ];
 
