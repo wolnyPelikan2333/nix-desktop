@@ -6,7 +6,6 @@
   xdg.configFile."wezterm/wezterm.lua".text = ''
     local wezterm = require("wezterm")
     local act = wezterm.action
-    local mux = wezterm.mux
     local config = {}
 
     -- 🔤 font
@@ -29,22 +28,7 @@
       -- Ctrl+A s  → split pionowy (w bok)
       { key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
-      -- Ctrl+A w → split right + watch-nix (correct SplitPane)
-    {
-      key = "w",
-      mods = "LEADER",
-      action = act.SplitPane {
-        direction = "Right",
-        size = 0.5,
-        command = {
-          "zsh",
-          "-lc",
-          "rg --files /etc/nixos | entr -c nix flake check /etc/nixos"
-        },
-      },
-    },
-
-
+      
       -- Ruch między panelami (tmux-style)
       { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
       { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
