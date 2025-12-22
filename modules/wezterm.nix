@@ -34,7 +34,10 @@
     local right = pane:split {
       direction = "Right",
       size = 0.5,
-      command = { "zsh", "-lc", "watch-nix" },
+      command = { 
+         "zsh", "-lc",
+         "rg --files /etc/nixos | entr -c nix flake check /etc/nixos"
+        },
     }
     right:activate()
   end),
