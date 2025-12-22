@@ -11,7 +11,7 @@ z NixOS, shellem i narzędziami.
 
 ## Struktura
 - `shell/`   – narzędzia CLI (rg, fd, sed, awk…)
-- `nix/`     – workflow NixOS (flake, rollback, GC)
+- `nix/`   – workflow NixOS (flake, rollback, GC)
 - `git/`     – bezpieczna praca z repo
 - `wezterm/` – skróty i sesje
 
@@ -21,3 +21,6 @@ z NixOS, shellem i narzędziami.
 3. zaglądasz tutaj
 4. wracasz do pracy
 
+### Nix
+- [flake check / build / switch — którą komendę wybrać?](ściągi/nix/flake-check-build-switch.md)
+- [nix warnings — jak znaleźć źródło](ściągi/nix/nix-warnings-jak-znalezc-zrodlo.md)
