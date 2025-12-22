@@ -69,6 +69,7 @@
 
         nhd     = "nh os diff /etc/nixos#nixos";
         nhgens = "nh os generations | nl -ba";
+        watch-nix = "rg --files /etc/nixos | entr -c nix flake check /etc/nixos";
       }
 
       # ===========================
