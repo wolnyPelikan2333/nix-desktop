@@ -29,6 +29,18 @@
       -- Ctrl+A s  → split pionowy (w bok)
       { key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
+      -- Ctrl+A w → split + watch-nix
+{ key = "w", mods = "LEADER", action = wezterm.action_callback(function(window, pane)
+    local right = pane:split {
+      direction = "Right",
+      size = 0.5,
+      command = { "zsh", "-lc", "watch-nix" },
+    }
+    right:activate()
+  end),
+},
+
+
       -- Ruch między panelami (tmux-style)
       { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
       { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
