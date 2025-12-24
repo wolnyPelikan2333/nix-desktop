@@ -30,6 +30,11 @@
   programs.bat.enable = true;
   programs.eza.enable = true;
 
+  programs.zoxide = {
+  enable = true;
+  enableZshIntegration = true;
+};
+
 
   programs.home-manager.enable = true;
   home.packages = [pkgs.home-manager];
