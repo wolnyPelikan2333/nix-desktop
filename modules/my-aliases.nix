@@ -154,14 +154,14 @@
         git status -sb
     }
 
-        sesja-stop() {
-          BASE="/etc/nixos/SESJE"
-          TS="$(date '+%Y-%m-%d_%H-%M')"
+              sesja-stop() {
+        BASE="/etc/nixos/SESJE"
+        TS="$(date '+%Y-%m-%d_%H-%M')"
 
-          echo "Zamykanie sesji. Wybierz typ:"
-          echo "1) zakonczona"
-          echo "2) awaria"
-          read -r CHOICE
+        echo "Zamykanie sesji. Wybierz typ:"
+        echo "1) zakonczona"
+        echo "2) awaria"
+        read -r CHOICE
 
         case "$CHOICE" in
           1) DIR="$BASE/zakonczone" ;;
@@ -172,20 +172,20 @@
         mkdir -p "$DIR"
         FILE="$DIR/$TS.md"
 
-        cat > "$FILE" <<EOF
-        # SESJA — $TS
-
-       ## Stan wejściowy
-
-       ## Co zostało zrobione
-
-       ## Decyzje / ustalenia
-
-       ## Stan wyjściowy
-      EOF
+        printf "%s\n" \
+"# SESJA — $TS" \
+"" \
+"## Stan wejściowy" \
+"" \
+"## Co zostało zrobione" \
+"" \
+"## Decyzje / ustalenia" \
+"" \
+"## Stan wyjściowy" \
+> "$FILE"
 
         nvim "$FILE"
-  }
+      }
 
     '';
   };
