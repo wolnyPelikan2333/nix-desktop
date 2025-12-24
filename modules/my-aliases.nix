@@ -134,6 +134,59 @@
           *) echo "❗ Nieprawidłowa opcja" ;;
         esac
       }
+
+      # ===========================
+      # SESJE — start / stop
+      # ===========================
+
+      sesja-start() {
+        echo "=== SESJA START ==="
+        echo
+        echo "--- PLAN (NEXT.md) ---"
+        if [ -f /etc/nixos/SESJE/NEXT.md ]; then
+          sed -n '1,120p' /etc/nixos/SESJE/NEXT.md
+        else
+          echo "Brak /etc/nixos/SESJE/NEXT.md"
+        fi
+        echo
+        echo "--- GIT STATUS (/etc/nixos) ---"
+        cd /etc/nixos || return
+        git status -sb
+    }
+
+        sesja-stop() {
+          BASE="/etc/nixos/SESJE"
+          TS="$(date '+%Y-%m-%d_%H-%M')"
+
+          echo "Zamykanie sesji. Wybierz typ:"
+          echo "1) zakonczona"
+          echo "2) awaria"
+          read -r CHOICE
+
+        case "$CHOICE" in
+          1) DIR="$BASE/zakonczone" ;;
+          2) DIR="$BASE/awaria" ;;
+          *) echo "Przerwano"; return ;;
+        esac
+
+        mkdir -p "$DIR"
+        FILE="$DIR/$TS.md"
+
+        cat > "$FILE" <<EOF
+        # SESJA — $TS
+
+       ## Stan wejściowy
+
+       ## Co zostało zrobione
+
+       ## Decyzje / ustalenia
+
+       ## Stan wyjściowy
+      EOF
+
+        nvim "$FILE"
+  }
+
     '';
   };
 }
