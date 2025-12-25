@@ -27,4 +27,4 @@ z NixOS, shellem i narzędziami.
 
 ### Shell
 - [Vim / Neovim — makra i rejestry](ściągi/shell/vim-makra-rejestry.md)
-
+- [Vim / Neovim — absolutne podstawy](ściągi/shell/vim-podstawy.md)
