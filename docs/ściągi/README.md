@@ -28,3 +28,4 @@ z NixOS, shellem i narzędziami.
 ### Shell
 - [Vim / Neovim — makra i rejestry](ściągi/shell/vim-makra-rejestry.md)
 - [Vim / Neovim — absolutne podstawy](ściągi/shell/vim-podstawy.md)
+- [Neovim — edycja wielu miejsc (bez multikursora)](./shell/nvim-multi-edit.md)
