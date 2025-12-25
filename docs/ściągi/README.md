@@ -24,3 +24,7 @@ z NixOS, shellem i narzędziami.
 ### Nix
 - [flake check / build / switch — którą komendę wybrać?](ściągi/nix/flake-check-build-switch.md)
 - [nix warnings — jak znaleźć źródło](ściągi/nix/nix-warnings-jak-znalezc-zrodlo.md)
+
+### Shell
+- [Vim / Neovim — makra i rejestry](ściągi/shell/vim-makra-rejestry.md)
+
