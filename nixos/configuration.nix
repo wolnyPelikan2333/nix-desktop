@@ -169,6 +169,7 @@
     winetricks
     libreoffice
     entr
+    # fresh
 
   ];
 
