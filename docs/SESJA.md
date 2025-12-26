@@ -1,3 +1,70 @@
+# 🧾 SESJA
+
+## 📅 Data
+2025-12-26
+
+## ⏱ Czas
+start: nieformalnie  
+koniec: domknięcie sesji
+
+---
+
+## 🎯 Cel sesji
+Utworzyć prosty, bezpieczny system notatek w Markdown zsynchronizowany z GitHubem, bez magii i z pełną kontrolą.
+
+---
+
+## ✅ Zrobione
+- utworzono repo `notes-md` na notatki `.md`
+- zaprojektowano strukturę katalogów (daily / nixos / ideas / archive)
+- dodano workflow dziennych notatek (`note`)
+- dodano nawigację (`nd`, `ni`, `nn`)
+- dodano szablony NixOS (debug / runbook / decyzje)
+- dodano aliasy do szablonów (`ndd`, `ndr`, `ndc`)
+- dodano pół-automat synchronizacji (A1: pytanie o sync)
+- utworzono README jako indeks notatek
+- utworzono ściągę aliasów (`README-aliases.md`)
+
+---
+
+## 🔧 Zmiany techniczne
+- `/etc/nixos/modules/zsh.nix`
+  - nowe funkcje: `note`, `notes-sync`, `notes-sync-ask`
+  - aliasy: `nd`, `ni`, `nn`, `ndd`, `ndr`, `ndc`
+- repo notatek: `~/notes-md` (osobny GitHub)
+
+---
+
+## 🧠 Wnioski
+- rozróżnienie „nawigacja vs akcja” jest kluczowe
+- automatyzacja ma sens tylko tam, gdzie nie przeszkadza
+- README + ściąga zdejmują ciężar pamięci
+- lepiej najpierw widoczność, potem automaty
+
+---
+
+## ⚠️ Otwarte rzeczy / ryzyka
+- brak (system stabilny, workflow domknięty)
+
+---
+
+## 📌 Następny krok
+Użyć systemu przez kilka dni bez zmian i zobaczyć, co realnie przeszkadza.
+
+---
+
+## 🛑 Checkpoint
+- [x] zmiany zapisane
+- [x] commit zrobiony (`ns`)
+- [x] push wykonany
+- [x] system stabilny
+
+---
+
+## 🧘 Stan
+Spokojny, z poczuciem kontroli i zrozumienia tego, co zostało zrobione.
+
+
 ## 2025-12-26 — refaktor sed-awk.md
 
 DONE:

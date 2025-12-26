@@ -45,6 +45,9 @@
       ##########################################################
 
       sesja-start() {
+        echo "$(date '+%F %H:%M')" > /tmp/sesja.start
+        echo "🟢 Start: $(cat /tmp/sesja.start)"
+
         echo "===== 🧭 START SESJI ====="
         echo
         echo "📄 Ostatnia sesja (/etc/nixos/docs/SESJA.md):"
@@ -61,11 +64,45 @@
       }
 
       sesja-stop() {
-        echo "===== 🛑 STOP SESJI ====="
-        echo
-        echo "✍️  Otwieram SESJA.md do wpisu..."
-        nvim /etc/nixos/docs/SESJA.md
-      }
+  if [ ! -f /tmp/sesja.start ]; then
+    echo "❌ Brak sesji start (sesja-start)"
+    return 1
+  fi
+
+  START="$(cat /tmp/sesja.start)"
+  END="$(date '+%F %H:%M')"
+  DAY="$(date '+%F')"
+  SESJA_FILE="/etc/nixos/docs/SESJA.md"
+
+  {
+    echo
+    echo "## 📅 $DAY"
+    echo
+    echo "### ⏱ Czas"
+    echo "start: $START#*   "
+    echo "koniec: $END#*   "
+    echo
+    echo "### 🔧 Zmiany techniczne"
+    git -C /etc/nixos status --porcelain | while read -r _ f; do echo "- \$f"; done
+    echo
+    echo "### 🎯 Cel sesji"
+    echo "- "
+    echo
+    echo "### ✅ Zrobione"
+    echo "- "
+    echo
+    echo "### 🧠 Wnioski"
+    echo "- "
+    echo
+    echo "### 📌 Następny krok"
+    echo "- "
+  } >> "$SESJA_FILE"
+
+  rm -f /tmp/sesja.start
+
+  echo "✍️  Otwieram SESJA.md do uzupełnienia..."
+  nvim "$SESJA_FILE"
+}
 
 
       ##########################################################
