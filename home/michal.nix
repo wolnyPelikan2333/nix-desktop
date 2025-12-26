@@ -39,5 +39,11 @@
   programs.home-manager.enable = true;
   home.packages = [pkgs.home-manager];
 
+   programs.zellij = {
+    enable = true;
+  };
+  
+
+
   home.stateVersion = "25.05";
 }
