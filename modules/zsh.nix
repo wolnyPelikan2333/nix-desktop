@@ -112,11 +112,7 @@
           DAY="$(date '+%F')"
           SESJA_FILE="/etc/nixos/docs/SESJA.md"
             
-          sen() {
-              sesja-stop
-          }
-
-          {
+               {
             echo
             echo "## 📅 $DAY"
             echo
