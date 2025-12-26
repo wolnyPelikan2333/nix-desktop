@@ -210,6 +210,25 @@
         sudo nix-collect-garbage -d
       }
 
+      # 📓 Daily note
+        note() {
+          NOTES_DIR="$HOME/notes-md"
+          DAILY_DIR="$NOTES_DIR/daily"
+          TEMPLATE="$DAILY_DIR/TEMPLATE.md"
+          TODAY="$(date +%F)"
+          FILE="$DAILY_DIR/$TODAY.md"
+
+          mkdir -p "$DAILY_DIR"
+
+          if [ ! -f "$FILE" ]; then
+            sed "s/{{date}}/$TODAY/" "$TEMPLATE" > "$FILE"
+          fi
+
+          cd "$NOTES_DIR" || return
+          nvim "$FILE"
+}
+
+
 
     '';
 
