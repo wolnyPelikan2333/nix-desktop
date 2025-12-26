@@ -266,6 +266,25 @@
               cd "$HOME/notes-md/nixos" || return
               nvim .
 }
+    
+            # ❄️ NixOS note templates
+ndd() {
+  FILE="$HOME/notes-md/nixos/debug-$(date +%F).md"
+  cp "$HOME/notes-md/nixos/TEMPLATE-debug.md" "$FILE"
+  nvim "$FILE"
+}
+
+ndr() {
+  FILE="$HOME/notes-md/nixos/runbook-$(date +%F).md"
+  cp "$HOME/notes-md/nixos/TEMPLATE-runbook.md" "$FILE"
+  nvim "$FILE"
+}
+
+ndc() {
+  FILE="$HOME/notes-md/nixos/decision-$(date +%F).md"
+  cp "$HOME/notes-md/nixos/TEMPLATE-decision.md" "$FILE"
+  nvim "$FILE"
+}
 
 
 
