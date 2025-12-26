@@ -169,7 +169,9 @@
     winetricks
     libreoffice
     entr
-    # fresh
+    ddgr
+    elinks
+    qutebrowser
 
   ];
 
