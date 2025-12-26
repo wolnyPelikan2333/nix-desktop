@@ -249,6 +249,19 @@
             git push
 
             echo "☁️ Notes synced"
+}              
+           # 🔄 Ask before syncing notes
+              notes-sync-ask() {
+                echo
+                read "?☁️  Sync notes now? [y/N] " answer
+                case "$answer" in
+                  y|Y)
+                    notes-sync
+                    ;;
+                  *)
+                    echo "↩️  Skipped sync"
+                    ;;
+                esac
 }
 
           # 🗂 Notes navigation
@@ -272,18 +285,21 @@ ndd() {
   FILE="$HOME/notes-md/nixos/debug-$(date +%F).md"
   cp "$HOME/notes-md/nixos/TEMPLATE-debug.md" "$FILE"
   nvim "$FILE"
+  notes-sync-ask
 }
 
 ndr() {
   FILE="$HOME/notes-md/nixos/runbook-$(date +%F).md"
   cp "$HOME/notes-md/nixos/TEMPLATE-runbook.md" "$FILE"
   nvim "$FILE"
+  notes-sync-ask
 }
 
 ndc() {
   FILE="$HOME/notes-md/nixos/decision-$(date +%F).md"
   cp "$HOME/notes-md/nixos/TEMPLATE-decision.md" "$FILE"
   nvim "$FILE"
+  notes-sync-ask
 }
 
 
