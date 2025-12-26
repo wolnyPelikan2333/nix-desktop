@@ -40,6 +40,32 @@
 
     less "$FILE"
   }
+      ##########################################################
+      # SESJA — START / STOP (workflow)
+      ##########################################################
+
+      sesja-start() {
+        echo "===== 🧭 START SESJI ====="
+        echo
+        echo "📄 Ostatnia sesja (/etc/nixos/docs/SESJA.md):"
+        echo "-------------------------------------------"
+        if [ -f /etc/nixos/docs/SESJA.md ]; then
+          tail -n 40 /etc/nixos/docs/SESJA.md
+        else
+          echo "❌ Brak pliku SESJA.md"
+        fi
+        echo
+        echo "📦 Stan repo (/etc/nixos):"
+        git -C /etc/nixos status
+        echo
+      }
+
+      sesja-stop() {
+        echo "===== 🛑 STOP SESJI ====="
+        echo
+        echo "✍️  Otwieram SESJA.md do wpisu..."
+        nvim /etc/nixos/docs/SESJA.md
+      }
 
 
       ##########################################################
