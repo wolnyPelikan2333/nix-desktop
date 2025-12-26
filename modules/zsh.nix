@@ -251,6 +251,22 @@
             echo "☁️ Notes synced"
 }
 
+          # 🗂 Notes navigation
+            nd() {
+              cd "$HOME/notes-md/daily" || return
+              nvim .
+            }
+
+            ni() {
+              cd "$HOME/notes-md/ideas" || return
+              nvim .
+            }
+
+            nn() {
+              cd "$HOME/notes-md/nixos" || return
+              nvim .
+}
+
 
 
 
