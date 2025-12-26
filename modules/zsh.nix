@@ -54,16 +54,7 @@
         unalias g3 2>/dev/null
         unalias g5 2>/dev/null
       ''
-        ''
-        sen() {
-          # jeśli brak argumentów → otwórz bieżący katalog
-          if [ "$#" -eq 0 ]; then
-            sudo -E nvim .
-          else
-            sudo -E nvim "$@"
-          fi
-	      }
-      '' 
+      
 
 
 
