@@ -228,6 +228,30 @@
           nvim "$FILE"
 }
 
+        # 🔄 Notes: auto sync
+          notes-sync() {
+            NOTES_DIR="$HOME/notes-md"
+
+            cd "$NOTES_DIR" || return
+
+            if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+              echo "❌ Not a git repository: $NOTES_DIR"
+              return 1
+            fi
+
+            if [ -z "$(git status --porcelain)" ]; then
+              echo "✔ No changes to sync"
+              return 0
+            fi
+
+            git add .
+            git commit -m "notes: update $(date +%F_%H-%M)"
+            git push
+
+            echo "☁️ Notes synced"
+}
+
+
 
 
     '';
