@@ -167,7 +167,6 @@
           echo "🚀 snapshot zapisany → $msg"
         }
 
-        ns()  { sys-note "$*"; sys-save-os "$*"; }
         nss() { sys-save-os "$*"; }
 
         sys-status() {

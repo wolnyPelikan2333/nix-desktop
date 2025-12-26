@@ -1,4 +1,11 @@
 2025-12-26
+
+ZSH: rozdzielenie aliasów i funkcji; usunięcie ns; dodanie nbuild i nss; konflikt rozwiązany przez switch.”
+
+### 📌 Następny krok
+- Dokończyć audyt aliasów ZSH (porządkowanie, brakujące, decyzje)
+
+2025-12-26
 ✔ Zainstalowano Zellij przez Home Manager
 ✔ ETAP 1 zakończony (bez auto-startu, bez zmian w skrótach)
 ✔ System stabilny po ns
@@ -154,3 +161,26 @@ to pamięć robocza systemu
 krótko, technicznie, bez lania wody
 
 jeden wpis = jedna zamknięta sesja
+
+## 📅 2025-12-26
+
+### ⏱ Czas
+start: 2025-12-26 10:32
+koniec: 2025-12-26 21:31
+
+### 🔧 Zmiany techniczne
+- docs/SESJA.md
+- home/zsh/core.nix
+- modules/zsh.nix
+
+### 🎯 Cel sesji
+- 
+
+### ✅ Zrobione
+- 
+
+### 🧠 Wnioski
+- 
+
+### 📌 Następny krok
+- 

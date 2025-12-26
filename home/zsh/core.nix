@@ -15,8 +15,14 @@
         fi
       }
 
-        nbuild() {
-          sudo nixos-rebuild build --flake /etc/nixos
+      nbuild() {
+        sudo nixos-rebuild build --flake /etc/nixos
+      }
+
+      nss() {
+        sys-note "$@"
+        sys-save-os "$@"
+      }
     '';
   };
 }
