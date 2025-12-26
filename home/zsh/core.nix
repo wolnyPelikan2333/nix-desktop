@@ -14,6 +14,9 @@
           sudo -E nvim "$@"
         fi
       }
+
+        nbuild() {
+          sudo nixos-rebuild build --flake /etc/nixos
     '';
   };
 }
