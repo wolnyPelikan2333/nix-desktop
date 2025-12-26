@@ -1,4 +1,19 @@
-# SESJA — dziennik pracy
+## 2025-12-26 — mini-ściąga grep vs rg
+
+DONE:
+- dodana mini-ściąga: grep-vs-rg.md
+- decyzje: kiedy grep / kiedy rg
+- zapisane, zakomitowane, wypchnięte
+
+Stan repo: CLEAN
+Checkpoint: OK
+
+NEXT (następna sesja — wybrać jedno):
+- sanity-check katalogu docs/ściągi/shell
+- refaktor jednej ściągi: sed-awk / xargs / vim
+
+
+ # SESJA — dziennik pracy
 
 Ten plik zawiera checkpointy sesji roboczych.
 Każda sesja = krótki wpis:
