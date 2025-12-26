@@ -1,3 +1,33 @@
+## 2025-12-26 — refaktor sed-awk.md
+
+DONE:
+- sed-awk.md przepisany do formy ściągi decyzyjnej
+- rozdzielenie decyzji: kiedy sed / kiedy awk
+- dodane gotowe wzorce poleceń
+- skrócenie treści do formy „kopiuj i użyj”
+
+Stan repo: CLEAN
+Checkpoint: OK
+
+NEXT (następna sesja — wybrać jedno):
+- refaktor xargs.md do formy decyzyjnej
+- pakiet vim-* (ujednolicenie struktury i decyzji)
+
+
+## 2025-12-26 — sanity-check docs/ściągi/shell
+
+DONE:
+- przegląd katalogu shell
+- klasyfikacja plików (OK / do refaktoru)
+- identyfikacja problemu struktury vim
+
+Stan repo: CLEAN
+Checkpoint: OK
+
+NEXT:
+- refaktor sed-awk.md do formy decyzyjnej
+
+
 ## 2025-12-26 — mini-ściąga grep vs rg
 
 DONE:
