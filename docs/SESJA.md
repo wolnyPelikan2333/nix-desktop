@@ -1,3 +1,10 @@
+2025-12-26
+✔ Zainstalowano Zellij przez Home Manager
+✔ ETAP 1 zakończony (bez auto-startu, bez zmian w skrótach)
+✔ System stabilny po ns
+⏭ Następne: opcjonalnie alias zj / sesje nazwane
+
+
 # 🧾 SESJA
 
 ## 📅 Data
