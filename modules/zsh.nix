@@ -53,7 +53,7 @@
         echo "📄 Ostatnia sesja (/etc/nixos/docs/SESJA.md):"
         echo "-------------------------------------------"
         if [ -f /etc/nixos/docs/SESJA.md ]; then
-          tail -n 40 /etc/nixos/docs/SESJA.md
+          sed -n '/--- END SESSION ---/,$p' /etc/nixos/docs/SESJA.md
         else
           echo "❌ Brak pliku SESJA.md"
         fi
