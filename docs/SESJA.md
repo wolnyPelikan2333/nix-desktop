@@ -1,3 +1,86 @@
+## 🌐 qutebrowser — dark baseline (komfort wzroku)
+
+**Problem:** domyślna konfiguracja wali białym tłem po oczach.  
+**Cel:** spokojny dark mode, zero magii, jedno źródło konfiguracji.
+
+**Stan faktyczny:**
+- qutebrowser zainstalowany
+- brak `config.py` (czysta konfiguracja domyślna)
+- katalog: `~/.config/qutebrowser/`
+
+**Rozwiązanie:**
+Utworzono ręczną konfigurację.
+
+Plik:
+~/.config/qutebrowser/config.py
+
+
+Kluczowe decyzje:
+- `config.load_autoconfig(False)`  
+  → jedno źródło prawdy, brak ostrzeżeń
+- włączony dark mode stron
+- kontrast ustawiony łagodnie (nie absolutna czerń)
+- delikatne kolory UI
+- brak adblocka, JS tweaks, keybindów (świadomie)
+
+**Status:** działa, komfort OK
+
+
+## ✅ Neovim — autopairs (LazyVim override)
+
+**Cel:** ultra-lekka, przewidywalna konfiguracja autopairs  
+bez „smart magii”, bez Treesittera, bez integracji z cmp.
+
+**Stan faktyczny:**
+- `nvim-autopairs` dostarczany domyślnie przez LazyVim
+- plugin NIE jest zarządzany przez NixOS / Home Manager
+- wersja zablokowana w `~/.config/nvim/lazy-lock.json`
+
+**Rozwiązanie:**
+Jawny override konfiguracji LazyVim.
+
+Plik:
+~/.config/nvim/lua/plugins/autopairs.lua
+
+
+Konfiguracja:
+- `check_ts = false`
+- `fast_wrap = false`
+- tylko podstawowe pary: `() [] {} "" ''`
+- brak agresji w Markdown
+
+**Dlaczego tak:**
+- minimalne tarcie poznawcze
+- przewidywalność > spryt
+- jeden plik = pełna kontrola
+- usunięcie pliku = powrót do defaultów LazyVim
+
+**Status:** działa, zostaje
+
+
+
+## 2025-12-26 — terminal web workflow (baseline)
+
+✅ Zainstalowane i przetestowane:
+- ddgr — wyszukiwarka DuckDuckGo w terminalu
+- elinks — przeglądarka tekstowa do docs / czytania
+- qutebrowser — pełny web (GUI, klawiaturowy)
+
+📌 Status:
+- instalacja OK
+- brak konfiguracji (świadomie)
+- system stabilny
+- dobra baza do dalszej pracy
+
+🧭 Plan na kolejną sesję:
+1. aliasy (dd, ww, itp.)
+2. minimalna konfiguracja qutebrowser (external editor = nvim)
+3. spisanie workflow: szukam → czytam → zapisuję
+4. checkpoint (commit + push)
+
+🛑 Sesja zamknięta komendą „zamykamy”.
+
+
 2025-12-26
 
 ZSH: rozdzielenie aliasów i funkcji; usunięcie ns; dodanie nbuild i nss; konflikt rozwiązany przez switch.”
@@ -172,6 +255,27 @@ koniec: 2025-12-26 21:31
 - docs/SESJA.md
 - home/zsh/core.nix
 - modules/zsh.nix
+
+### 🎯 Cel sesji
+- 
+
+### ✅ Zrobione
+- 
+
+### 🧠 Wnioski
+- 
+
+### 📌 Następny krok
+- 
+
+## 📅 2025-12-27
+
+### ⏱ Czas
+start: 2025-12-26 23:53
+koniec: 2025-12-27 00:12
+
+### 🔧 Zmiany techniczne
+- docs/SESJA.md
 
 ### 🎯 Cel sesji
 - 

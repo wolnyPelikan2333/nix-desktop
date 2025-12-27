@@ -116,13 +116,14 @@
 };
 
   services.blueman.enable = true;
-
+  
+   
 
   ###############################################
   ## USER
   ###############################################
 
-  users.users.michal = {
+    users.users.michal = {
     isNormalUser = true;
     description = "michal";
      extraGroups = [
@@ -170,8 +171,8 @@
     libreoffice
     entr
     ddgr
-    elinks
     qutebrowser
+    w3m
 
   ];
 
@@ -210,8 +211,8 @@
   ## NH
   ###############################################
 
-  programs.nh.enable = true;
-  programs.nh.clean = {
+    programs.nh.enable = true;
+    programs.nh.clean = {
     enable = false;
     dates = "weekly";
   };
@@ -231,7 +232,7 @@
   ## FILESYSTEMS
   ###############################################
 
-  fileSystems."/mnt/steam" = {
+    fileSystems."/mnt/steam" = {
     device = "/dev/disk/by-uuid/8fbe63e6-58f2-4609-905a-5f2365318224";
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
