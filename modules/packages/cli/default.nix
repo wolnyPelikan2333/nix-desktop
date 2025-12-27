@@ -18,6 +18,7 @@
     mpv
     mpd
     mpc
+    yt-dlp
   ];
 }
 
