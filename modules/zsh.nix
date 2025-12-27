@@ -45,7 +45,8 @@
         setopt HIST_REDUCE_BLANKS
         setopt HIST_SAVE_NO_DUPS
            
-        alias w='w3m'   
+        alias w='w3m' 
+        alias nixman='w3m https://nixos.org/manual/nixos/stable/'
        ''
       # ----------------------------------------------------------
       # UNALIASY (czyścimy stare konflikty)
