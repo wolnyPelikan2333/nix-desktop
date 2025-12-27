@@ -52,12 +52,9 @@
           # ----------------------------------------------------------
             ''
               dw() {
-                local url
-                url="$(ddgr -x "$@" | fzf --prompt='ddgr > ')"
-                [ -n "$url" ] && w3m "$url"
+                ddgr -x "$@" | fzf --prompt='ddgr > ' | xargs -r w3m
               }
             ''
-
 
       # ----------------------------------------------------------
       # UNALIASY (czyścimy stare konflikty)
