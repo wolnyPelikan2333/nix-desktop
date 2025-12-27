@@ -16,6 +16,8 @@
     tree
     jq
     mpv
-       ];
+    mpd
+    mpc
+  ];
 }
 
