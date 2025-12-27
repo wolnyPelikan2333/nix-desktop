@@ -83,6 +83,28 @@
           less "$FILE"
         }
       ''
+      # ----------------------------------------------------------
+      # YOUTUBE → AUDIO (mp3) → mpd
+      # ----------------------------------------------------------
+      ''
+        yta() {
+          if [ -z "$1" ]; then
+            echo "❌ Użycie: yta <youtube-url>"
+            return 1
+          fi
+
+          yt-dlp -x --audio-format mp3 \
+            -o "$HOME/Music/music/gregorian/melodia-wiary/%(title)s.%(ext)s" \
+            "$1" || return 1
+
+          if command -v mpc >/dev/null; then
+            mpc update >/dev/null
+          fi
+
+          echo "🎶 Dodano do Melodia wiary"
+        }
+      ''
+
 
       # ----------------------------------------------------------
       # SESJA — START / STOP
