@@ -47,6 +47,9 @@
            
         alias w='w3m' 
         alias nixman='w3m https://nixos.org/manual/nixos/stable/'
+        alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
+
+        
        ''
       # ----------------------------------------------------------
       # UNALIASY (czyścimy stare konflikty)
@@ -181,6 +184,15 @@
           echo "💾 Disk /:"; df -h / | sed '1d;s/^/  /'; echo
           echo "🔐 Repo:"; if [ -z "$(git -C /etc/nixos status --porcelain)" ]; then echo "  CLEAN ✔"; else echo "  DIRTY ✖"; fi; echo
         }
+
+         nixe() {
+          nixos-rebuild build --flake /etc/nixos#nixos 2>&1 | tee /tmp/nix-error.log
+          echo
+          echo "📄 Ściąga: jak czytać błędy nix build"
+          echo "----------------------------------"
+          sed -n '1,80p' /etc/nixos/docs/ściągi/nix/nix-build-errors.md
+        }
+
       ''
 
     ];
