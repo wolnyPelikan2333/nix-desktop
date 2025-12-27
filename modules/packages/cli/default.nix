@@ -15,7 +15,7 @@
     fd
     tree
     jq
-
+    mpv
        ];
 }
 

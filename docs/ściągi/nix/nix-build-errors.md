@@ -78,4 +78,46 @@ Nie jest to błąd nix — tylko **artefakt edycji**.
 ## Złota zasada
 
 > **Nix zawsze mówi prawdę, tylko bardzo dosłownie.**  
-> Nie zgaduj. Czytaj dokładnie JEDNĄ linię, którą wskazuje
+> Nie zgaduj. Czytaj dokładnie JEDNĄ linię, którą wskazuje.
+
+---
+
+## 🔁 Workflow: bezpieczna praca z NixOS (mini-diagram)
+
+edit
+↓
+nixos-rebuild build (suchy build)
+↓
+czy build OK?
+├─ TAK → nss (build + switch + snapshot)
+│
+└─ NIE → nixe
+↓
+czytanie błędu + ściąga
+↓
+poprawka
+↓
+nixos-rebuild build
+↓
+(wróć do decyzji)
+
+yaml
+Skopiuj kod
+
+---
+
+### Zasady użycia
+
+- **Zawsze zaczynaj od suchego builda**
+- **Nie rób `nss`, jeśli parser krzyczy**
+- `nixe` uruchamiaj:
+  - gdy błąd nie jest oczywisty
+  - gdy chcesz zachować log
+  - gdy potrzebujesz checklisty „co czytać”
+
+---
+
+### Złota reguła
+
+> **Build ma być nudny.  
+> Jeśli nie jest — wracasz o krok wyżej.**
