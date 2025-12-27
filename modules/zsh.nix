@@ -10,6 +10,9 @@
 
     dotDir = "${config.xdg.configHome}/zsh";
     defaultKeymap = "viins";
+    
+    
+    
 
     # ==========================================================
     # HISTORIA — STABILNA, BEZ KORUPCJI
@@ -41,7 +44,18 @@
         setopt INC_APPEND_HISTORY
         setopt HIST_REDUCE_BLANKS
         setopt HIST_SAVE_NO_DUPS
-      ''
+           
+        alias w='w3m'   
+       ''
+       # ----------------------------------------------------------
+       # TERMINAL WEB — ddgr → w3m
+       # ----------------------------------------------------------
+        ''
+          dw() {
+            ddgr "$@" | w3m
+          }
+        ''
+
 
       # ----------------------------------------------------------
       # UNALIASY (czyścimy stare konflikty)
