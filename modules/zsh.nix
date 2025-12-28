@@ -142,6 +142,8 @@
           echo "🟢 Start: $(cat /tmp/sesja.start)"
 
           echo "===== 🧭 START SESJI ====="
+          echo "🧠 System sesji: NOWY"
+          echo "📄 Stan pracy: /etc/nixos/SESJE/AKTYWNA.md"
           echo
           echo "📄 Ostatnia sesja (/etc/nixos/docs/SESJA.md):"
           echo "-------------------------------------------"
