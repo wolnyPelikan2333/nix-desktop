@@ -104,6 +104,27 @@
           echo "🎶 Dodano do Melodia wiary"
         }
       ''
+              # ----------------------------------------------------------
+      # YOUTUBE → AUDIO (mp3) → mpd (modes)
+      # ----------------------------------------------------------
+      ''
+        yta-praca() {
+          _yta_core "praca" "$1"
+        }
+
+        yta-modlitwa() {
+          _yta_core "modlitwa" "$1"
+        }
+
+        yta-noc() {
+          _yta_core "noc" "$1"
+        }
+
+        yta-wiara() {
+          _yta_core "melodia-wiary" "$1"
+        }
+      ''
+
 
 
       # ----------------------------------------------------------
