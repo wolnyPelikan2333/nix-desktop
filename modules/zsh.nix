@@ -83,31 +83,30 @@
           less "$FILE"
         }
       ''
-      # ----------------------------------------------------------
-      # YOUTUBE → AUDIO (mp3) → mpd
+            # ----------------------------------------------------------
+      # YOUTUBE → AUDIO (mp3) → mpd (gregorian modes)
       # ----------------------------------------------------------
       ''
-        yta() {
-          if [ -z "$1" ]; then
-            echo "❌ Użycie: yta <youtube-url>"
+        _yta_core() {
+          local target="$1"
+          local url="$2"
+
+          if [ -z "$target" ] || [ -z "$url" ]; then
+            echo "❌ Użycie: yta-<tryb> <youtube-url>"
             return 1
           fi
 
           yt-dlp -x --audio-format mp3 \
-            -o "$HOME/Music/music/gregorian/melodia-wiary/%(title)s.%(ext)s" \
-            "$1" || return 1
+            -o "$HOME/Music/music/gregorian/$target/%(title)s.%(ext)s" \
+            "$url" || return 1
 
           if command -v mpc >/dev/null; then
             mpc update >/dev/null
           fi
 
-          echo "🎶 Dodano do Melodia wiary"
+          echo "🎶 Dodano do gregorian/$target"
         }
-      ''
-              # ----------------------------------------------------------
-      # YOUTUBE → AUDIO (mp3) → mpd (modes)
-      # ----------------------------------------------------------
-      ''
+
         yta-praca() {
           _yta_core "praca" "$1"
         }
