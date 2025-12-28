@@ -142,22 +142,18 @@
           echo "🟢 Start: $(cat /tmp/sesja.start)"
 
           echo "===== 🧭 START SESJI ====="
+          echo
           echo "🧠 System sesji: NOWY"
           echo "📄 Stan pracy: /etc/nixos/SESJE/AKTYWNA.md"
           echo
-          echo "📄 Ostatnia sesja (/etc/nixos/docs/SESJA.md):"
-          echo "-------------------------------------------"
-
-          if [ -f /etc/nixos/docs/SESJA.md ]; then
-            sed -n '/--- END SESSION ---/,$p' /etc/nixos/docs/SESJA.md
-          else
-            echo "❌ Brak pliku SESJA.md"
-          fi
-
+          read -n 1 -s -r -p "↵ ENTER → przejście do AKTYWNA.md"
           echo
+          echo
+
           echo "📦 Stan repo (/etc/nixos):"
           git -C /etc/nixos status
           echo
+
           nvim /etc/nixos/SESJE/AKTYWNA.md
         }
       ''
