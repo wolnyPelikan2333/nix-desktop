@@ -156,8 +156,7 @@
           echo "📦 Stan repo (/etc/nixos):"
           git -C /etc/nixos status
           echo
-
-          nvim /etc/nixos/SESJE/AKTYWNA.md
+          echo "__OTWIERAM AKTYWNA__"
         }
 
         sesja-stop() {
