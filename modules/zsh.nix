@@ -146,7 +146,7 @@
           echo "🧠 System sesji: NOWY"
           echo "📄 Stan pracy: /etc/nixos/SESJE/AKTYWNA.md"
           echo
-          read -n 1 -s -r -p "↵ ENTER → przejście do AKTYWNA.md"
+          read -k 1 "?↵ ENTER → przejście do AKTYWNA.md"
           echo
           echo
 
