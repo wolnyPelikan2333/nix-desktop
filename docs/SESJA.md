@@ -1,3 +1,49 @@
+--- END SESSION ---
+
+## 📅 2025-12-28
+
+### ⏱ Czas
+start: —
+koniec: —
+
+### 🎯 Cel sesji
+- Stabilna muzyka offline do pracy i modlitwy
+- Brak zależności od internetu
+- Sterowanie z terminala bez blokowania pracy
+
+### 🔧 Zmiany techniczne
+- dodano mpd + mpc (audio w tle, terminal wolny)
+- utworzono strukturę `~/Music/music/gregorian/{praca,modlitwa,noc,melodia-wiary}`
+- dodano yt-dlp (YouTube → audio offline)
+- dodano funkcje:
+  - yta-praca
+  - yta-modlitwa
+  - yta-noc
+  - yta-wiara
+- dodano aliasy mpd:
+  - music-praca
+  - music-modlitwa
+  - music-noc
+  - music-wiara
+- poprawiono strukturę `lib.mkMerge` w `zsh.nix` (usunięcie błędnego `''`)
+
+### ✅ Zrobione
+- mpd gra w tle i nie przejmuje terminala
+- muzyka może grać podczas `nss` i pracy w `/etc/nixos`
+:- YouTube → mp3 → właściwy folder → mpd update działa jednym poleceniem
+- rozdzielenie trybów słuchania przez foldery (bez sortowania po fakcie)
+
+### 🧠 Wnioski
+- mpv nadaje się do testów, mpd do codziennej pracy
+- folder = tryb (ważniejsze niż pliki/tagi)
+- aliasy redukują decyzje i utrzymują spokój
+- dyscyplina `mkMerge` jest kluczowa w konfiguracji Zsh
+
+### 📌 Następny krok
+- (opcjonalnie) krótka ściąga „Audio workflow — mpd + mpc + yt-dlp”
+- ewentualnie autostart mpd po loginie
+
+
 ## 🌐 qutebrowser — dark baseline (komfort wzroku)
 
 **Problem:** domyślna konfiguracja wali białym tłem po oczach.  
@@ -273,6 +319,27 @@ koniec: 2025-12-26 21:31
 ### ⏱ Czas
 start: 2025-12-26 23:53
 koniec: 2025-12-27 00:12
+
+### 🔧 Zmiany techniczne
+- docs/SESJA.md
+
+### 🎯 Cel sesji
+- 
+
+### ✅ Zrobione
+- 
+
+### 🧠 Wnioski
+- 
+
+### 📌 Następny krok
+- 
+
+## 📅 2025-12-28
+
+### ⏱ Czas
+start: 2025-12-27 20:06
+koniec: 2025-12-28 02:12
 
 ### 🔧 Zmiany techniczne
 - docs/SESJA.md
