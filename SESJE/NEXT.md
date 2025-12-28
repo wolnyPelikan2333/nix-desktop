@@ -1,28 +1,17 @@
-# NEXT — plan na kolejną sesję
+# ▶️ NEXT — następna sesja
 
-## 🎯 Cel główny (1)
+## 🎯 Cel
+(jeden, maks dwa konkretne cele)
 
-Refaktor `grep.md` do formy **ściągi decyzyjnej** (jak `rg-fd-tree.md`)
+## 📋 Kroki
+- [ ] krok 1
+- [ ] krok 2
+- [ ] krok 3 (opcjonalnie)
 
-## 🧩 Kroki (max 3)
-1.Otworzyć i przeczytać aktualny plik:
-   ```bash
-   sen /etc/nixos/docs/ściągi/shell/grep.md
+## ⚠️ Ryzyka / uwagi
+- (np. „nie robić switcha”, „tylko plan”, „sprawdzić ścieżki”)
 
-2.Dodać na górze sekcję „Szybka decyzja”
-(kiedy grep, kiedy rg, kiedy NIE używać grep)
+## ⏸ Jeśli zabraknie czasu
+- zapisz punkt zatrzymania
+- reszta przechodzi do kolejnej sesji
 
-3.Przegrupować istniejące przykłady pod nagłówki decyzyjne
-  (bez dodawania nowej treści)
-
-## 🚫 Czego NIE robić
-
-1. nie dopisywać nowych przykładów
-
-2. nie ruszać systemu ani konfiguracji
-
-3. nie poprawiać stylu „na perfekcyjny”
-
-## ⏱ Szacowany blok
-
-1 blok (20–30 minut)
