@@ -48,9 +48,7 @@
         alias w='w3m' 
         alias nixman='w3m https://nixos.org/manual/nixos/stable/'
         alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
-
-        
-       ''
+      ''
       # ----------------------------------------------------------
       # UNALIASY (czyścimy stare konflikty)
       # ----------------------------------------------------------
@@ -122,6 +120,15 @@
         yta-wiara() {
           _yta_core "melodia-wiary" "$1"
         }
+      ''
+                # ----------------------------------------------------------
+      # MPD — szybkie tryby (play folder)
+      # ----------------------------------------------------------
+      ''
+        alias music-praca='mpc clear && mpc add "music/gregorian/praca" && mpc play'
+        alias music-modlitwa='mpc clear && mpc add "music/gregorian/modlitwa" && mpc play'
+        alias music-noc='mpc clear && mpc add "music/gregorian/noc" && mpc play'
+        alias music-wiara='mpc clear && mpc add "music/gregorian/melodia-wiary" && mpc play'
       ''
 
 
