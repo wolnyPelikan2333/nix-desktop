@@ -158,47 +158,8 @@
           echo
           nvim /etc/nixos/SESJE/AKTYWNA.md
         }
-
-        sesja-stop() {
-          if [ ! -f /tmp/sesja.start ]; then
-            echo "❌ Brak sesji start (sesja-start)"
-            return 1
-          fi
-
-          START="$(cat /tmp/sesja.start)"
-          END="$(date '+%F %H:%M')"
-          DAY="$(date '+%F')"
-          SESJA_FILE="/etc/nixos/docs/SESJA.md"
-            
-               {
-            echo
-            echo "## 📅 $DAY"
-            echo
-            echo "### ⏱ Czas"
-            echo "start: $START"
-            echo "koniec: $END"
-            echo
-            echo "### 🔧 Zmiany techniczne"
-            git -C /etc/nixos status --porcelain | while read -r _ f; do echo "- $f"; done
-            echo
-            echo "### 🎯 Cel sesji"
-            echo "- "
-            echo
-            echo "### ✅ Zrobione"
-            echo "- "
-            echo
-            echo "### 🧠 Wnioski"
-            echo "- "
-            echo
-            echo "### 📌 Następny krok"
-            echo "- "
-          } >> "$SESJA_FILE"
-
-          rm -f /tmp/sesja.start
-          nvim "$SESJA_FILE"
-        }
       ''
-
+        
       # ----------------------------------------------------------
       # SYSTEM — SNAPSHOT / STATUS
       # ----------------------------------------------------------
