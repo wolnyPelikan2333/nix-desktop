@@ -73,7 +73,7 @@
         nss-doc() {
           nvim /etc/nixos/docs/ściągi/nix/nss.md
         }
-      '';
+      ''
 
       
 
