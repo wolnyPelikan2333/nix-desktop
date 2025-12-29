@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/etc/nixos"
+HOST="$(hostname)"
+SESSION_FILE="$ROOT/docs/SESJA.md"
+
+RED="\033[31m"
+YELLOW="\033[33m"
+GREEN="\033[32m"
+RESET="\033[0m"
+
+fail() {
+  echo -e "${RED}❌ $1${RESET}"
+  exit 1
+}
+
+warn() {
+  echo -e "${YELLOW}⚠️  $1${RESET}"
+}
+
+ok() {
+  echo -e "${GREEN}✅ $1${RESET}"
+}
+
+header() {
+  echo
+  echo "=============================="
+  echo "🛡  NSS SAFETY CHECK"
+  echo "=============================="
+  echo
+}
+header
+
+cd "$ROOT"
+
+# 1. repo clean (tracked + untracked)
+if [[ -n "$(git status --porcelain)" ]]; then
+  fail "Repo /etc/nixos jest brudne (tracked lub untracked)"
+fi
+ok "Repo clean"
+
+# 2. flake check
+echo "🔍 nix flake check…"
+nix flake check "$ROOT" || fail "flake check failed"
+ok "Flake OK"
+
+CRITICAL_PATHS=(
+  "nixos/configuration.nix"
+  "flake.nix"
+  "modules/boot.nix"
+  "modules/graphics.nix"
+)
+
+CRITICAL_HIT=0
+
+for path in "${CRITICAL_PATHS[@]}"; do
+  if git diff --name-only | grep -q "^$path"; then
+    CRITICAL_HIT=1
+  fi
+done
+
+if [[ "$CRITICAL_HIT" -eq 1 ]]; then
+  warn "Zmiany dotykają KRYTYCZNYCH PLIKÓW"
+  RISK="HIGH"
+else
+  RISK="NORMAL"
+fi
+
+echo
+echo "🧠 Decision gate"
+echo "Ryzyko: $RISK"
+echo
+echo "Zmodyfikowane pliki:"
+git diff --name-only
+echo
+
+echo "[A] build only"
+echo "[B] build + switch"
+echo "[C] build + switch + commit"
+echo "[D] abort (domyślne)"
+echo
+
+read -r -p "Wybór: " CHOICE
+CHOICE="${CHOICE:-D}"
+
+case "$CHOICE" in
+A | a) MODE="build" ;;
+B | b) MODE="switch" ;;
+C | c) MODE="commit" ;;
+*)
+  fail "Abort by user"
+  ;;
+esac
+
+ok "Wybrany tryb: $MODE"
+
+echo
+echo "🏗  BUILD: nix build (system)"
+nix build "$ROOT#nixosConfigurations.$HOST.config.system.build.toplevel" ||
+  fail "Build failed"
+
+ok "Build OK"
+
+if [[ "$MODE" == "switch" || "$MODE" == "commit" ]]; then
+  echo
+  echo "🔁 SWITCH: nixos-rebuild switch"
+  sudo nixos-rebuild switch --flake "$ROOT#$HOST" ||
+    fail "Switch failed"
+
+  ok "Switch OK"
+fi
+
+read -r -p "Kontynuować? (wpisz 'zamykamy' aby przerwać): " LAST
+if [[ "$LAST" == "zamykamy" ]]; then
+  fail "Przerwano hasłem awaryjnym"
+fi
+
+ok "Bezpiecznik przeszedł"
