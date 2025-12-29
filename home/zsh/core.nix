@@ -5,7 +5,7 @@
     enable = true;
     enableCompletion = true;
 
-    initContent = ''
+    initContent = lib.mkAfter ''
       # sen — sudo nvim helper
       sen() {
         if [ "$#" -eq 0 ]; then
