@@ -34,3 +34,37 @@ Nix: jak bezpiecznie edytować bloki ''” (5 punktów)
 - Nic nie refaktorować na razie
 - Najpierw używać, potem poprawiać 
 
+## 📅 2025-12-29
+
+### ⏱ Czas
+start: —
+koniec: —
+
+### 🔧 Zmiany techniczne
+- docs/README.md
+- docs/standardy/nix.md
+
+### 🎯 Cel sesji
+Zbudować spójną, użyteczną strukturę dokumentacji NixOS:
+- mapę dokumentacji (`docs/README.md`)
+- kontrakt pracy ze systemem (`standardy/nix.md`)
+
+### ✅ Zrobione
+- wykonano pełną inwentaryzację istniejącej dokumentacji
+- zaprojektowano i zapisano `docs/README.md` jako mapę dokumentów
+- zaprojektowano i zapisano `docs/standardy/nix.md` jako kontrakt pracy z NixOS
+- zdefiniowano nadrzędną zasadę bezpieczeństwa: *system ważniejszy niż tempo*
+- wprowadzono wzorzec ostrzegawczy **⚠️ OPERACJA PRODUKCYJNA**
+- zamknięto drugi moduł dokumentacji (standardy)
+
+### 🧠 Wnioski
+- dokumentacja musi być projektowana jak system bezpieczeństwa, nie jak tutorial
+- jeden spójny format ostrzegawczy działa lepiej niż wiele miękkich komunikatów
+- standardy muszą być zmienialne, inaczej stają się blokadą zamiast pomocą
+- rozdzielenie: standardy → procedury → ściągi realnie zmniejsza obciążenie poznawcze
+
+### 📌 Następny krok
+1. Wypełnianie treści kolejnych standardów (jeśli zajdzie potrzeba)
+2. Zaprojektowanie i wdrożenie technicznego bezpiecznika dla `nss`
+   (alias / wrapper / hook) zgodnie z `standardy/nix.md`
+
