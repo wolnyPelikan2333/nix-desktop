@@ -68,3 +68,29 @@ Zbudować spójną, użyteczną strukturę dokumentacji NixOS:
 2. Zaprojektowanie i wdrożenie technicznego bezpiecznika dla `nss`
    (alias / wrapper / hook) zgodnie z `standardy/nix.md`
 
+## 📅 Następna sesja — PLAN
+
+### 🎯 Cel
+- Porządkowanie dokumentacji (bez zmian w shell / HM / Zsh)
+
+### 🧭 Zakres
+- Podpięcie `docs/ściągi/nix/nss.md` w:
+  - `docs/ściągi/nix/README.md`
+- Bez:
+  - aliasów
+  - funkcji Zsh
+  - zmian w Home Manager / modules
+
+### ✅ Stan wejściowy
+- Eksperyment `nss-doc` **w całości usunięty**
+- `rg nss-doc /etc/nixos` → brak wyników
+- Build wrócił do stabilnego stanu
+
+### 🧠 Wnioski
+- Integracje shell ↔ HM są kosztowne poznawczo
+- Dokumentacja spełnia swoją rolę **bez skrótów w Zsh**
+
+### 📌 Zasada na sesję
+> Tylko docs.  
+> Zero zmian systemowych.
+
