@@ -5,6 +5,18 @@ ROOT="/etc/nixos"
 HOST="$(hostname)"
 SESSION_FILE="$ROOT/docs/SESJA.md"
 
+DRY=0
+FORCE=0
+PANIC=0
+
+for arg in "$@"; do
+  case "$arg" in
+  --dry) DRY=1 ;;
+  --force) FORCE=1 ;;
+  --panic) PANIC=1 ;;
+  esac
+done
+
 RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
@@ -32,11 +44,25 @@ header() {
 }
 header
 
+if [[ "$PANIC" -eq 1 ]]; then
+  echo "🧯 PANIC MODE: rollback"
+  sudo nixos-rebuild switch --rollback ||
+    fail "Rollback failed"
+  ok "Rollback OK"
+  exit 0
+fi
+
+[[ "$DRY" -eq 1 ]] && warn "DRY RUN: brak zmian w systemie"
+
 cd "$ROOT"
 
 # 1. repo clean (tracked + untracked)
 if [[ -n "$(git status --porcelain)" ]]; then
-  fail "Repo /etc/nixos jest brudne (tracked lub untracked)"
+  if [[ "$FORCE" -eq 1 ]]; then
+    warn "FORCE: repo brudne, kontynuuję"
+  else
+    fail "Repo /etc/nixos jest brudne (tracked lub untracked)"
+  fi
 fi
 ok "Repo clean"
 
@@ -97,18 +123,24 @@ ok "Wybrany tryb: $MODE"
 
 echo
 echo "🏗  BUILD: nix build (system)"
-nix build "$ROOT#nixosConfigurations.$HOST.config.system.build.toplevel" ||
-  fail "Build failed"
-
-ok "Build OK"
+if [[ "$DRY" -eq 1 ]]; then
+  warn "DRY: pomijam build"
+else
+  nix build "$ROOT#nixosConfigurations.$HOST.config.system.build.toplevel" ||
+    fail "Build failed"
+  ok "Build OK"
+fi
 
 if [[ "$MODE" == "switch" || "$MODE" == "commit" ]]; then
   echo
   echo "🔁 SWITCH: nixos-rebuild switch"
-  sudo nixos-rebuild switch --flake "$ROOT#$HOST" ||
-    fail "Switch failed"
-
-  ok "Switch OK"
+  if [[ "$DRY" -eq 1 ]]; then
+    warn "DRY: pomijam switch"
+  else
+    sudo nixos-rebuild switch --flake "$ROOT#$HOST" ||
+      fail "Switch failed"
+    ok "Switch OK"
+  fi
 fi
 
 read -r -p "Kontynuować? (wpisz 'zamykamy' aby przerwać): " LAST
