@@ -11,6 +11,11 @@
     dotDir = "${config.xdg.configHome}/zsh";
     defaultKeymap = "viins";
     
+    sessionVariables = {
+      MPC_HOST = "127.0.0.1";
+      MPC_PORT = "6600";
+    };
+    
     
     
 
