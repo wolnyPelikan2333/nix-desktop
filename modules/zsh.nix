@@ -175,21 +175,9 @@
           echo "📝 zapisano"
         }
 
-        sys-save-os() {
-          local msg="$*"
-          [ -z "$msg" ] && msg="update"
-
-          echo "⚙ build + switch..."
-          sudo nixos-rebuild switch --flake /etc/nixos#nixos || { echo "❌ FAIL"; return; }
-
-          git -C /etc/nixos add -A
-          git -C /etc/nixos commit -m "snapshot: $(date +%F_%H-%M) — $msg" \
-            && git -C /etc/nixos push
-
-          echo "🚀 snapshot zapisany → $msg"
+        nss() {
+          /etc/nixos/scripts/nss-safe "$@"
         }
-
-        nss() { sys-save-os "$*"; }
 
         sys-status() {
           echo "===== SYSTEM STATUS ====="
