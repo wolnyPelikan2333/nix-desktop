@@ -23,6 +23,13 @@
         sys-note "$@"
         sys-save-os "$@"
       }
+
+      # ==========================
+      # NSS — dokumentacja
+      # ==========================
+      nss-doc() {
+        nvim /etc/nixos/docs/ściągi/nix/nss.md
+      }
     '';
   };
 }
