@@ -65,6 +65,16 @@
         unalias g3 2>/dev/null
         unalias g5 2>/dev/null
       ''
+
+      ''
+        # ==========================
+        # NSS — dokumentacja
+        # ==========================
+        nss-doc() {
+          nvim /etc/nixos/docs/ściągi/nix/nss.md
+        }
+      '';
+
       
 
 

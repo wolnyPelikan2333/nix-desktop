@@ -74,6 +74,7 @@ Przykładowe obszary:
 - nix (błędy, ostrzeżenia, różnice między komendami)
 
 Przykładowe pliki:
+- **`ściągi/nix/nss.md` — główny workflow pracy z systemem**
 - `ściągi/shell/rg-fd-tree.md`
 - `ściągi/nix/flake-check-vs-build-vs-switch.md`
 - `ściągi/nix/nix-build-errors.md`
