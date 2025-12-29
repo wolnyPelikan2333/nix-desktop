@@ -66,7 +66,7 @@
         unalias g5 2>/dev/null
       ''
 
-      ''
+      interactiveShellInit = ''
         # ==========================
         # NSS — dokumentacja
         # ==========================
@@ -74,7 +74,6 @@
           nvim /etc/nixos/docs/ściągi/nix/nss.md
         }
       ''
-
       
 
 
