@@ -139,34 +139,39 @@ fi
 
 # ---------- POST-SUCCESS ----------
 if [[ "$MODE" == "commit" && "$DRY" -eq 0 ]]; then
-  echo
-  echo "📝 AUTO-COMMIT"
+  CHANGES="$(git status --porcelain)"
 
-  CHANGES="$(git diff --name-only HEAD)"
-  git add -A
-  git commit -m "nss: apply nixos config
+  if [[ -z "$CHANGES" ]]; then
+    warn "Brak zmian do commit — pomijam auto-commit"
+  else
+    echo
+    echo "📝 AUTO-COMMIT"
+
+    git add -A
+    git commit -m "nss: apply nixos config
 
 Risk: $RISK
 Touched:
-$CHANGES
+$(git diff --name-only HEAD)
 " || fail "Commit failed"
 
-  ok "Commit OK"
+    ok "Commit OK"
 
-  echo
-  echo "📓 SESJA.md"
-  DATE="$(date '+%F %H:%M')"
-  {
     echo
-    echo "## 📅 $DATE"
-    echo
-    echo "- Mode: commit"
-    echo "- Risk: $RISK"
-    echo "- Changes:"
-    echo "$CHANGES"
-  } >>"$SESSION_FILE"
+    echo "📓 SESJA.md"
+    DATE="$(date '+%F %H:%M')"
+    {
+      echo
+      echo "## 📅 $DATE"
+      echo
+      echo "- Mode: commit"
+      echo "- Risk: $RISK"
+      echo "- Changes:"
+      git diff --name-only HEAD
+    } >>"$SESSION_FILE"
 
-  ok "SESJA.md updated"
+    ok "SESJA.md updated"
+  fi
 fi
 
 # ---------- FINAL SAFETY ----------
