@@ -10,6 +10,7 @@
       {
         ll = "eza -la";
         gs = "git status";
+        lab = "cd ~/lab";
       }
     ];
 
