@@ -1,3 +1,21 @@
+## 2025-12-30 — środowisko do nauki (LAB)
+
+DONE:
+- ustalone stałe miejsce do nauki: ~/lab
+- utworzona kopia edukacyjna systemu: ~/lab/nixos-learning
+- zasada: kopia TYLKO do nauki, zero wpływu na system
+- dodany marker bezpieczeństwa: .EDUKACJA_DO_NICZEGO_NIE_IMPORTOWAC
+- nauka Nixa tylko na realnych plikach, bez buildów i importów
+
+Stan:
+- /etc/nixos — nietknięte
+- lab = bezpieczna piaskownica
+
+NEXT (następna sesja, jedno):
+- bardzo mała analiza jednego pliku w nixos-learning (czytanie, nie zmiany)
+
+
+
 📅 2025-12-30 — stabilizacja Zsh + nss
 
 DONE:
