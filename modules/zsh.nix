@@ -162,7 +162,7 @@
       alias grh='git reset --hard'
       alias grs='git restore --staged'
       alias gr='git restore'
-
+      alias gp='git push'
       
     '';
   };
