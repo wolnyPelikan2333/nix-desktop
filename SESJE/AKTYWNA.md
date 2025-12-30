@@ -94,3 +94,17 @@ Zbudować spójną, użyteczną strukturę dokumentacji NixOS:
 > Tylko docs.  
 > Zero zmian systemowych.
 
+## 2025-12-29 — rollback systemu
+
+DONE:
+- cofnięcie systemu do stabilnej generacji 117
+- potwierdzenie działania shella i aliasów (m.in. nss)
+- usunięcie nieudanej generacji 118
+
+Stan systemu: STABILNY  
+Stan repo: BEZ ZMIAN  
+Checkpoint: OK
+
+NEXT:
+- wrócić do sesja-start w osobnej, spokojnej sesji
+

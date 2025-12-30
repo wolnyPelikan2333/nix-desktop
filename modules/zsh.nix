@@ -42,6 +42,29 @@
       setopt HIST_REDUCE_BLANKS
       setopt HIST_SAVE_NO_DUPS
 
+          # ==========================================================
+    # SESJA — START (orientacja, zero automatyki)
+    # ==========================================================
+    ''
+      sesja-start() {
+        echo "🧭 START SESJI"
+        echo
+
+        if [ -f /etc/nixos/SESJE/AKTYWNA.md ]; then
+          echo "📄 Źródło startu:"
+          echo "  → /etc/nixos/SESJE/AKTYWNA.md"
+          echo
+          nvim /etc/nixos/SESJE/AKTYWNA.md
+        else
+          echo "📄 Źródło startu:"
+          echo "  → /etc/nixos/docs/SESJA.md"
+          echo
+          nvim /etc/nixos/docs/SESJA.md
+        fi
+      }
+    ''
+
+
       # ----------------------------------------------------------
       # ALIASY
       # ----------------------------------------------------------
