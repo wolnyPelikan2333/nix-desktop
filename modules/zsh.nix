@@ -47,10 +47,10 @@
 
         local hint=""
 
-        status=$(git -C /etc/nixos status --porcelain 2>/dev/null)
-        if [ -n "$status" ]; then
+        if [ -n "$(git -C /etc/nixos status --porcelain 2>/dev/null)" ]; then
           hint="✖"
         fi
+
 
         if git -C /etc/nixos rev-list --count @{u}..HEAD >/dev/null 2>&1; then
           if [ "$(git -C /etc/nixos rev-list --count @{u}..HEAD)" -gt 0 ]; then
