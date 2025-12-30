@@ -94,17 +94,39 @@ Zbudować spójną, użyteczną strukturę dokumentacji NixOS:
 > Tylko docs.  
 > Zero zmian systemowych.
 
-## 2025-12-29 — rollback systemu
+## 2025-12-29 — rollback systemu (NixOS)
 
-DONE:
-- cofnięcie systemu do stabilnej generacji 117
-- potwierdzenie działania shella i aliasów (m.in. nss)
-- usunięcie nieudanej generacji 118
+Kontekst:
+- po zmianach konfiguracyjnych brak dostępnych funkcji zsh (m.in. nss)
+- decyzja: powrót do ostatniej stabilnej generacji systemu
+
+Wykonane kroki:
+1. Sprawdzenie generacji systemu:
+
+2. Rollback do poprzedniej generacji (117):
+
+3. Restart powłoki:
+exec zsh
+
+4. Weryfikacja stanu:
+
+type nss
+sudo nixos-rebuild list-generations | head -n 5
+
+5. Usunięcie nieudanej generacji:
+sudo nix-env -p /nix/var/nix/profiles/system --delete-generations 118
+
+
+Efekt:
+- aktywna generacja: 117 (STABLE)
+- generacja 118 usunięta
+- shell i aliasy działają poprawnie
 
 Stan systemu: STABILNY  
 Stan repo: BEZ ZMIAN  
 Checkpoint: OK
 
 NEXT:
-- wrócić do sesja-start w osobnej, spokojnej sesji
+- przywrócić `sesja-start` jako narzędzie systemowe w osobnej sesji
+
 
