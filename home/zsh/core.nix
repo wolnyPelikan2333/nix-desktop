@@ -19,11 +19,7 @@
         sudo nixos-rebuild build --flake /etc/nixos
       }
 
-      nss() {
-        sys-note "$@"
-        sys-save-os "$@"
-      }
-
+      
           '';
   };
 }

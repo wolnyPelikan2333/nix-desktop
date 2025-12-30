@@ -148,14 +148,22 @@
       alias nixman='w3m https://nixos.org/manual/nixos/stable/'
       alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
       alias st='sys-status'
+      alias nss='/etc/nixos/scripts/nss-safe'
+      alias gd='git diff'
+      alias gds='git diff --staged'
+      alias ga='git add'
+      alias gaa='git add -A'
+      alias gc='git commit'
+      alias gcm='git commit -m'
+      alias gb='git branch'
+      alias gba='git branch -a'
+      alias gco='git checkout'
+      alias gcb='git checkout -b'
+      alias grh='git reset --hard'
+      alias grs='git restore --staged'
+      alias gr='git restore'
 
-
-      # ----------------------------------------------------------
-      # NSS — WRAPPER
-      # ----------------------------------------------------------
-      nss() {
-        /etc/nixos/scripts/nss-safe "$@"
-      }
+      
     '';
   };
 }
