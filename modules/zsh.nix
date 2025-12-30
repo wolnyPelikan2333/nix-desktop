@@ -163,7 +163,7 @@
       alias grs='git restore --staged'
       alias gr='git restore'
       alias gp='git push'
-      
+      alias='cd /home/michal/lab/' 
     '';
   };
 }
