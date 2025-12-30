@@ -46,7 +46,6 @@
         esac
 
         local hint=""
-        local status
 
         status=$(git -C /etc/nixos status --porcelain 2>/dev/null)
         if [ -n "$status" ]; then
