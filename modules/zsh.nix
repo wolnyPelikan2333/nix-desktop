@@ -54,7 +54,7 @@
 
         if git -C /etc/nixos rev-list --count @{u}..HEAD >/dev/null 2>&1; then
           if [ "$(git -C /etc/nixos rev-list --count @{u}..HEAD)" -gt 0 ]; then
-            hint="${hint}↑"
+            hint="$hint↑"
           fi
         fi
 
