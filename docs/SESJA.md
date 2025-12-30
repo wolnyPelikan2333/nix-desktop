@@ -1,3 +1,102 @@
+📅 2025-12-30 — stabilizacja Zsh + nss
+
+DONE:
+
+uporządkowany workflow nss
+
+nss-safe jako jedyny bezpiecznik (skrypt w /etc/nixos/scripts)
+
+nss w Zsh sprowadzony do cienkiego aliasu
+
+usunięta konfliktująca funkcja nss() z Home Manager
+
+naprawiony prompt:
+
+sygnał repo [✖↑] tylko w /etc/nixos
+
+st → szybki, pełny raport (sys-status)
+
+wyczyszczone konflikty Zsh (status, stare definicje w .zshrc)
+
+dodane i przetestowane aliasy Git
+
+potwierdzone:
+
+type nss → alias do nss-safe
+
+type gs → alias gitowy
+
+repo stabilne, rebuild działa bez ukrytych hooków
+
+Stan repo: CLEAN
+Checkpoint: OK
+
+PROPOZYCJA — NASTĘPNA SESJA (wybrać jedno):
+
+📄 Krótka dokumentacja:
+„nss-safe — jedyny bezpiecznik systemu (jak działa, kiedy używać)”
+
+🧹 Cleanup Zsh:
+audyt i uproszczenie aliasów / funkcji (tryb low-brain)
+
+🔍 Git ergonomia:
+dopasowanie aliasów (gs, bezpieczne cofanie, checklist przed commit)
+
+Dobra robota. To była trudna, ale bardzo wartościowa sesja.
+Do następnego razu 👋
+
+tylko gdzie to dać?
+
+Już mówię dokładnie i jednoznacznie 👍
+
+📍 GDZIE WKLEIĆ TEN WPIS
+
+👉 Plik:
+
+/etc/nixos/docs/SESJA.md
+
+📌 JAK (ważne)
+
+na samej górze pliku
+
+nad wcześniejszymi wpisami
+
+bez usuwania niczego poniżej
+
+Czyli:
+
+Otwórz:
+
+nvim /etc/nixos/docs/SESJA.md
+
+
+Przejdź na pierwszą linię
+
+Wklej cały wpis, który Ci podałem
+
+Zapisz (:wq)
+
+To wszystko.
+
+🧠 Dlaczego akurat tam
+
+Zgodnie z Twoją zasadą:
+
+SESJA.md = jedyne źródło startu następnej pracy
+
+Najświeższy kontekst zawsze na górze, żeby:
+
+- nie szukać
+
+- nie myśleć
+
+- nie odtwarzać historii z głowy
+
+Masz checkpoint.
+Sesja jest formalnie zamknięta ✅
+
+
+
 ### 🎯 Cel sesji
 - Sprawdzenie stanu repo i kontekstu po przerwie
 - Weryfikacja aktywnej gałęzi (recovery-baseline)
