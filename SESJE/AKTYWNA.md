@@ -51,6 +51,56 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+### 🧭 CHECKPOINT — git worktree (pierwsze wdrożenie)
+🕒 Data: 2026-01-01 00:42
+
+**Stan repo:**
+- Katalog bazowy: `/etc/nixos`
+- Aktywny branch: `recovery-baseline`
+- Repo czyste, zsynchronizowane z `origin/recovery-baseline`
+
+**Wykonane kroki:**
+- Utworzono katalog na worktree: `/etc/nixos-wt`
+  - właściciel: `michal:users`
+- Utworzono pierwszy worktree:
+  - katalog: `/etc/nixos-wt/test-worktree`
+  - branch: `test-worktree`
+  - branch startuje z aktualnego `recovery-baseline`
+- Potwierdzono poprawne działanie `git worktree`:
+  - `/etc/nixos` jest przypięte do branch `recovery-baseline`
+  - `/etc/nixos-wt/test-worktree` jest przypięte do branch `test-worktree`
+  - oba katalogi mają niezależne drzewa robocze
+  - historia repo jest wspólna
+
+**Wyjaśnienia i ustalenia:**
+- Zasada mentalna: **katalog = branch**
+- W `git branch`:
+  - `*` oznacza aktywny branch w danym katalogu
+  - `+` oznacza branch używany w innym worktree (zablokowany do checkoutu)
+- Nie przełączamy branchy przez `git checkout` — zmiana kontekstu = `cd` do katalogu
+
+**Zasady bezpieczeństwa (ważne):**
+- LazyGit traktowany wyłącznie jako narzędzie podglądowe (historia / diff / porównania)
+- Normalna praca (commit, rebase, push) tylko przez CLI
+- Nowa zasada komunikacji i pracy przy stanie 2–3:
+  - zawsze jawnie podawać kontekst w formacie:
+    ```
+    /pełna/ścieżka/katalogu
+    ❯ polecenie
+    ```
+  - brak domyślania się, w jakim katalogu jesteśmy
+
+**Wnioski:**
+- Worktree daje fizyczne rozdzielenie kontekstów pracy
+- Baza (`/etc/nixos`) pozostaje czysta i bezpieczna
+- Znacznie zmniejszone ryzyko błędów kontekstowych
+
+**Co dalej (następna sesja):**
+- Jedno krótkie ćwiczenie praktyczne:
+  - zmiana pliku w worktree
+  - potwierdzenie, że baza (`/etc/nixos`) pozostaje czysta
+- Ustalenie reguły: kiedy zakładać nowy worktree (czas / typ zadania)
+
 ## 📅 2025-12-31 — porządkowanie nss / nbuild
 
 DONE:
