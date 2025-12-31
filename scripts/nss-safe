@@ -2,22 +2,20 @@
 set -euo pipefail
 
 # =============================
-# NSS SAFE — FINAL VERSION
+# NSS SAFE — TRYB DECYZYJNY
 # =============================
 
 ROOT="/etc/nixos"
 HOST="$(hostname)"
-SESSION_FILE="$ROOT/docs/SESJA.md"
+SESSION_FILE="$ROOT/SESJE/AKTYWNA.md"
 
 # ---------- FLAGS ----------
 DRY=0
-FORCE=0
 PANIC=0
 
 for arg in "$@"; do
   case "$arg" in
   --dry) DRY=1 ;;
-  --force) FORCE=1 ;;
   --panic) PANIC=1 ;;
   esac
 done
@@ -38,13 +36,15 @@ ok() { echo -e "${GREEN}✅ $1${RESET}"; }
 header() {
   echo
   echo "=============================="
-  echo "🛡  NSS SAFETY CHECK"
+  echo "🛡  NSS — TRYB DECYZYJNY"
   echo "=============================="
   echo
 }
 
 # ---------- HEADER ----------
 header
+
+cd "$ROOT"
 
 # ---------- PANIC ----------
 if [[ "$PANIC" -eq 1 ]]; then
@@ -56,21 +56,11 @@ fi
 
 [[ "$DRY" -eq 1 ]] && warn "DRY RUN: brak zmian w systemie"
 
-cd "$ROOT"
-
-# ---------- PREFLIGHT ----------
-if [[ -n "$(git status --porcelain)" ]]; then
-  if [[ "$FORCE" -eq 1 ]]; then
-    warn "FORCE: repo brudne, kontynuuję"
-  else
-    fail "Repo /etc/nixos jest brudne (tracked lub untracked)"
-  fi
-fi
-ok "Repo clean"
-
-echo "🔍 nix flake check…"
-nix flake check "$ROOT" || fail "flake check failed"
-ok "Flake OK"
+# ---------- REPO INFO ----------
+echo "📦 Repo: /etc/nixos"
+echo "────────────────────────"
+git status --short || true
+echo "────────────────────────"
 
 # ---------- RISK ----------
 CRITICAL_PATHS=(
@@ -87,17 +77,15 @@ for path in "${CRITICAL_PATHS[@]}"; do
   fi
 done
 
-# ---------- GATE ----------
-echo
-echo "🧠 Decision gate"
 echo "Ryzyko: $RISK"
 echo
-echo "Zmodyfikowane pliki:"
-git diff --name-only || true
+
+# ---------- MENU ----------
+echo "Wybierz tryb:"
 echo
-echo "[A] build only"
+echo "[A] tylko build"
 echo "[B] build + switch"
-echo "[C] build + switch + commit"
+echo "[C] build + switch + commit + push (wymaga: ga)"
 echo "[D] abort (domyślne)"
 echo
 
@@ -137,47 +125,43 @@ if [[ "$MODE" == "switch" || "$MODE" == "commit" ]]; then
   fi
 fi
 
-# ---------- POST-SUCCESS ----------
+# ---------- COMMIT ----------
 if [[ "$MODE" == "commit" && "$DRY" -eq 0 ]]; then
-  CHANGES="$(git status --porcelain)"
+  echo
+  echo "📦 COMMIT CHECK"
 
-  if [[ -z "$CHANGES" ]]; then
-    warn "Brak zmian do commit — pomijam auto-commit"
-  else
-    echo
-    echo "📝 AUTO-COMMIT"
-
-    git add -A
-    git commit -m "nss: apply nixos config
-
-Risk: $RISK
-Touched:
-$(git diff --name-only HEAD)
-" || fail "Commit failed"
-
-    ok "Commit OK"
-
-    echo
-    echo "📓 SESJA.md"
-    DATE="$(date '+%F %H:%M')"
-    {
-      echo
-      echo "## 📅 $DATE"
-      echo
-      echo "- Mode: commit"
-      echo "- Risk: $RISK"
-      echo "- Changes:"
-      git diff --name-only HEAD
-    } >>"$SESSION_FILE"
-
-    ok "SESJA.md updated"
+  if git diff --cached --quiet; then
+    fail "Brak zmian w staging. Użyj ręcznie: ga"
   fi
+
+  read -r -p "Commit message: " MSG
+  [[ -z "$MSG" ]] && fail "Commit message pusta"
+
+  git commit -m "$MSG" || fail "Commit failed"
+  git push || fail "Push failed"
+  ok "Commit + push OK"
+
+  echo
+  echo "📓 AKTYWNA.md"
+  DATE="$(date '+%F %H:%M')"
+  {
+    echo
+    echo "## 📅 $DATE"
+    echo
+    echo "- Mode: commit"
+    echo "- Risk: $RISK"
+    echo "- Changes:"
+    git diff --name-only HEAD
+  } >>"$SESSION_FILE"
+
+  ok "AKTYWNA.md updated"
 fi
 
 # ---------- FINAL SAFETY ----------
+echo
 read -r -p "Kontynuować? (wpisz 'zamykamy' aby przerwać): " LAST
 if [[ "$LAST" == "zamykamy" ]]; then
   fail "Przerwano hasłem awaryjnym"
 fi
 
-ok "NSS completed successfully"
+ok "NSS zakończony pomyślnie"
