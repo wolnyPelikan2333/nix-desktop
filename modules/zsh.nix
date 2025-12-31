@@ -87,9 +87,9 @@
           nvim /etc/nixos/SESJE/AKTYWNA.md
         else
           echo "📄 Źródło startu:"
-          echo "  → /etc/nixos/docs/SESJA.md"
+          echo "  → /etc/nixos/docs/AKTYWNA.md
           echo
-          nvim /etc/nixos/docs/SESJA.md
+          nvim /etc/nixos/docs/AKTYWNA.md
         fi
       }
     
