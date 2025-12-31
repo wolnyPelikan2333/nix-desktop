@@ -51,6 +51,22 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+## 📅 2025-12-31 — porządkowanie nss / nbuild
+
+DONE:
+- `nss` przebudowany na tryb decyzyjny A/B/C (jawna intencja, brak automatyki)
+- commit/push tylko w trybie C, staging wyłącznie ręczny (`ga`)
+- zapis sesji tylko do `/etc/nixos/SESJE/AKTYWNA.md`
+- wykryto i usunięto duplikat `nbuild`
+- `nbuild` pozostawiony wyłącznie w `modules/zsh.nix` (bez zmiany zachowania)
+
+Stan repo: CLEAN
+Checkpoint: OK
+
+NEXT:
+- brak (temat zamknięty)
+
+
 ---
 
 ## 📅 2025-12-30 — praca na nowym systemie SESJE
