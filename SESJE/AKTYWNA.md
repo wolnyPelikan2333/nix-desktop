@@ -181,3 +181,10 @@ realnie zmniejsza obciążenie poznawcze
 > **Tylko docs.**  
 > **Zero zmian systemowych.**
 
+
+## 📅 2025-12-31 18:50
+
+- Mode: commit
+- Risk: NORMAL
+- Changes:
+SESJE/AKTYWNA.md
