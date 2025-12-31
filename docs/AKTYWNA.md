@@ -1,3 +1,26 @@
+## 2025-12-31 21:45 — ETAP B (audyt workflow sesji)
+
+DONE:
+- podjęta decyzja: **jeden plik stanu pracy**
+- migracja `SESJA.md` → `AKTYWNA.md` (historia zachowana)
+- `AKTYWNA.md` = jedyne miejsce:
+  - stanu prac bieżących
+  - planu prac przyszłych
+- usunięte wszystkie instrukcyjne odwołania do `SESJA.md`
+- dokumentacja zsynchronizowana (`README.md`, `nss.md`)
+- sanity-check `rg` potwierdził brak aktywnych referencji
+
+STAN:
+- repo: zmiany tylko w dokumentacji
+- workflow spójny, odporny na stan 2–3
+- brak dublowania plików sesyjnych
+
+NEXT (jedno):
+- kontynuacja ETAPU B: audyt aliasów / funkcji shell (klasyfikacja 🔒⚠️🧪)
+
+
+
+
 ## 2025-12-30 — środowisko do nauki (LAB)
 
 DONE:
