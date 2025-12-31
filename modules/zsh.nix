@@ -153,6 +153,13 @@
 
           [[ -n "$file" ]] && nvim "/etc/nixos/docs/$file"
         }
+        
+        # ----------------------------------------------------------
+        # NBUILD — tylko build (zero switch, zero git)
+        # ----------------------------------------------------------
+              nbuild() {
+                sudo nixos-rebuild build --flake /etc/nixos
+              }
 
 
 
