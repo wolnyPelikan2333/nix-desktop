@@ -139,6 +139,21 @@
       git -C /etc/nixos log -1 --pretty='  %h  "%s"' 2>/dev/null
       echo
     }
+      
+      # ----------------------------------------------------------
+      # DOCS — fzf → wybór → nvim
+      # ----------------------------------------------------------
+        docs() {
+          local file
+          file=$(cd /etc/nixos/docs || return
+                find . -type f \
+                | sed 's|^\./||' \
+                | fzf --prompt="docs> " \
+                      --preview 'bat --style=numbers --color=always {} 2>/dev/null || sed -n "1,200p" {}')
+
+          [[ -n "$file" ]] && nvim "/etc/nixos/docs/$file"
+        }
+
 
 
       # ----------------------------------------------------------
