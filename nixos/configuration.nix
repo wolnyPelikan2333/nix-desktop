@@ -173,6 +173,7 @@
     ddgr
     qutebrowser
     w3m
+    lazygit
 
   ];
 
