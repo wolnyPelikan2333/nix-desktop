@@ -120,5 +120,5 @@ Podczas `nss` zobaczysz ocenę ryzyka:
 
 * `docs/ściągi/nix/flake-workflow.md`
 * `docs/ściągi/nix/emergency.md`
-* `docs/SESJA.md`
+* `docs/AKTYWNA.md`
 

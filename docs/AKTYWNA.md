@@ -71,7 +71,7 @@ Już mówię dokładnie i jednoznacznie 👍
 
 👉 Plik:
 
-/etc/nixos/docs/SESJA.md
+/etc/nixos/docs/AKTYWNA.md
 
 📌 JAK (ważne)
 
@@ -85,7 +85,7 @@ Czyli:
 
 Otwórz:
 
-nvim /etc/nixos/docs/SESJA.md
+nvim /etc/nixos/docs/AKTYWNA.md
 
 
 Przejdź na pierwszą linię
@@ -100,7 +100,7 @@ To wszystko.
 
 Zgodnie z Twoją zasadą:
 
-SESJA.md = jedyne źródło startu następnej pracy
+AKTYWNA.md = jedyne źródło startu następnej pracy
 
 Najświeższy kontekst zawsze na górze, żeby:
 
@@ -417,7 +417,7 @@ NEXT (następna sesja — wybrać jedno):
 
 🧠 Ważna zasada (zapamiętajmy)
 
-SESJA.md nie jest dokumentacją
+AKTYWNA.md nie jest dokumentacją
 
 to pamięć robocza systemu
 
@@ -432,7 +432,7 @@ start: 2025-12-26 10:32
 koniec: 2025-12-26 21:31
 
 ### 🔧 Zmiany techniczne
-- docs/SESJA.md
+- docs/AKTYWNA.md
 - home/zsh/core.nix
 - modules/zsh.nix
 
@@ -455,7 +455,7 @@ start: 2025-12-26 23:53
 koniec: 2025-12-27 00:12
 
 ### 🔧 Zmiany techniczne
-- docs/SESJA.md
+- docs/AKTYWNA.md
 
 ### 🎯 Cel sesji
 - 
@@ -476,7 +476,7 @@ start: 2025-12-27 20:06
 koniec: 2025-12-28 02:12
 
 ### 🔧 Zmiany techniczne
-- docs/SESJA.md
+- docs/AKTYWNA.md
 
 ### 🎯 Cel sesji
 - 

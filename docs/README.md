@@ -92,7 +92,7 @@ Służą do:
 - spokojnego powrotu do pracy po przerwie.
 
 Pliki:
-- `SESJA.md`
+- `AKTYWNA.md`
 - `sesje/`
 
 Logi nie są dokumentacją referencyjną — są pamięcią projektu.
