@@ -37,11 +37,16 @@
 
 
   programs.home-manager.enable = true;
-  home.packages = [pkgs.home-manager];
 
-   programs.zellij = {
-    enable = true;
-  };
+  home.packages = with pkgs; [
+   home-manager
+   zellij
+  ];
+  
+
+   
+   
+  
   
 
 

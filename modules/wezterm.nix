@@ -10,7 +10,7 @@
 
     -- 🔤 font
     config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
-    config.font_size = 14
+    config.font_size = 12
 
     -- 🎨 styl
     config.color_scheme = "Dracula"

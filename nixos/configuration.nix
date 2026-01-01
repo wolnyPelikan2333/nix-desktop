@@ -31,7 +31,6 @@
   boot.loader = {
     systemd-boot.enable = true;
     systemd-boot.configurationLimit = 10;
-
     efi.canTouchEfiVariables = true;
   };
 
@@ -90,7 +89,7 @@
 
   hardware.graphics = {
     enable = true;
-    enable32Bit= true;
+    enable32Bit = true;
   };
 
   ###############################################
@@ -109,29 +108,27 @@
   ###############################################
   ## BLUETOOTH
   ###############################################
-  
+
   hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = true;
-};
+    enable = true;
+    powerOnBoot = true;
+  };
 
   services.blueman.enable = true;
-  
-   
 
   ###############################################
   ## USER
   ###############################################
 
-    users.users.michal = {
+  users.users.michal = {
     isNormalUser = true;
     description = "michal";
-     extraGroups = [
-    "networkmanager"
-    "wheel"
-    "vboxusers"
-    "bluetooth"
-  ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "vboxusers"
+      "bluetooth"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [ kdePackages.kate ];
   };
@@ -174,11 +171,8 @@
     qutebrowser
     w3m
     lazygit
-
   ];
 
-    
-   
   ###############################################
   ## ZSH
   ###############################################
@@ -212,8 +206,8 @@
   ## NH
   ###############################################
 
-    programs.nh.enable = true;
-    programs.nh.clean = {
+  programs.nh.enable = true;
+  programs.nh.clean = {
     enable = false;
     dates = "weekly";
   };
@@ -233,11 +227,12 @@
   ## FILESYSTEMS
   ###############################################
 
-    fileSystems."/mnt/steam" = {
+  fileSystems."/mnt/steam" = {
     device = "/dev/disk/by-uuid/8fbe63e6-58f2-4609-905a-5f2365318224";
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
   };
+
   ###############################################
   ## STATE
   ###############################################

@@ -51,6 +51,51 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+🧭 CHECKPOINT SESJI (do zapisania)
+
+Data 01.01.2026/ godzina: 21:28
+
+Stan techniczny
+
+WezTerm: główny terminal (decyzja świadoma)
+
+Kitty: do usunięcia (powodował konflikty i przeciążenie poznawcze)
+
+Zellij: tylko okazjonalnie, świadomie
+
+Zsh vi-mode (NOR / INS): działa poprawnie poza zellij
+
+Problem „martwej klawiatury” → zdiagnozowany: tryb klawiszy zellij
+
+Decyzje (ważne)
+
+Rezygnacja z kitty → powrót do stabilnego środowiska
+
+Nie łączymy na co dzień: vi-mode Zsh + multiplexer
+
+Upraszczamy stack zamiast go rozbudowywać
+
+Co zostało zrobione
+
+Zrozumienie przyczyny blokady inputu
+
+Wyjście z zellij (Ctrl+g, Ctrl+q)
+
+Przywrócenie normalnej pracy w WezTerm
+
+Podjęcie decyzji o usunięciu kitty
+
+Co dalej (następna sesja – max 2 punkty)
+
+Usunąć kitty z home/michal.nix i zrobić nixos-rebuild switch
+
+(Opcjonalnie) Uprościć / uporządkować konfigurację WezTerm pod aktualny workflow
+
+🔒 Stan końcowy
+
+System nieuszkodzony, konfiguracja do odzyskania pełnej stabilności jednym rebuildem.
+Decyzje podjęte na chłodno, nie pod presją błędu.
+
 ### 🧭 CHECKPOINT — git worktree (pierwsze wdrożenie)
 🕒 Data: 2026-01-01 00:42
 
