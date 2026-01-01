@@ -51,6 +51,39 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+🧭 CHECKPOINT — stan na teraz (do zapisania)
+
+Data 02/01/2026 godzina 00:20
+Stan systemu:
+
+WezTerm działa
+
+Theme: Gruvbox Dark (test)
+
+Leader + splity + ruch między panelami działają
+
+Repo: jedno
+
+Worktree:
+
+/etc/nixos → recovery-baseline (produkcja)
+
+/etc/nixos-wt/test-worktree → system do nauki i eksperymentów
+
+Git w test-worktree: pełny (commit/log/branch działają)
+
+Ryzyka: brak
+Otwarte decyzje: ewentualny bezpiecznik nss w test-worktree (na później)
+
+🧠 PLAN NA NASTĘPNĄ SESJĘ (bez działania teraz)
+
+(Opcjonalnie) Dodać bezpiecznik nss w test-worktree.
+
+(Opcjonalnie) Dokończyć test Gruvbox Dark → decyzja zostaje / zmiana.
+
+(Opcjonalnie) Wyróżnić prompt PROD/TEST.
+
+
 🧭 CHECKPOINT SESJI (do zapisania)
 
 Data 01.01.2026/ godzina: 21:28
