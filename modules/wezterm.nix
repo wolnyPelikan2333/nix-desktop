@@ -11,10 +11,13 @@
     -- 🔤 font
     config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
     config.font_size = 12
+    config.line_height = 1.1
 
     -- 🎨 styl
-    config.color_scheme = "Dracula"
+    config.color_scheme = "Gruvbox Dark"
     config.hide_tab_bar_if_only_one_tab = true
+                                       
+    
 
     -- 🧠 Leader: Ctrl + A
     config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 800 }
@@ -27,6 +30,7 @@
 
       -- Ctrl+A s  → split pionowy (w bok)
       { key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+
 
       
       -- Ruch między panelami (tmux-style)
@@ -64,7 +68,7 @@
     }
 
     -- Przełączanie kart: Ctrl+A 1..9
-	for i = 1, 9 do
+	  for i = 1, 9 do
 	  table.insert(config.keys, {
 	    key = tostring(i),
 	    mods = "LEADER",
