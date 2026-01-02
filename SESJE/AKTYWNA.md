@@ -51,7 +51,43 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
-📅 2026-01-02 12:50 — Kierunek nauki: spokojne operowanie NixOS
+🧭 SESJA — test kitty (terminal)
+
+Data: 02-01-2026 19:18
+Status: zamknięta
+Kontekst: ergonomia terminala / zmęczenie wzroku
+
+Co zrobiono:
+
+Zainstalowano kitty przez Home Manager
+
+Uruchomiono bez żadnej konfiguracji
+
+Przetestowano domyślny wygląd, czcionkę, splity
+
+Wnioski:
+
+Odczucia: podobnie jak w WezTerm
+
+Domyślny plik konfiguracyjny kitty oceniony jako bardzo pomocny
+
+Brak regresji → brak potrzeby zmian
+
+Decyzja:
+
+Zostawiamy kitty z domyślnym configiem
+
+Temat zamknięty, bez dalszej optymalizacji na ten moment
+
+Uwagi na przyszłość:
+
+Ewentualne zmiany tylko jeśli pojawi się realne zmęczenie wzroku
+
+Dopuszczalna korekta: 1 parametr, bez rozbudowy configu
+
+
+
+📅 02-01-2026 12:50 — Kierunek nauki: spokojne operowanie NixOS
 
 Kontekst / stan:
 
