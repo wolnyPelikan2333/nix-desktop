@@ -51,6 +51,86 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+📅 2026-01-02 12:50 — Kierunek nauki: spokojne operowanie NixOS
+
+Kontekst / stan:
+
+System roboczy (NixOS, sesje, Git, bezpieczniki) jest gotowy.
+
+Pojawił się moment „pustki” — brak kolejnych pomysłów nie z braku narzędzi, tylko z zakończenia etapu „budowania systemu”.
+
+Jasno nazwany kierunek nauki:
+
+rozumienie NixOS bez strachu,
+
+czytanie cudzej konfiguracji bez paniki,
+
+pisanie prostych skryptów bez zacięć,
+
+grzebanie w systemie bez ryzyka.
+
+Ustalenie kluczowe:
+
+Do nauki i ćwiczeń używany jest oddzielny worktree:
+/etc/nixos-wt/test-worktree
+→ pełna kopia systemu, zero ryzyka produkcyjnego.
+
+W test-worktree nie celem jest działający build, tylko:
+
+- czytanie,
+
+- komentowanie,
+
+- rozumienie struktury.
+
+Zasada nadrzędna nauki:
+
+- Najpierw uczymy się czytać system, dopiero później go zmieniać.
+
+🎯 Następne kroki nauki (bez pośpiechu)
+
+A) Wybrać 1 najlepszy plik na start
+
+Mały, znany „z widzenia”, ale nie w pełni rozumiany.
+
+Praca polega wyłącznie na czytaniu i komentowaniu, bez zmian logicznych.
+
+B) Mikroszablon komentarzy (zawsze taki sam)
+Do każdego analizowanego pliku:
+
+# CO to jest?
+# NA CO wpływa?
+# JAK to bezpiecznie wyłączyć / pominąć?
+
+
+C) Wziąć cudzy moduł i „czytać go razem”
+
+Bez presji zrozumienia wszystkiego.
+
+Szukamy punktów zaczepienia: struktura, imports, options, mkIf.
+
+D) Prosty skrypt pomocniczy (tylko jeśli pojawi się realna potrzeba)
+
+Skrypt jako narzędzie pomocnicze do:
+
+sprawdzania,
+
+porównywania,
+
+zabezpieczania.
+
+Bez nauki basha „dla samej nauki”.
+
+Stan końcowy sesji:
+
+Kierunek ustalony.
+
+Brak presji realizacji.
+
+Nauka ma formę krótkich, bezpiecznych wejść (10–20 min).
+
+Następna praca zaczyna się od jednego pliku w test-worktree.
+
 🧭 CHECKPOINT — stan na teraz (do zapisania)
 
 Data 02/01/2026 godzina 00:20
