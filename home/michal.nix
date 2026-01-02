@@ -41,6 +41,7 @@
   home.packages = with pkgs; [
    home-manager
    zellij
+   kitty
   ];
   
 
