@@ -25,10 +25,10 @@ _ostatnia aktualizacja: 29-12-2025_
 ## 🟡 POTEM / PRZYPOMNIENIA
 - Nix: jak bezpiecznie edytować bloki `''` / `"` — **5 punktów**
 - (~za kilka dni) ewentualny cleanup:
-  - skrócić legacy output w `sesja-start`
-  - zdecydować, czy całkiem ukryć `docs/SESJA.md`
+- skrócić legacy output w `sesja-start`
+- zdecydować, czy całkiem ukryć `docs/SESJA.md`
 - Spisać krótką notkę:
-  - **„Jak działa system SESJE”** (dla przyszłego mnie)
+- **„Jak działa system SESJE”** (dla przyszłego mnie)
 
 ---
 
@@ -107,8 +107,8 @@ grzebanie w systemie bez ryzyka.
 
 Ustalenie kluczowe:
 
-Do nauki i ćwiczeń używany jest oddzielny worktree:
-/etc/nixos-wt/test-worktree
+Do nauki i ćwiczeń używany jest oddzielny worktree: /etc/nixos-wt/test-worktree
+
 → pełna kopia systemu, zero ryzyka produkcyjnego.
 
 W test-worktree nie celem jest działający build, tylko:
