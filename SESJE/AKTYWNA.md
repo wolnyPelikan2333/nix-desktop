@@ -51,7 +51,41 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
-03-01-2026 godzina: 18:30
+03-01-2026 21:22
+## CHECKPOINT – uporządkowanie systemu sesji (model + nss)
+
+Co zostało zrobione:
+- zdefiniowano dwa typy wpisów:
+  - CHECKPOINT – zapis w trakcie pracy
+  - ZAMYKANIE – zakończenie pracy
+- CHECKPOINT służy jako mapa prowadząca do kodu, nie raport
+- rozróżniono przyczyny checkpointu:
+  - spadek skupienia („krasnoludki”)
+  - przerwa techniczna
+- cały plik AKTYWNA.md został ujednolicony semantycznie
+  (nagłówki dodane bez zmiany treści)
+
+Decyzje dot. automatu:
+- `nss` przestał zapisywać automatyczne wpisy do AKTYWNA.md
+- powód: wpisy techniczne nie wnosiły kontekstu i psuły czytelność
+- zasada: lepiej brak wpisu niż szum w źródle prawdy
+
+Ustalenia nadrzędne:
+- najnowsze wpisy są ZAWSZE na górze
+- AKTYWNA.md to narzędzie poznawcze, nie log techniczny
+- zapisy sesyjne są robione ręcznie, świadomie
+
+Stan na teraz:
+- system spójny
+- brak kaszany
+- brak automatyki w złym miejscu
+
+Co dalej:
+- używać systemu w realnej pracy
+- nie poprawiać „na zapas”
+
+
+03-01-2026  18:30
 
 ## ZAMYKANIE – rozwiązanie problemu (Neovim + Nix, wcięcia)
 
