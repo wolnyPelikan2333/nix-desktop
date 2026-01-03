@@ -51,6 +51,37 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+03-01-2026 17:10
+
+Temat: Zellij — manual decyzyjny
+Status: ✅ zakończone
+
+Co zrobiono:
+
+przygotowano i dodano do docs manual decyzyjny Zellij
+
+format: pytanie → odpowiedź → gotowa komenda
+
+opisano: pane, taby, tryby, layouty, sesje, detach/attach
+
+dodano zasadę bezpieczeństwa: najpierw ergonomia, potem automatyzacja w Nix
+
+Decyzje:
+
+brak dalszych działań w tej sesji
+
+brak integracji z Nix / home-manager na tym etapie
+
+Uwagi:
+
+manual gotowy jako baza do przyszłych layoutów i ściąg
+
+kolejny krok (opcjonalny): layout „editor + build + logi”
+
+Zakończenie sesji: świadome („zamykamy”)
+
+------------------------------------------------------------
+
 🧠 SESJA — Bash (tryb użytkowy / awaryjny)
 
 Data: 03-01-2026 godzina: 15:10
