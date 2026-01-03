@@ -51,6 +51,20 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+## 📅 03-01-2026 23:00
+
+- Zakres: kitty
+- Działanie:
+  - zmiana układu okien w terminalu kitty na wygodniejszy pod aktualny workflow
+  - utworzenie ściągi: docs/ściągi/kitty.md
+- Status:
+  - zapisane
+  - zakomitowane
+  - wypchnięte
+- Wniosek:
+  - pierwszy samodzielnie domknięty cykl: zmiana → dokumentacja → git
+
+
 03-01-2026 21:22
 ## CHECKPOINT – uporządkowanie systemu sesji (model + nss)
 
