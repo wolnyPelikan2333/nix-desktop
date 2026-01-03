@@ -67,92 +67,95 @@
 
 
 
-      setopt APPEND_HISTORY
-      setopt INC_APPEND_HISTORY
-      setopt HIST_REDUCE_BLANKS
-      setopt HIST_SAVE_NO_DUPS
+          setopt APPEND_HISTORY
+          setopt INC_APPEND_HISTORY
+          setopt HIST_REDUCE_BLANKS
+          setopt HIST_SAVE_NO_DUPS
 
           # ==========================================================
-    # SESJA — START (orientacja, zero automatyki)
-    # ==========================================================
+          # SESJA — START (orientacja, zero automatyki)
+          # ==========================================================
     
-      sesja-start() {
-        echo "🧭 START SESJI"
-        echo
+            sesja-start() {
+              echo "🧭 START SESJI"
+              echo
 
-        if [ -f /etc/nixos/SESJE/AKTYWNA.md ]; then
-          echo "📄 Źródło startu:"
-          echo "  → /etc/nixos/SESJE/AKTYWNA.md"
-          echo
-          nvim /etc/nixos/SESJE/AKTYWNA.md
-        else
-          echo "📄 Źródło startu:"
-          echo "  → /etc/nixos/docs/AKTYWNA.md"
-          echo
-          nvim /etc/nixos/docs/AKTYWNA.md
-        fi
-      }
+              if [ -f /etc/nixos/SESJE/AKTYWNA.md ]; then
+                echo "📄 Źródło startu:"
+                echo "  → /etc/nixos/SESJE/AKTYWNA.md"
+                echo
+                nvim /etc/nixos/SESJE/AKTYWNA.md
+               else
+                echo "❌ BŁĄD STARTU SESJI"
+                echo
+                echo "Brak pliku:"
+                echo "  /etc/nixos/SESJE/AKTYWNA.md"
+                echo
+                echo "Utwórz plik sesji przed rozpoczęciem pracy."
+                return 1
+              fi
+            }
     
-             # ==========================================================
-    # SYSTEM STATUS — MINI RAPORT (B)
-    # ==========================================================
-    sys-status() {
-      echo "===== SYSTEM STATUS ====="
-      echo
+          # ==========================================================
+          # SYSTEM STATUS — MINI RAPORT (B)
+          # ==========================================================
+            sys-status() {
+              echo "===== SYSTEM STATUS ====="
+              echo
 
-      echo "📊 Uptime:"
-      uptime | sed 's/^/  /'
-      echo
+              echo "📊 Uptime:"
+              uptime | sed 's/^/  /'
+              echo
 
-      echo "💾 Disk /:"
-      df -h / | sed '1d;s/^/  /'
-      echo
+              echo "💾 Disk /:"
+              df -h / | sed '1d;s/^/  /'
+              echo
 
-      echo "🔐 Repo (/etc/nixos):"
+              echo "🔐 Repo (/etc/nixos):"
 
-      # licznik zmian
-      local modified untracked
-      modified=$(git -C /etc/nixos status --porcelain | grep -c '^ M')
-      untracked=$(git -C /etc/nixos status --porcelain | grep -c '^??')
+              # licznik zmian
+              local modified untracked
+              modified=$(git -C /etc/nixos status --porcelain | grep -c '^ M')
+              untracked=$(git -C /etc/nixos status --porcelain | grep -c '^??')
 
-      if [ "$modified" -eq 0 ] && [ "$untracked" -eq 0 ]; then
-        echo "  Stan: CLEAN ✔"
-      else
-        echo "  Stan: DIRTY ✖"
-        echo "  Zmiany:"
-        echo "    M  $modified   (zmodyfikowane)"
-        echo "    ?? $untracked   (nieśledzone)"
-      fi
+              if [ "$modified" -eq 0 ] && [ "$untracked" -eq 0 ]; then
+                echo "  Stan: CLEAN ✔"
+              else
+                echo "  Stan: DIRTY ✖"
+                echo "  Zmiany:"
+                echo "    M  $modified   (zmodyfikowane)"
+                echo "    ?? $untracked   (nieśledzone)"
+              fi
 
-      # ahead / behind (bez fetch)
-      local ahead behind
-      ahead=$(git -C /etc/nixos rev-list --count @{u}..HEAD 2>/dev/null || echo 0)
-      behind=$(git -C /etc/nixos rev-list --count HEAD..@{u} 2>/dev/null || echo 0)
+              # ahead / behind (bez fetch)
+              local ahead behind
+              ahead=$(git -C /etc/nixos rev-list --count @{u}..HEAD 2>/dev/null || echo 0)
+              behind=$(git -C /etc/nixos rev-list --count HEAD..@{u} 2>/dev/null || echo 0)
 
-      echo
-      echo "  Commit:"
-      echo "    ahead: $ahead   behind: $behind"
+              echo
+              echo "  Commit:"
+              echo "    ahead: $ahead   behind: $behind"
 
-      # ostatni commit
-      echo
-      echo "  Ostatni commit:"
-      git -C /etc/nixos log -1 --pretty='  %h  "%s"' 2>/dev/null
-      echo
-    }
+              # ostatni commit
+              echo
+              echo "  Ostatni commit:"
+              git -C /etc/nixos log -1 --pretty='  %h  "%s"' 2>/dev/null
+              echo
+            }
       
       # ----------------------------------------------------------
       # DOCS — fzf → wybór → nvim
       # ----------------------------------------------------------
-        docs() {
-          local file
-          file=$(cd /etc/nixos/docs || return
-                find . -type f \
-                | sed 's|^\./||' \
-                | fzf --prompt="docs> " \
-                      --preview 'bat --style=numbers --color=always {} 2>/dev/null || sed -n "1,200p" {}')
+            docs() {
+              local file
+              file=$(cd /etc/nixos/docs || return
+                    find . -type f \
+                    | sed 's|^\./||' \
+                    | fzf --prompt="docs> " \
+                          --preview 'bat --style=numbers --color=always {} 2>/dev/null || sed -n "1,200p" {}')
 
-          [[ -n "$file" ]] && nvim "/etc/nixos/docs/$file"
-        }
+              [[ -n "$file" ]] && nvim "/etc/nixos/docs/$file"
+            }
         
         # ----------------------------------------------------------
         # NBUILD — tylko build (zero switch, zero git)
@@ -166,26 +169,26 @@
       # ----------------------------------------------------------
       # ALIASY
       # ----------------------------------------------------------
-      alias w='w3m'
-      alias nixman='w3m https://nixos.org/manual/nixos/stable/'
-      alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
-      alias st='sys-status'
-      alias nss='/etc/nixos/scripts/nss-safe'
-      alias gd='git diff'
-      alias gds='git diff --staged'
-      alias ga='git add'
-      alias gaa='git add -A'
-      alias gc='git commit'
-      alias gcm='git commit -m'
-      alias gb='git branch'
-      alias gba='git branch -a'
-      alias gco='git checkout'
-      alias gcb='git checkout -b'
-      alias grh='git reset --hard'
-      alias grs='git restore --staged'
-      alias gr='git restore'
-      alias gp='git push'
-      alias lab='cd /home/michal/lab/'
+          alias w='w3m'
+          alias nixman='w3m https://nixos.org/manual/nixos/stable/'
+          alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
+          alias st='sys-status'
+          alias nss='/etc/nixos/scripts/nss-safe'
+          alias gd='git diff'
+          alias gds='git diff --staged'
+          alias ga='git add'
+          alias gaa='git add -A'
+          alias gc='git commit'
+          alias gcm='git commit -m'
+          alias gb='git branch'
+          alias gba='git branch -a'
+          alias gco='git checkout'
+          alias gcb='git checkout -b'
+          alias grh='git reset --hard'
+          alias grs='git restore --staged'
+          alias gr='git restore'
+          alias gp='git push'
+          alias lab='cd /home/michal/lab/'
     '';
   };
 }
