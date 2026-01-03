@@ -51,6 +51,136 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+03-01-2026 godzina: 18:30
+## Neovim + Nix — rozjechane wcięcia (rozwiązanie)
+
+### Problem
+Przy otwieraniu plików `.nix` w Neovim:
+- wcięcia są „rozjechane”
+- komentarze przesuwają się
+- problem występuje nawet w `nvim -u NONE`
+
+### Przyczyna
+Domyślne ustawienia Neovim:
+- `tabstop = 8`
+- brak reguł specyficznych dla Nix
+
+Nix **wizualnie wymaga 2 spacji** — inaczej kod wygląda chaotycznie, mimo że jest poprawny.
+
+### Rozwiązanie (minimalne, bezpieczne)
+Dodać lokalne ustawienia **tylko dla FileType `nix`** w konfiguracji Neovim (LazyVim):
+
+Plik:
+~/.config/nvim/lua/config/autocmds.lua
+
+
+Kod:
+```lua
+-- Nix: stabilne wcięcia (2 spacje), bez tabów
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nix",
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
+    vim.bo.expandtab = true
+  end,
+})
+
+Efekt
+
+stabilne wcięcia
+
+komentarze na miejscu
+
+brak „rozjechania” przy samym otwarciu pliku
+
+zero wpływu na inne języki
+
+Zasada bezpieczeństwa
+
+Nie instalować formatterów ani pluginów zanim nie zostaną poprawnie ustawione podstawowe wcięcia.
+
+
+---
+
+## ✅ Co jeszcze warto (opcjonalnie, nie teraz)
+- poprawić w docs **nieaktualną informację**, że NVIM config jest w `/etc/nixos/modules/editors/nvim`
+- dodać link do tej notatki z `README.md`
+
+Na teraz:  
+🔒 **problem zamknięty**  
+🧠 **wiedza zapisana**  
+🧭 **kolejna sesja będzie łatwiejsza**
+
+Jeśli chcesz, w następnym kroku możemy:
+- poprawić docs (mapa prawdy o nvim),
+- albo **zamknąć sesję** i zrobić checkpoint.
+
+
+03-01-2026 18:20
+
+Temat: Porządkowanie AKTYWNA.md — źródło prawdy
+Status: ✅ zakończone
+
+Cel pracy:
+
+usunąć chaos związany z dwoma plikami AKTYWNA.md
+
+zabezpieczyć workflow pod stan 2–3
+
+jednoznacznie wskazać jedno źródło prawdy
+
+Stan początkowy:
+
+istniały dwa byty:
+
+/etc/nixos/SESJE/AKTYWNA.md (roboczy)
+
+/etc/nixos/docs/AKTYWNA.md (historyczny, mylący)
+
+część narzędzi miała fallback do docs/AKTYWNA.md
+
+Wykonane kroki:
+
+Usunięto fallback do docs/AKTYWNA.md w sesja-start()
+→ brak pliku sesji = czytelny błąd, nie „magia”
+
+Commit + switch wykonane przez nss (bezpieczny checkpoint)
+
+Fizycznie usunięto plik:
+
+/etc/nixos/docs/AKTYWNA.md
+Commit + push wykonane (repo czyste)
+
+Decyzje architektoniczne:
+
+JEDYNY plik roboczy sesji:
+
+swift
+Skopiuj kod
+/etc/nixos/SESJE/AKTYWNA.md
+
+docs/ = wyłącznie dokumentacja (brak plików „żywych”)
+
+usuwamy bodźce ryzyka zamiast liczyć na koncentrację
+
+Efekt:
+
+brak możliwości pomyłki przy starcie sesji
+
+jednoznaczna struktura pracy
+
+workflow odporny na przeciążenie poznawcze
+
+Uwagi:
+
+w docs pozostały jedynie nieszkodliwe referencje tekstowe (do sprzątnięcia później)
+
+porządki wykonane etapowo, z checkpointami
+
+Zakończenie: porządki AKTYWNA.md domknięte
+
 03-01-2026 17:10
 
 Temat: Zellij — manual decyzyjny
