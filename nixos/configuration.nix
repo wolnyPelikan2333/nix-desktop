@@ -171,6 +171,7 @@
     qutebrowser
     w3m
     lazygit
+    bash-completion
   ];
 
   ###############################################
