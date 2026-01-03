@@ -143,20 +143,41 @@ if [[ "$MODE" == "commit" && "$DRY" -eq 0 ]]; then
 
   echo
   echo "📓 AKTYWNA.md"
+
   DATE="$(date '+%F %H:%M')"
-  {
-    echo
-    echo "## 📅 $DATE"
-    echo
-    echo "- Mode: commit"
-    echo "- Risk: $RISK"
-    echo "- Changes:"
-    git diff --name-only HEAD
-  } >>"$SESSION_FILE"
+
+  ENTRY="$(
+    {
+      echo
+      echo "## 📅 $DATE"
+      echo
+      echo "- Mode: commit"
+      echo "- Risk: $RISK"
+      echo "- Changes:"
+      git diff --name-only HEAD
+    }
+  )"
+
+  MARKER="# 📅 SESJE (od najnowszej)"
+  TMP="$(mktemp)"
+
+  grep -q "^$MARKER$" "$SESSION_FILE" ||
+    fail "Brak markera SESJE w AKTYWNA.md"
+
+  awk -v entry="$ENTRY" -v marker="$MARKER" '
+    $0 == marker {
+      print
+      print ""
+      print entry
+      next
+    }
+    { print }
+  ' "$SESSION_FILE" >"$TMP"
+
+  mv "$TMP" "$SESSION_FILE"
 
   ok "AKTYWNA.md updated"
 fi
-
 # ---------- FINAL SAFETY ----------
 echo
 read -r -p "Kontynuować? (wpisz 'zamykamy' aby przerwać): " LAST

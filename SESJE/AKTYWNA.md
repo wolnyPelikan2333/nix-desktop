@@ -52,7 +52,8 @@ _ostatnia aktualizacja: 29-12-2025_
 # 📅 SESJE (od najnowszej)
 
 03-01-2026 godzina: 18:30
-## Neovim + Nix — rozjechane wcięcia (rozwiązanie)
+
+## ZAMYKANIE – rozwiązanie problemu (Neovim + Nix, wcięcia)
 
 ### Problem
 Przy otwieraniu plików `.nix` w Neovim:
@@ -120,7 +121,7 @@ Jeśli chcesz, w następnym kroku możemy:
 
 03-01-2026 18:20
 
-Temat: Porządkowanie AKTYWNA.md — źródło prawdy
+## ZAMYKANIE – porządkowanie AKTYWNA.md (jedno źródło prawdy)
 Status: ✅ zakończone
 
 Cel pracy:
@@ -183,7 +184,8 @@ Zakończenie: porządki AKTYWNA.md domknięte
 
 03-01-2026 17:10
 
-Temat: Zellij — manual decyzyjny
+## ZAMYKANIE – dokumentacja Zellij (manual decyzyjny)
+
 Status: ✅ zakończone
 
 Co zrobiono:
@@ -212,9 +214,10 @@ Zakończenie sesji: świadome („zamykamy”)
 
 ------------------------------------------------------------
 
-🧠 SESJA — Bash (tryb użytkowy / awaryjny)
 
 Data: 03-01-2026 godzina: 15:10
+
+## ZAMYKANIE – Bash jako shell awaryjny (konfiguracja)
 Status: ✅ zamknięte
 
 Co zostało zrobione
@@ -261,6 +264,8 @@ Fish: tylko referencyjnie / koncepcyjnie
 ## 🐚 Bash — przywrócenie do stanu używalnego (wykonane)
 
 Data: 02-01-2026 godzina: 23:05
+
+## CHECKPOINT – Bash przywrócony, dalsze etapy zaplanowane
 **Status:** DONE ✅
 
 ### Co zostało zrobione
@@ -286,7 +291,7 @@ Data: 02-01-2026 godzina: 23:05
 
 ---
 
-## 🧭 Bash — plan dalszej konfiguracji (na jutro)
+## CHECKPOINT – plan dalszej pracy (Bash)
 
 **Zasada nadrzędna:**
 > Bash = narzędzie kompatybilności i debugowania, nie shell codziennej pracy.
@@ -319,9 +324,10 @@ Data: 02-01-2026 godzina: 23:05
 - bash pomocny wtedy, gdy naprawdę potrzebny
 
 
-🧭 SESJA — test kitty (terminal)
 
 Data: 02-01-2026 19:18
+
+## ZAMYKANIE – test kitty (ergonomia terminala)
 Status: zamknięta
 Kontekst: ergonomia terminala / zmęczenie wzroku
 
@@ -355,7 +361,9 @@ Dopuszczalna korekta: 1 parametr, bez rozbudowy configu
 
 
 
-📅 02-01-2026 12:50 — Kierunek nauki: spokojne operowanie NixOS
+📅 02-01-2026 12:50
+
+## ZAMYKANIE – ustalenie kierunku nauki (NixOS, worktree)
 
 Kontekst / stan:
 
@@ -435,9 +443,10 @@ Nauka ma formę krótkich, bezpiecznych wejść (10–20 min).
 
 Następna praca zaczyna się od jednego pliku w test-worktree.
 
-🧭 CHECKPOINT — stan na teraz (do zapisania)
 
 Data 02/01/2026 godzina 00:20
+
+## CHECKPOINT – stan systemu i worktree (bez presji)
 Stan systemu:
 
 WezTerm działa
@@ -468,9 +477,10 @@ Otwarte decyzje: ewentualny bezpiecznik nss w test-worktree (na później)
 (Opcjonalnie) Wyróżnić prompt PROD/TEST.
 
 
-🧭 CHECKPOINT SESJI (do zapisania)
 
 Data 01.01.2026/ godzina: 21:28
+
+## CHECKPOINT – diagnoza problemów terminala (WezTerm / Zellij / Kitty)
 
 Stan techniczny
 
@@ -513,8 +523,9 @@ Usunąć kitty z home/michal.nix i zrobić nixos-rebuild switch
 System nieuszkodzony, konfiguracja do odzyskania pełnej stabilności jednym rebuildem.
 Decyzje podjęte na chłodno, nie pod presją błędu.
 
-### 🧭 CHECKPOINT — git worktree (pierwsze wdrożenie)
 🕒 Data: 2026-01-01 00:42
+
+## CHECKPOINT – wdrożenie git worktree (działa, do dalszego użycia)
 
 **Stan repo:**
 - Katalog bazowy: `/etc/nixos`
@@ -563,7 +574,9 @@ Decyzje podjęte na chłodno, nie pod presją błędu.
   - potwierdzenie, że baza (`/etc/nixos`) pozostaje czysta
 - Ustalenie reguły: kiedy zakładać nowy worktree (czas / typ zadania)
 
-## 📅 2025-12-31 — porządkowanie nss / nbuild
+## 📅 2025-12-31 
+
+## ZAMYKANIE – porządkowanie nss / nbuild
 
 DONE:
 - `nss` przebudowany na tryb decyzyjny A/B/C (jawna intencja, brak automatyki)
@@ -581,7 +594,9 @@ NEXT:
 
 ---
 
-## 📅 2025-12-30 — praca na nowym systemie SESJE
+## 📅 2025-12-30 
+
+## ZAMYKANIE – test nowego systemu SESJE
 
 ### ⏱ Czas
 start: —
@@ -611,7 +626,9 @@ koniec: —
 
 ---
 
-## 📅 2025-12-29 — rollback systemu (NixOS)
+## 📅 2025-12-29 
+
+## ZAMYKANIE – rollback systemu NixOS (powrót do stabilności)
 
 **Kontekst:**
 - po zmianach konfiguracyjnych brak dostępnych funkcji Zsh (m.in. `nss`)
@@ -643,8 +660,9 @@ Checkpoint: **OK**
 
 ---
 
-## 📅 2025-12-29 — dokumentacja NixOS
+## 📅 2025-12-29 
 
+## ZAMYKANIE – dokumentacja NixOS (standardy i mapa)
 ### ⏱ Czas
 - start: —
 - koniec: —
