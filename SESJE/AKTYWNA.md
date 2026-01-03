@@ -51,6 +51,52 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+🧠 SESJA — Bash (tryb użytkowy / awaryjny)
+
+Data: 03-01-2026 godzina: 15:10
+Status: ✅ zamknięte
+
+Co zostało zrobione
+
+Uporządkowano ~/.bashrc jako lekki shell zapasowy (debug / kompatybilność).
+
+Ustawiono czytelny prompt (tylko katalog, kolor, bez szumu).
+
+Skonfigurowano historię:
+
+brak duplikatów
+
+histappend
+
+sensowne limity.
+
+Włączono tryb vi w bash (set -o vi) — spójność z nvim i zsh.
+
+Dodano historię po prefiksie (↑ / ↓).
+
+Ustalono bezpieczne ładowanie bash-completion (warunkowe source).
+
+Decyzje architektoniczne
+
+bash-completion instalowany systemowo przez configuration.nix
+(powtarzalność, TTY, rescue shell).
+
+Bash traktowany jako:
+
+shell awaryjny
+
+narzędzie testowe
+
+punkt odniesienia (bez dalszego „tuningowania”).
+
+Stan końcowy
+
+Bash: zamknięty, stabilny, nie ruszamy dalej
+
+Główny shell: zsh
+
+Fish: tylko referencyjnie / koncepcyjnie
+
 ## 🐚 Bash — przywrócenie do stanu używalnego (wykonane)
 
 Data: 02-01-2026 godzina: 23:05
