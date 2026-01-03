@@ -51,6 +51,67 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+## 🐚 Bash — przywrócenie do stanu używalnego (wykonane)
+
+Data: 02-01-2026 godzina: 23:05
+**Status:** DONE ✅
+
+### Co zostało zrobione
+- bash przestał być „śmietnikiem”
+- skonfigurowany minimalny `.bashrc` wyłącznie dla trybu interaktywnego
+- ustawiony **kolorowy prompt** pokazujący **tylko bieżący katalog**
+- usunięto konflikt podwójnego `PS1` (nadpisywanie promptu)
+- potwierdzone działanie po `exec bash`
+
+### Aktualny prompt basha
+- kolorowy
+- format: tylko katalog (`\W`)
+- brak user@host (celowo)
+- brak wpływu na skrypty i środowiska nieinteraktywne
+
+### Zasady przyjęte w trakcie
+- bash ≠ zsh (brak mieszania ról)
+- bash bez magii, bez aliasów destrukcyjnych
+- bash jako narzędzie:
+  - kompatybilności
+  - debugowania
+  - środowisko referencyjne
+
+---
+
+## 🧭 Bash — plan dalszej konfiguracji (na jutro)
+
+**Zasada nadrzędna:**
+> Bash = narzędzie kompatybilności i debugowania, nie shell codziennej pracy.
+
+### ETAP A — porządkowanie (bezpieczne)
+- [ ] pełny przegląd `~/.bashrc`
+- [ ] potwierdzić:
+  - jedno `PS1`
+  - wszystko tylko dla trybu interaktywnego
+- [ ] usunąć/commentować wszystko, co zmienia semantykę
+
+### ETAP B — bash jako narzędzie diagnostyczne
+- [ ] porównać:
+  - `bash`
+  - `bash --norc`
+  - `bash --noprofile --norc`
+- [ ] ustalić tryb „referencyjny”
+
+### ETAP C — integracja z NixOS / home-manager
+- [ ] decyzja: ręczny `.bashrc` vs home-manager
+- [ ] jeśli HM → tylko minimalna, łatwa do usunięcia konfiguracja
+
+### ETAP D — dokumentacja
+- [ ] dodać zasadę do docs:
+  > „Bash służy wyłącznie do kompatybilności i debugowania; codzienna praca odbywa się w zsh.”
+
+**Cel końcowy:**
+- bash nudny  
+- bash przewidywalny  
+- bash pomocny wtedy, gdy naprawdę potrzebny
+
+
 🧭 SESJA — test kitty (terminal)
 
 Data: 02-01-2026 19:18
