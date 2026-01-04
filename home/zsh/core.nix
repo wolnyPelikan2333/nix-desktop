@@ -15,9 +15,18 @@
         fi
       }
 
+      mklesson-bulk() {
+        [[ -f TEMPLATE.md ]] || { echo "Brak TEMPLATE.md"; return 1; }
+
+        for d in */; do
+          [[ ! -s "$d/README.md" ]] && cp TEMPLATE.md "$d/README.md"
+        done
+      }
+
+
       
       
-          '';
+    '';
   };
 }
 
