@@ -51,6 +51,45 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+📅 04-01-2026 15:21
+
+Status: ✅ zrobione
+
+- utworzenie pliku README.md we właściwych folderach
+
+PLAN:
+- pobranie materiałów do nauki java z internetu
+- przekopiowanie pobranych materiałów do właściwych folderów
+- zmiana nazw plików stosownie do zawartości
+
+Ryzyko: niskie
+
+Uwagi: nie robić tego w obecności krasnoludków
+
+📅 04-01-2026 14:43
+
+Temat: przygotowanie do nauki java i javascript
+
+Status: ✅ zrobione
+
+Zakres: 
+
+- utworzenie katalogu java
+- utworzenie folderów w katalogu java
+- utworzenie katalogu javascript
+- utworzenie folderów w katalogu javascript
+- pobranie materiałów do nauki javascript z internetu do folderu Pobrane 
+
+PLAN:
+- pobranie materiałów do nauki java z internetu
+- przekopiowanie pobranych materiałów do właściwych folderów
+- utworzenie pliku README.md we właściwych folderach
+
+Ryzyko: niskie
+
+Uwagi: nie robić tego w obecności krasnoludków
+
+
 📅 04-01-2026 06:02
 
 Temat: kitty — ściąga do zarządzania oknami
