@@ -51,12 +51,12 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+📅 04-01-2026 16:16
 
-## 📅 2026-01-04 15:56
+Status: ✅ zrobione
 
-- Mode: commit
-- Risk: NORMAL
-- Changes:
+Hurtowo zmieniono nazwy folderów lekcji z 1,2,3… na lekcja_01, lekcja_02… w javascript i javascript-teoria.
+
 
 📅 04-01-2026 15:21
 
