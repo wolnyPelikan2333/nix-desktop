@@ -51,6 +51,35 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+📅 04-01-2026 06:02
+
+Temat: kitty — ściąga do zarządzania oknami
+
+Status: ✅ zrobione
+
+Zakres:
+
+uporządkowanie docs/ściągi/kitty.md
+
+zmiana formatu na pytanie → odpowiedź → gotowa komenda
+
+rozbicie skrótów na logiczne sekcje (split, fokus, move, bias)
+
+dodana notatka mentalna pod pracę w zmęczeniu
+
+Efekt:
+
+ściąga czytelna przy niskiej sprawności (2–3)
+
+brak „czytania komentarzy z configa”
+
+gotowe do dalszej optymalizacji pod prawy monitor
+
+Ryzyko: niskie
+
+Uwagi: krasnoludki wykonały robotę, mogą iść w glanach 🥾
+
+
 ## 📅 03-01-2026 23:00
 
 - Zakres: kitty

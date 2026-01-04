@@ -1,39 +1,79 @@
-# Create a new window splitting the space used by the existing one so that
-# the two windows are placed one above the other
+🐱 kitty — zarządzanie oknami (ściąga decyzyjna)
+➕ Jak podzielić terminal na dwa panele?
+
+Poziomo (góra / dół)
+
+F5
+
 map f5 launch --location=hsplit
 
-# Create a new window splitting the space used by the existing one so that
-# the two windows are placed side by side
+Pionowo (lewo / prawo)
+
+F6
+
 map f6 launch --location=vsplit
 
-# Create a new window splitting the space used by the existing one so that
-# the two windows are placed side by side if the existing window is wide or
-# one above the other if the existing window is tall.
+Automatycznie (kitty wybiera najlepszy podział)
+
+F4
+
 map f4 launch --location=split
 
-# Rotate the current split, changing its split axis from vertical to
-# horizontal or vice versa
+🔄 Jak zmienić orientację podziału?
+
+Obróć aktualny split (pion ↔ poziom)
+
+F7
+
 map f7 layout_action rotate
 
-# Move the active window in the indicated direction
+🚚 Jak przesunąć aktywne okno?
+
+Przesuwanie okna między panelami
+
+Shift + ↑ ↓ ← →
+
 map shift+up move_window up
+map shift+down move_window down
 map shift+left move_window left
 map shift+right move_window right
-map shift+down move_window down
 
-# Move the active window to the indicated screen edge
+📌 Jak „przykleić” okno do krawędzi ekranu?
+
+Do krawędzi aktualnego workspace
+
+Ctrl + Shift + ↑ ↓ ← →
+
 map ctrl+shift+up layout_action move_to_screen_edge top
+map ctrl+shift+down layout_action move_to_screen_edge bottom
 map ctrl+shift+left layout_action move_to_screen_edge left
 map ctrl+shift+right layout_action move_to_screen_edge right
-map ctrl+shift+down layout_action move_to_screen_edge bottom
 
-# Switch focus to the neighboring window in the indicated direction
-map ctrl+left neighboring_window left
-map ctrl+right neighboring_window right
+🧭 Jak zmienić fokus (bez ruszania okien)?
+
+Przełączanie się między panelami
+
+Ctrl + ↑ ↓ ← →
+
 map ctrl+up neighboring_window up
 map ctrl+down neighboring_window down
+map ctrl+left neighboring_window left
+map ctrl+right neighboring_window right
 
-# Set the bias of the split containing the currently focused window. The
-# currently focused window will take up the specified percent of its parent
-# window's size.
+⚖️ Jak zmienić proporcje splitu?
+
+Aktywne okno zajmuje 80% przestrzeni
+
+Ctrl + .
+
 map ctrl+. layout_action bias 80
+
+🧠 Notatka mentalna (ważne przy zmęczeniu)
+
+F4 – „nie myśl, kitty zdecyduje”
+
+Ctrl + strzałki – tylko fokus (bez bałaganu)
+
+Shift + strzałki – realne przemieszczanie okien
+
+Bias używaj rzadko, ale świadomie
