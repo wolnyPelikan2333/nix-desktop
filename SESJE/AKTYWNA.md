@@ -71,6 +71,14 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+
+## 📅 2026-01-05 23:10
+
+- Mode: commit
+- Risk: NORMAL
+- Changes:
+home/michal.nix
+
 Data: 05-01-2026 20:01
 
 ### Temat

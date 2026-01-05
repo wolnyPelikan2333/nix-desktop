@@ -78,7 +78,7 @@
    home-manager
    zellij
    kitty
-   JetBrains-mono
+   jetbrains-mono
   ];
   
 
