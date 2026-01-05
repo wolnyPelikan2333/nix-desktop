@@ -51,7 +51,98 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
-## 📅 06-01-2026 01:05
+
+### Temat
+### Stan wyjściowy
+### Decyzja
+### Wdrożenie
+### Status
+### Plan
+
+
+### Temat
+### Stan wyjściowy
+### Decyzja
+### Wdrożenie
+### Status
+### Plan
+
+## 📅 05-01-2026 15:05
+
+### 🧭 Temat
+Wykorzystanie rejestrów i makr w Neovim do usprawnienia pracy z plikami SESJA.md / AKTYWNA.md
+
+### 📌 Stan wyjściowy
+- Rejestry i makra w Vim/Neovim były znane tylko teoretycznie
+- Brak praktycznego workflow do tworzenia i uzupełniania wpisów sesji
+- Powtarzalne czynności wykonywane ręcznie (nagłówki, sekcje)
+
+### 🧠 Decyzja
+- Wykorzystać rejestry `a–d` jako robocze schowki sesji
+- Użyć makr do automatycznego wstawiania szkieletu wpisu sesji
+- Powiązać rejestry bezpośrednio z plikami `SESJA.md` / `AKTYWNA.md`
+
+### 🔧 Wdrożenie
+- Ustalono przeznaczenie rejestrów:
+  - `a` – temat / nagłówek sesji
+  - `b` – decyzje
+  - `c` – komendy / kroki techniczne
+  - `d` – plan / następne kroki
+- Nagrano makro w rejestrze `a`, które wstawia szkielet wpisu sesji:
+  - Temat
+  - Stan wyjściowy
+  - Decyzja
+  - Wdrożenie
+  - Status
+  - Plan
+- Makro jest uruchamiane komendą `@a`
+- Rejestry używane jako „klocki”, wklejane do sesji w dowolnej kolejności
+
+### 📊 Status
+✔️ **Zrobione**
+
+### 🧭 Efekt
+- Tworzenie nowego wpisu sesji zajmuje kilka sekund
+- Mniej ręcznego pisania i mniejsze obciążenie poznawcze
+- Spójna struktura wpisów w `SESJA.md` i `AKTYWNA.md`
+
+### 📅 Plan / Następne kroki
+- Wyrobić nawyk używania rejestrów `a–d` podczas każdej sesji
+- W kolejnej sesji rozważyć dodatkowe makro do częstych operacji edycyjnych
+
+---
+
+## 📅 05-01-2026 14:11
+
+### 🧭 Temat
+Przekopiowanie plików kursu JavaScript z folderu Pobrane do folderów lekcji
+
+### 📌 Stan wyjściowy
+- W katalogu `javascript-teoria` w folderach lekcji znajduje się tylko `README.md`
+
+### 🧠 Decyzja
+- Kopiowanie plików do odpowiednich folderów lekcji
+
+### 🔧 Wdrożenie
+- Skopiowano pliki z:
+  - **Źródło:** `~/Pobrane`
+- Do:
+  - **Cel:**  
+    - `~/javascript-teoria/lekcja_01`  
+    - `~/javascript-teoria/lekcja_02`
+
+### 📊 Status
+✔️ **Zrobione**
+
+### 🧭 Efekt
+- Pliki zostały poprawnie przekopiowane do folderów właściwych lekcji
+
+### 📅 Plan / Następne kroki
+- Sukcesywnie kopiować kolejne pliki zgodnie z postępami w nauce
+
+----------
+
+## 📅 05-01-2026 01:05
 
 ### Temat
 Autopairs i domykanie tagów HTML w LazyVim
