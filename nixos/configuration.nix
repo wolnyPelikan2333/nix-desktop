@@ -172,6 +172,7 @@
     w3m
     lazygit
     bash-completion
+    wl-clipboard
   ];
 
   ###############################################
