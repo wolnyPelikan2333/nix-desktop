@@ -34,14 +34,51 @@
   enable = true;
   enableZshIntegration = true;
 };
+   
+  programs.alacritty = {
+    enable = true;
 
+    settings = {
+      env = {
+       TERM = "xterm-256color";
+    };
 
+    window = {
+       decorations = "full";
+       dynamic_padding = true;
+    };
+
+    font = {
+      normal = {
+        family = "JetBrains Mono";
+        style = "Regular";
+      };
+      size = 12.0;
+    };
+
+    scrolling = {
+      history = 10000;
+    };
+
+    cursor = {
+      style = "Block";
+      unfocused_hollow = true;
+    };
+
+    selection = {
+      save_to_clipboard = true;
+    };
+  };
+};
+ 
+  
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
    home-manager
    zellij
    kitty
+   JetBrains-mono
   ];
   
 
