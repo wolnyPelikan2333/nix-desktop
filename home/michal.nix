@@ -94,6 +94,8 @@
 
     # Alt+G -> ,g
     # { key = "G"; mods = "Alt"; chars = ",g"; }
+        
+{ key = "A"; mods = "Alt"; chars = "tmux new -A -s main; nvim /etc/nixos/docs/AKTYWNA.md\n"; }
   ];
 };
  };
