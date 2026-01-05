@@ -99,7 +99,6 @@
  };
 };
  
-  
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
@@ -107,6 +106,7 @@
    zellij
    kitty
    jetbrains-mono
+   tmux
   ];
   
 
