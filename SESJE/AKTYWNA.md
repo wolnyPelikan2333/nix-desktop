@@ -51,6 +51,69 @@ _ostatnia aktualizacja: 29-12-2025_
 
 # 📅 SESJE (od najnowszej)
 
+## 📅 06-01-2026 01:05
+
+### Temat
+Autopairs i domykanie tagów HTML w LazyVim
+
+### Stan wyjściowy
+- LazyVim z `nvim-autopairs` już zainstalowany
+- Autopairs działa poprawnie dla `() [] {} "" ''`
+- Brak automatycznego domykania tagów HTML (stan domyślny)
+
+### Decyzja
+- **Zostawić** `nvim-autopairs`
+- **Dodać** lekkie domykanie tagów HTML przez Tree-sitter
+
+### Wdrożenie
+Dodano plugin:
+- `windwp/nvim-ts-autotag`
+
+Plik:
+~/.config/nvim/lua/plugins/autotag.lua
+
+
+Konfiguracja:
+```lua
+return {
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    opts = {},
+  },
+}
+
+Wymagania
+
+Tree-sitter parser html (opcjonalnie: javascript, tsx)
+
+Efekt
+
+<div> → <div></div>
+
+poprawne zachowanie dla self-closing (<img />)
+
+brak konfliktów z autopairs
+
+automatyzacja tylko tam, gdzie ma sens
+
+Uwagi
+
+Świadomie nie dodawano emmetów ani ciężkich snippetów
+
+Konfiguracja minimalna, odwracalna, bez wpływu na inne filetype’y
+
+Status
+
+✔️ Zrobione
+🧭 Do ewentualnego rozszerzenia w przyszłości: formatowanie Enter / minimalne snippety HTML
+
+Jak chcesz, przy **następnej sesji** możemy:
+- dorzucić *ładne Enter + indent* w HTML  
+- albo zrobić **checkpoint „HTML workflow”** jako osobną ściągę  
+
+Na teraz: **dobra robota**, krasnoludki ogarnęły temat 💪
+
 📅 04-01-2026 16:16
 
 Status: ✅ zrobione
