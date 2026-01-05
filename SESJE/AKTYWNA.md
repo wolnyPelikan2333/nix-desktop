@@ -1,10 +1,12 @@
 # 🧠 AKTYWNA — stan pracy
+
 _utworzono: 28-12-2025 (niedziela) 22:05_  
 _ostatnia aktualizacja: 29-12-2025_
 
 ---
 
 ## 🔴 TERAZ
+
 - Używać nowego systemu sesji przez kilka dni **bez zmian**
 - Zapisywać **WYŁĄCZNIE tutaj**  
   (bez powrotów do `docs/SESJA.md`)
@@ -12,17 +14,21 @@ _ostatnia aktualizacja: 29-12-2025_
 ---
 
 ## 🟢 W TOKU
+
 **Nowy workflow sesji:**
+
 - `sesja-start` → orientacja → **ENTER** → praca
 - brak `sesja-stop`
 
 **Obserwacja:**
+
 - czy ENTER-pauza pomaga
 - czy output `sesja-start` nie jest za długi
 
 ---
 
 ## 🟡 POTEM / PRZYPOMNIENIA
+
 - Nix: jak bezpiecznie edytować bloki `''` / `"` — **5 punktów**
 - (~za kilka dni) ewentualny cleanup:
 - skrócić legacy output w `sesja-start`
@@ -33,6 +39,7 @@ _ostatnia aktualizacja: 29-12-2025_
 ---
 
 ## 📎 KONTEKST / ODNIESIENIA
+
 - Nowy system: `/etc/nixos/SESJE/`
 - Jedyny plik roboczy: **AKTYWNA.md**
 - ARCHIWUM tylko przy:
@@ -43,14 +50,103 @@ _ostatnia aktualizacja: 29-12-2025_
 ---
 
 ## 🧠 NOTATKA STANU
+
 - System świeżo wdrożony, stabilny
 - **Nic nie refaktorować na razie**
-- Najpierw używać → potem poprawiać
+- Najpierw używać → potem popCzęść keymap działała, część nie
+
+Wklejanie ze schowka systemowego działało tylko pCzęść keymap działała, część nie
+
+Wklejanie ze schowka systemowego działało tylko przez Ctrl+Shift+V
+
+"+y / <leader>y nie działały
+
+Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrzez Ctrl+Shift+V
+
+"+y / <leader>y nie działały
+
+Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 ---
 
 # 📅 SESJE (od najnowszej)
 
+Data: 05-01-2026 20:01
+
+### Temat
+
+Neovim — rejestry, schowek systemowy i skróty leaderowe (kanoniczne)
+
+### Stan wyjściowy
+
+Część keymap działała, część nie
+
+Wklejanie ze schowka systemowego działało tylko przez Ctrl+Shift+V
+
+"+y / <leader>y nie działały
+
+Trudność w rozróżnieniu: terminal vs Neovim vs rejestry
+
+Diagnoza
+
+:echo has('clipboard') → 0
+
+Neovim nie miał podłączonego schowka systemowego
+
+Ctrl+Shift+V działał, bo był obsługiwany przez terminal, nie przez Neovima
+
+### Decyzja
+
+Uznano rejestry za kanoniczny mechanizm pracy
+
+Przyjęto stały zestaw rejestrów: ", 0, +, \_
+
+Leader ustawiony na ,
+
+Zdefiniowano jednoruchowe skróty leaderowe, które ukrywają rejestry
+
+### Wdrożenie
+
+Ustalono kanoniczną ściągę rejestrów:
+
+" — domyślny (niestabilny)
+
+0 — ostatni yank (bezpieczny)
+
+- — schowek systemowy
+
+\_ — czarny rejestr (kasowanie bez śladu)
+
+Dodano skróty leaderowe (tryb normalny):
+
+,y → "+yy (kopiuj linię do schowka systemowego)
+
+,p → "+p (wklej ze schowka systemowego)
+
+,Y → "0yy (bezpieczny yank do rejestru 0)
+
+,P → "0p (wklej z rejestru 0)
+
+,d → "\_dd (usuń linię bez psucia schowka)
+
+Zachowano pełną kompatybilność z ręcznym użyciem "+…, "0…, "\_…
+
+### Status
+
+✔️ Zrobione
+✔️ Rejestry działają przewidywalnie
+✔️ Jednoruchowe skróty eliminują potrzebę pamiętania "+
+✔️ Rozróżnienie: terminal ≠ Neovim ≠ rejestry jest jasne
+
+### Plan
+
+(opcjonalnie) wariant visual dla skrótów leaderowych
+
+(opcjonalnie) sekcja „antywpadki” do dokumentacji
+
+(opcjonalnie) uporządkowanie pozostałych keymaps pod ten sam model
+
+---
 
 ## 📅 2026-01-05 19:23
 
@@ -58,31 +154,40 @@ _ostatnia aktualizacja: 29-12-2025_
 - Risk: NORMAL
 - Changes:
 
+### Data: 05-01-2026 15:20
 
-Data: 05-01-2026 15:20
 ### Temat
+
 ### Stan wyjściowy
+
 ### Decyzja
+
 ### Wdrożenie
+
 ### Status
+
 ### Plan
 
-
 Data: 05-01-2026 15:20
+
 ### Temat
+
 Wykorzystanie rejestrów i makr w Neovim do usprawnienia pracy z plikami SESJA.md / AKTYWNA.md
 
 ### Stan wyjściowy
+
 - Rejestry i makra w Vim/Neovim były znane tylko teoretycznie
 - Brak praktycznego workflow do tworzenia i uzupełniania wpisów sesji
 - Powtarzalne czynności wykonywane ręcznie (nagłówki, sekcje)
 
 ### Decyzja
+
 - Wykorzystać rejestry `a–d` jako robocze schowki sesji
 - Użyć makr do automatycznego wstawiania szkieletu wpisu sesji
 - Powiązać rejestry bezpośrednio z plikami `SESJA.md` / `AKTYWNA.md`
 
 ### Wdrożenie
+
 - Ustalono przeznaczenie rejestrów:
   - `a` – temat / nagłówek sesji
   - `b` – decyzje
@@ -99,33 +204,40 @@ Wykorzystanie rejestrów i makr w Neovim do usprawnienia pracy z plikami SESJA.m
 - Rejestry używane jako „klocki”, wklejane do sesji w dowolnej kolejności
 
 ### Status
+
 ✔️ **Zrobione**
 
 ### 🧭 Efekt
+
 - Tworzenie nowego wpisu sesji zajmuje kilka sekund
 - Mniej ręcznego pisania i mniejsze obciążenie poznawcze
 - Spójna struktura wpisów w `SESJA.md` i `AKTYWNA.md`
 
 ### Plan
+
 - Wyrobić nawyk używania rejestrów `a–d` podczas każdej sesji
 - W kolejnej sesji rozważyć dodatkowe makro do częstych operacji edycyjnych
 
 ## 📅 05-01-2026 15:05
 
 ### 🧭 Temat
+
 Wykorzystanie rejestrów i makr w Neovim do usprawnienia pracy z plikami SESJA.md / AKTYWNA.md
 
 ### 📌 Stan wyjściowy
+
 - Rejestry i makra w Vim/Neovim były znane tylko teoretycznie
 - Brak praktycznego workflow do tworzenia i uzupełniania wpisów sesji
 - Powtarzalne czynności wykonywane ręcznie (nagłówki, sekcje)
 
 ### 🧠 Decyzja
+
 - Wykorzystać rejestry `a–d` jako robocze schowki sesji
 - Użyć makr do automatycznego wstawiania szkieletu wpisu sesji
 - Powiązać rejestry bezpośrednio z plikami `SESJA.md` / `AKTYWNA.md`
 
 ### 🔧 Wdrożenie
+
 - Ustalono przeznaczenie rejestrów:
   - `a` – temat / nagłówek sesji
   - `b` – decyzje
@@ -142,14 +254,17 @@ Wykorzystanie rejestrów i makr w Neovim do usprawnienia pracy z plikami SESJA.m
 - Rejestry używane jako „klocki”, wklejane do sesji w dowolnej kolejności
 
 ### 📊 Status
+
 ✔️ **Zrobione**
 
 ### 🧭 Efekt
+
 - Tworzenie nowego wpisu sesji zajmuje kilka sekund
 - Mniej ręcznego pisania i mniejsze obciążenie poznawcze
 - Spójna struktura wpisów w `SESJA.md` i `AKTYWNA.md`
 
 ### 📅 Plan / Następne kroki
+
 - Wyrobić nawyk używania rejestrów `a–d` podczas każdej sesji
 - W kolejnej sesji rozważyć dodatkowe makro do częstych operacji edycyjnych
 
@@ -158,57 +273,69 @@ Wykorzystanie rejestrów i makr w Neovim do usprawnienia pracy z plikami SESJA.m
 ## 📅 05-01-2026 14:11
 
 ### 🧭 Temat
+
 Przekopiowanie plików kursu JavaScript z folderu Pobrane do folderów lekcji
 
 ### 📌 Stan wyjściowy
+
 - W katalogu `javascript-teoria` w folderach lekcji znajduje się tylko `README.md`
 
 ### 🧠 Decyzja
+
 - Kopiowanie plików do odpowiednich folderów lekcji
 
 ### 🔧 Wdrożenie
+
 - Skopiowano pliki z:
   - **Źródło:** `~/Pobrane`
 - Do:
-  - **Cel:**  
-    - `~/javascript-teoria/lekcja_01`  
+  - **Cel:**
+    - `~/javascript-teoria/lekcja_01`
     - `~/javascript-teoria/lekcja_02`
 
 ### 📊 Status
+
 ✔️ **Zrobione**
 
 ### 🧭 Efekt
+
 - Pliki zostały poprawnie przekopiowane do folderów właściwych lekcji
 
 ### 📅 Plan / Następne kroki
+
 - Sukcesywnie kopiować kolejne pliki zgodnie z postępami w nauce
 
-----------
+---
 
 ## 📅 05-01-2026 01:05
 
 ### Temat
+
 Autopairs i domykanie tagów HTML w LazyVim
 
 ### Stan wyjściowy
+
 - LazyVim z `nvim-autopairs` już zainstalowany
 - Autopairs działa poprawnie dla `() [] {} "" ''`
 - Brak automatycznego domykania tagów HTML (stan domyślny)
 
 ### Decyzja
+
 - **Zostawić** `nvim-autopairs`
 - **Dodać** lekkie domykanie tagów HTML przez Tree-sitter
 
 ### Wdrożenie
+
 Dodano plugin:
+
 - `windwp/nvim-ts-autotag`
 
 Plik:
 ~/.config/nvim/lua/plugins/autotag.lua
 
-
 Konfiguracja:
-```lua
+
+````lua
 return {
   {
     "windwp/nvim-ts-autotag",
@@ -243,8 +370,8 @@ Status
 🧭 Do ewentualnego rozszerzenia w przyszłości: formatowanie Enter / minimalne snippety HTML
 
 Jak chcesz, przy **następnej sesji** możemy:
-- dorzucić *ładne Enter + indent* w HTML  
-- albo zrobić **checkpoint „HTML workflow”** jako osobną ściągę  
+- dorzucić *ładne Enter + indent* w HTML
+- albo zrobić **checkpoint „HTML workflow”** jako osobną ściągę
 
 Na teraz: **dobra robota**, krasnoludki ogarnęły temat 💪
 
@@ -276,13 +403,13 @@ Temat: przygotowanie do nauki java i javascript
 
 Status: ✅ zrobione
 
-Zakres: 
+Zakres:
 
 - utworzenie katalogu java
 - utworzenie folderów w katalogu java
 - utworzenie katalogu javascript
 - utworzenie folderów w katalogu javascript
-- pobranie materiałów do nauki javascript z internetu do folderu Pobrane 
+- pobranie materiałów do nauki javascript z internetu do folderu Pobrane
 
 PLAN:
 - pobranie materiałów do nauki java z internetu
@@ -429,9 +556,9 @@ Nie instalować formatterów ani pluginów zanim nie zostaną poprawnie ustawion
 - poprawić w docs **nieaktualną informację**, że NVIM config jest w `/etc/nixos/modules/editors/nvim`
 - dodać link do tej notatki z `README.md`
 
-Na teraz:  
-🔒 **problem zamknięty**  
-🧠 **wiedza zapisana**  
+Na teraz:
+🔒 **problem zamknięty**
+🧠 **wiedza zapisana**
 🧭 **kolejna sesja będzie łatwiejsza**
 
 Jeśli chcesz, w następnym kroku możemy:
@@ -639,8 +766,8 @@ Data: 02-01-2026 godzina: 23:05
   > „Bash służy wyłącznie do kompatybilności i debugowania; codzienna praca odbywa się w zsh.”
 
 **Cel końcowy:**
-- bash nudny  
-- bash przewidywalny  
+- bash nudny
+- bash przewidywalny
 - bash pomocny wtedy, gdy naprawdę potrzebny
 
 
@@ -894,7 +1021,7 @@ Decyzje podjęte na chłodno, nie pod presją błędu.
   - potwierdzenie, że baza (`/etc/nixos`) pozostaje czysta
 - Ustalenie reguły: kiedy zakładać nowy worktree (czas / typ zadania)
 
-## 📅 2025-12-31 
+## 📅 2025-12-31
 
 ## ZAMYKANIE – porządkowanie nss / nbuild
 
@@ -914,7 +1041,7 @@ NEXT:
 
 ---
 
-## 📅 2025-12-30 
+## 📅 2025-12-30
 
 ## ZAMYKANIE – test nowego systemu SESJE
 
@@ -931,7 +1058,7 @@ koniec: —
 - weryfikacja, że zapis „na bieżąco” zmniejsza chaos poznawczy
 - potwierdzenie, że rozdział:
   - stan bieżący
-  - dziennik sesji  
+  - dziennik sesji
   jest czytelny i bezpieczny
 
 ### 🧠 Wnioski
@@ -946,7 +1073,7 @@ koniec: —
 
 ---
 
-## 📅 2025-12-29 
+## 📅 2025-12-29
 
 ## ZAMYKANIE – rollback systemu NixOS (powrót do stabilności)
 
@@ -970,17 +1097,17 @@ sudo nix-env -p /nix/var/nix/profiles/system --delete-generations 118
 - generacja 118 usunięta
 - shell i aliasy działają poprawnie
 
-Stan systemu: **STABILNY**  
-Stan repo: **BEZ ZMIAN**  
+Stan systemu: **STABILNY**
+Stan repo: **BEZ ZMIAN**
 Checkpoint: **OK**
 
 **NEXT:**
-- przywrócić `sesja-start` jako narzędzie systemowe  
+- przywrócić `sesja-start` jako narzędzie systemowe
 (w osobnej sesji)
 
 ---
 
-## 📅 2025-12-29 
+## 📅 2025-12-29
 
 ## ZAMYKANIE – dokumentacja NixOS (standardy i mapa)
 ### ⏱ Czas
@@ -1000,7 +1127,7 @@ Zbudować spójną, użyteczną strukturę dokumentacji NixOS:
 - pełna inwentaryzacja istniejącej dokumentacji
 - zaprojektowano i zapisano mapę dokumentów
 - zaprojektowano i zapisano kontrakt pracy z NixOS
-- zdefiniowano nadrzędną zasadę bezpieczeństwa:  
+- zdefiniowano nadrzędną zasadę bezpieczeństwa:
 *system ważniejszy niż tempo*
 - wprowadzono wzorzec **⚠️ OPERACJA PRODUKCYJNA**
 - zamknięto drugi moduł dokumentacji (standardy)
@@ -1022,7 +1149,7 @@ realnie zmniejsza obciążenie poznawcze
 ## 📅 Następna sesja — PLAN
 
 ### 🎯 Cel
-- Porządkowanie dokumentacji  
+- Porządkowanie dokumentacji
 (**bez zmian w shell / HM / Zsh**)
 
 ### 🧭 Zakres
@@ -1044,7 +1171,7 @@ realnie zmniejsza obciążenie poznawcze
 - dokumentacja działa **bez skrótów w Zsh**
 
 ### 📌 Zasada na sesję
-> **Tylko docs.**  
+> **Tylko docs.**
 > **Zero zmian systemowych.**
 
 
@@ -1096,3 +1223,4 @@ SESJE/AKTYWNA.md
 - Risk: NORMAL
 - Changes:
 SESJE/AKTYWNA.md
+````
