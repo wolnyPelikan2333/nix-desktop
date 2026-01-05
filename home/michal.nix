@@ -69,7 +69,7 @@
       save_to_clipboard = true;
     };
 
-        keyboard = {
+         keyboard = {
       bindings = [
         # --- Clipboard ---
         { key = "C"; mods = "Alt"; action = "Copy"; }
@@ -94,7 +94,7 @@
 
         # Alt+G -> ,g
         # { key = "G"; mods = "Alt"; action = { SendString = ",g"; }; }
-      ];
+     ];
     };
   };
 };
