@@ -71,13 +71,36 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+## 📅 05-01-2026 23:38
+
+### Temat
+
+Alacritty — wybór terminala
+
+### Decyzja
+
+Zostaje Alacritty.
+
+### Uzasadnienie
+
+Po ~10 minutach testów działa neutralnie, nie przeszkadza, spełnia potrzeby.
+
+### Status
+
+✔️ Zamknięte
+
+## 📅 2026-01-05 23:35
+
+- Mode: commit
+- Risk: NORMAL
+- Changes:
 
 ## 📅 2026-01-05 23:10
 
 - Mode: commit
 - Risk: NORMAL
 - Changes:
-home/michal.nix
+  home/michal.nix
 
 Data: 05-01-2026 20:01
 

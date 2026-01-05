@@ -68,6 +68,34 @@
     selection = {
       save_to_clipboard = true;
     };
+
+        keyboard = {
+      bindings = [
+        # --- Clipboard ---
+        { key = "C"; mods = "Alt"; action = "Copy"; }
+        { key = "V"; mods = "Alt"; action = "Paste"; }
+
+        # --- Window ---
+        { key = "N"; mods = "Alt"; action = "CreateNewWindow"; }
+        { key = "Q"; mods = "Alt"; action = "Quit"; }
+
+        # --- Font size ---
+        { key = "Equals"; mods = "Alt"; action = "IncreaseFontSize"; }
+        { key = "Minus"; mods = "Alt"; action = "DecreaseFontSize"; }
+        { key = "Key0"; mods = "Alt"; action = "ResetFontSize"; }
+
+        # --- Neovim leader mappings (jak w kitty) ---
+        # Alt+P -> ,p
+        { key = "P"; mods = "Alt"; action = { SendString = ",p"; }; }
+
+        # (opcjonalnie – dodawaj tylko jeśli faktycznie używasz)
+        # Alt+F -> ,f
+        # { key = "F"; mods = "Alt"; action = { SendString = ",f"; }; }
+
+        # Alt+G -> ,g
+        # { key = "G"; mods = "Alt"; action = { SendString = ",g"; }; }
+      ];
+    };
   };
 };
  
