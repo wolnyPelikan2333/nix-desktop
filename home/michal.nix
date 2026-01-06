@@ -101,6 +101,20 @@
 };
  };
 };
+
+   programs.tmux = {
+  enable = true;
+
+  extraConfig = ''
+    # === RATUNKOWY RUCH PRZESTRZENNY ===
+    # Ctrl + strzałki → zawsze panele tmuxa
+    bind -n C-Left  select-pane -L
+    bind -n C-Right select-pane -R
+    bind -n C-Up    select-pane -U
+    bind -n C-Down  select-pane -D
+  '';
+};
+
  
   programs.home-manager.enable = true;
 
