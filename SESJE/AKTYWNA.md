@@ -71,6 +71,48 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+## 📅 06-01-2026 15:05
+
+### Temat
+
+Integracja nawigacji Neovim ↔ tmux (Ctrl-h / Ctrl-j / Ctrl-k / Ctrl-l)
+
+### Stan wyjściowy
+
+- Neovim sprawdzony (checkhealth OK)
+- Splity i buffory działają poprawnie
+- Brak blokad klawiszy Ctrl-h/j/k/l
+- Istniejące mapowania tmuxa z prefiksem Ctrl-a (h/j/k/l, resize H/J/K/L)
+
+### Decyzja
+
+Wdrożenie inteligentnej nawigacji pomiędzy splitami Neovim i panelami tmuxa
+bez zmiany prefixu tmuxa i bez ingerencji w konfigurację Neovim.
+
+### Wdrożenie
+
+- Dodano w tmux obsługę Ctrl-h/j/k/l bez prefiksu:
+  - jeśli aktywny jest Neovim → klawisz trafia do nvim
+  - jeśli nie → tmux przełącza panel
+- Zachowano istniejące skróty:
+  - Ctrl-a + h/j/k/l (nawigacja)
+  - Ctrl-a + H/J/K/L (resize)
+
+### Status
+
+✔️ Zrobione  
+🧭 Integracja nawigacji działa poprawnie (test pozytywny)
+
+### Uwagi
+
+- Brak konfliktów mapowań
+- Zmiana odwracalna (jeden blok w tmux)
+
+### Plan (następna sesja)
+
+- Krok 2: omówienie (bez wdrożenia) integracji splitów
+- Opcjonalnie: przeniesienie konfiguracji tmuxa do NixOS
+
 📅 06-01-2026 12:55
 Temat
 
