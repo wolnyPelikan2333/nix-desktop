@@ -22,7 +22,12 @@
           [[ ! -s "$d/README.md" ]] && cp TEMPLATE.md "$d/README.md"
         done
       }
-
+        # --- auto tmux main session ---
+        if command -v tmux >/dev/null \
+          && [ -z "$TMUX" ] \
+          && [ -n "$PS1" ]; then
+          tmux new -A -s main
+        fi
 
       
       
