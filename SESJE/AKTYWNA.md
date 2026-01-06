@@ -71,6 +71,70 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+📅 06-01-2026 12:55
+Temat
+
+Integracja schowka systemowego z Neovim (copy / paste) + ergonomia pracy na dwóch monitorach
+
+Stan wyjściowy
+
+Alt + P działało (wklejanie ze schowka systemowego do nvim)
+
+Brak wygodnej opcji kopiowania z nvim do schowka systemowego
+
+Chrome na lewym monitorze miał zbyt małą czcionkę (problem DPI / scaling)
+
+Skróty Alt + F / Alt + G nie były jeszcze zdefiniowane (zakomentowane)
+
+Decyzje
+
+Najpierw usunięcie blockera ergonomicznego (skalowanie per-monitor w KDE Plasma)
+
+Zachowanie zasady: najpierw decyzja co skrót ma robić, potem konfiguracja
+
+Ustalenie symetrii:
+
+Alt + P → paste z systemu → nvim
+
+Alt + Y → copy z nvim → system
+
+Wdrożenie
+
+Poprawiono skalowanie per-monitor w KDE Plasma (zmiana zadziałała natychmiast)
+
+Potwierdzono, że w Neovim istnieje i działa mapowanie:
+
+,y → yank do systemowego clipboarda ("+y)
+
+Skonfigurowano skrót w Alacritty:
+
+Alt + Y → wysyła ,y do Neovim
+
+Test wykonany praktycznie: tekst skopiowany w nvim (Alt + Y) i wklejony do Chrome
+
+Status
+
+✔️ Zrobione
+🧭 Pełna, stabilna integracja schowka systemowego z Neovim
+🧠 Workflow spójny i symetryczny, bez konfliktów i zgadywania
+
+Wnioski / Notatki
+
+VeryLazy (lazy.nvim) nie powoduje problemów z keymapami
+
+Usuwanie ("\_) i kopiowanie ("+) są świadomie rozdzielone
+
+Ergonomia (DPI, oczy, zmęczenie) ma priorytet nad konfiguracją
+
+Następne kroki (opcjonalne)
+
+Ujednolicenie Alt + F / Alt + G pod akcje w Neovim
+
+Konfiguracja tmux (prefiks Ctrl + A) krok po kroku
+
+Checkpoint i przerwa, jeśli potrzebne
+
+---
 
 ## 📅 2026-01-06 12:51
 
