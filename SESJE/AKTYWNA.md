@@ -71,6 +71,49 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+📅 06-01-2026 19:05
+Temat
+
+Ujednolicenie nawigacji paneli (tmux + nvim) pod kątem pracy w stanie 2–3
+
+Stan wyjściowy
+
+Różne skróty do paneli w tmux i nvim
+
+Konieczność pamiętania prefiksu tmuxa
+
+Frustracja i utrata płynności pracy w stanie przeciążenia
+
+Decyzja
+
+Ujednolicenie mapy ruchów:
+
+Ctrl + strzałki → panele tmuxa (ruch przestrzenny, bez prefiksu)
+
+Ctrl + literki → nvim (ruch w tekście, precyzja)
+
+Utrwalenie rozwiązania w konfiguracji home-manager (bez shmuxa)
+
+Wdrożenie
+
+Dodanie wiązań Ctrl + ← → ↑ ↓ w programs.tmux.extraConfig
+
+Rozwiązanie konfliktu home-manager przez home-manager.backupFileExtension = "bak" w flake.nix
+
+Build i switch zakończone powodzeniem (nss ok)
+
+Status
+
+✔️ Zrobione
+🧠 Zauważalnie mniejsze napięcie i brak konfliktów skrótów
+🧭 Jednoznaczny podział ról: tmux = przestrzeń, nvim = tekst
+
+PLAN
+
+🔁 zrobić automatyczny start 3 paneli (bez shmuxa)
+🧭 dorobić wizualny wskaźnik „gdzie jestem”
+🧠 przenieść ten wzorzec na inne narzędzia
+przemyśleć porzucenie prefiksu Ctrl-a na rzecz skrótów do robienia paneli
 
 ## 📅 2026-01-06 19:10
 
