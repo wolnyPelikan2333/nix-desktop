@@ -71,6 +71,92 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+📅 06-01-2026 22:09
+Temat
+
+Stabilizacja sesji graficznej (X11), hibernacji oraz rozmieszczenia okien (Chrome / Alacritty) na dwóch monitorach
+
+Stan wyjściowy
+
+System niestabilny po usypianiu
+
+Wayland przejmował sesję mimo prób wymuszenia X11
+
+Po hibernacji: czarne ekrany / brak reakcji
+
+Okna (Chrome, Alacritty) nie wracały na właściwe monitory
+
+Po restarcie KWin brak tapety na jednym monitorze
+
+Decyzje
+
+Wymuszenie jednej domyślnej sesji: X11
+
+Rezygnacja z suspend → hibernacja jako jedyny tryb uśpienia
+
+Swapfile 40 GB jako backend hibernacji
+
+Pozycjonowanie okien rozwiązane regułami KWin (wymuszenie)
+
+Ominięcie UI Plasma 6 (regresja zasad okien) na rzecz konfiguracji plikowej
+
+Zachowanie Krohnkite (bez wyłączania)
+
+Wdrożenie
+
+Wymuszenie X11 w konfiguracji NixOS (SDDM + Plasma 6)
+
+Konfiguracja swapfile + resume
+
+Reguły okien:
+
+Chrome → lewy monitor, zmaksymalizowany
+
+Alacritty → prawy monitor
+
+Restart KWin (kwin_x11 --replace)
+
+Reset konfiguracji pulpitu Plasma (tylko tapety):
+
+usunięcie plasma-org.kde.plasma.desktop-appletsrc
+
+restart plasmashell
+
+Status
+
+✔️ Zrobione
+🧭 System stabilny po hibernacji
+🧭 Brak czarnych ekranów
+🧭 X11 utrzymany, Wayland nie przejmuje sesji
+🧭 Okna wracają na właściwe monitory
+🧭 Tapety i panele zsynchronizowane
+
+Wnioski
+
+Problemy nie wynikały z NixOS ani NVIDIA, lecz z interakcji:
+Plasma 6 + KWin + Krohnkite + restart sesji
+
+Konfiguracja plikowa (reguły KWin) jest stabilniejsza niż GUI
+
+Hibernacja jest bezpieczniejsza niż suspend na tym sprzęcie
+
+Plan (na przyszłość, opcjonalnie)
+
+Sprawdzić zachowanie innych emulatorów terminala po hibernacji
+
+(opcjonalnie) dopiąć skrót klawiszowy do hibernacji
+
+Nie wracać do Waylanda bez wyraźnej potrzeby
+
+- [ ] Poprawić jasność i czytelność kolorów w Alacritty (kontrast, gamma, paleta)
+
+- [ ] Zmienić format wypisywania daty w `SESJE/AKTYWNA.md` na europejski (DD-MM-YYYY) w skrypcie `nss`
+
+## 📅 2026-01-06 21:19
+
+- Mode: commit
+- Risk: NORMAL
+- Changes:
 
 ## 📅 2026-01-06 20:43
 
