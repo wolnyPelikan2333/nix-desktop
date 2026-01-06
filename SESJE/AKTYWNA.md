@@ -71,6 +71,94 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+📅 06-01-2026 23:46
+Temat
+
+Fix skalowania Chrome na lewym monitorze (KDE Plasma 6)
+
+Stan wyjściowy
+
+Dwa monitory o różnych DPI
+
+Chrome miał złe skalowanie na lewym monitorze
+
+Terminal (Alacritty / WezTerm) działał poprawnie na prawym
+
+Problem nie dotyczył NixOS ani flag Chrome
+
+Konfiguracja była robiona przez GUI KDE, ale szczegóły z czasem „wyparowały”
+
+Decyzja
+
+Użycie reguł okien KWin do:
+
+wymuszenia pozycji startowej aplikacji
+
+eliminacji „pływania” okien między monitorami przy starcie
+
+stabilizacji DPI per monitor
+
+Wdrożenie
+
+Konfiguracja zapisana w pliku:
+
+~/.config/kwinrulesrc
+
+Kluczowe reguły:
+
+Chrome
+
+wmclass=google-chrome
+
+pozycja: 0,0 → lewy monitor
+
+pozycja: Wymuś
+
+maksymalizacja: Wymuś (horiz + vert)
+
+Alacritty
+
+wmclass=Alacritty
+
+pozycja: 2000,0 → prawy monitor
+
+pozycja: Wymuś
+
+Reguły zostały utworzone przez:
+
+Ustawienia systemowe
+→ Zarządzanie oknami
+→ Reguły okien
+
+Efekt
+
+Chrome zawsze startuje na lewym monitorze
+
+Chrome bierze DPI właściwego monitora
+
+Brak błędnego skalowania i rozmytych czcionek
+
+Terminal zawsze startuje na prawym monitorze
+
+Rozwiązanie nie wymaga flag, wrapperów ani zmian w NixOS
+
+Uwagi / Ostrzeżenia
+
+Zmiana sesji (Wayland ↔ X11)
+
+reset ustawień KDE
+
+import profilu Plasma
+
+👉 mogą usunąć lub dezaktywować reguły KWin
+👉 w razie problemów sprawdzić ~/.config/kwinrulesrc w pierwszej kolejności
+
+Status
+
+✔️ Zrobione
+🧭 Konfiguracja stabilna i powtarzalna
+🛡️ Wiedza zabezpieczona w SESJA.md
+
 📅 06-01-2026 22:09
 Temat
 
