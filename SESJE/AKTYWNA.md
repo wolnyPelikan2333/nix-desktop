@@ -71,6 +71,28 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+## 📅 06-01-2026 01:22
+
+### Temat
+
+Alacritty + tmux — start dnia
+
+### Decyzja
+
+Auto-start tmux (`main`) z otwarciem AKTYWNA.md przy tworzeniu sesji.
+
+### Status
+
+✔️ Działa, zostaje
+
+PLAN:
+dopiąć nvim ↔ tmux hjkl
+
+## 📅 2026-01-06 01:18
+
+- Mode: commit
+- Risk: NORMAL
+- Changes:
 
 ## 📅 2026-01-06 00:55
 
@@ -78,13 +100,11 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 - Risk: NORMAL
 - Changes:
 
-
 ## 📅 2026-01-06 00:11
 
 - Mode: commit
 - Risk: NORMAL
 - Changes:
-
 
 ## 📅 2026-01-05 23:56
 
