@@ -70,7 +70,7 @@
     };
 
          keyboard = {
-  bindings = [
+         bindings = [
     # --- Clipboard ---
     { key = "C"; mods = "Alt"; action = "Copy"; }
     { key = "V"; mods = "Alt"; action = "Paste"; }
@@ -90,11 +90,13 @@
 
     # (na później, jeśli będziesz chciał)
     # Alt+F -> ,f
-    # { key = "F"; mods = "Alt"; chars = ",f"; }
+     { key = "F"; mods = "Alt"; chars = ",f"; }
 
     # Alt+G -> ,g
-    # { key = "G"; mods = "Alt"; chars = ",g"; }
-        
+     { key = "G"; mods = "Alt"; chars = ",g"; }
+    
+    # Alt+Y -> ,y
+    {key = "Y"; mods = "Alt"; chars = ",y"; }
   ];
 };
  };
