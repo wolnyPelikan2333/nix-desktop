@@ -63,15 +63,25 @@
   ## GRAFIKA / KDE
   ###############################################
 
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = false;
-  services.desktopManager.plasma6.enable = true;
+  
+    services.xserver.enable = true;
 
-  services.xserver.xkb = {
-    layout = "pl";
-    variant = "";
-  };
+    services.displayManager.sddm.enable = true;
+    services.displayManager.defaultSession = "plasmax11";
+
+    services.desktopManager.plasma6.enable = true;
+
+# Twarde wyłączenie Wayland
+    services.displayManager.sddm.wayland.enable = false;
+      services.xserver.xkb = {
+        layout = "pl";
+        variant = "";
+      };
+  
+  environment.sessionVariables = {
+  NIXOS_OZONE_WL = "0";
+  QT_QPA_PLATFORM = "xcb";
+};
 
   console.keyMap = "pl2";
 
@@ -172,7 +182,7 @@
     w3m
     lazygit
     bash-completion
-    wl-clipboard
+    xclip
   ];
 
   ###############################################
