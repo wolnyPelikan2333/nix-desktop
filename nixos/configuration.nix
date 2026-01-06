@@ -234,6 +234,26 @@
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
   };
+    
+  # ==========================================================
+  # SWAP + HIBERNATE (NVIDIA SAFE MODE)
+  # ==========================================================
+
+      swapDevices = [
+        {
+          device = "/swapfile";
+          size = 40960; # 40 GB (RAM 32 GB + zapas)
+        }
+      ];
+
+      boot.resumeDevice = "/swapfile";
+
+      services.logind.extraConfig = ''
+        HandleSuspendKey=hibernate
+        HandleLidSwitch=hibernate
+        HandleLidSwitchExternalPower=hibernate
+      '';
+
 
   ###############################################
   ## STATE
