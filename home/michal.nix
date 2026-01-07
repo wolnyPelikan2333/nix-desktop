@@ -124,12 +124,13 @@
     # prawy-góra: pomocniczy
     # prawy-dół: monitoring (btop)
 
-    bind M \
-      split-window -h \; \
-      split-window -v -t 1 \; \
-      select-pane -t 0 \; \
-      send-keys -t 2 "btop" C-m
-  '';
+     # --- layout startowy: 3 panele + btop (odporny) ---
+      bind M \
+        split-window -h \; \
+        split-window -v \; \
+        send-keys "btop" C-m \; \
+        select-pane -L
+ '';
 };
 
  
