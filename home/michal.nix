@@ -119,18 +119,17 @@
     bind -n C-Up    select-pane -U
     bind -n C-Down  select-pane -D
 
-    # --- layout startowy: 3 panele ---
-    # lewy: główny
-    # prawy-góra: pomocniczy
-    # prawy-dół: monitoring (btop)
+    
+  # --- layout startowy: 3 panele (bez autostartu programów) ---
+  # lewy: główny
+  # prawy-góra: pomocniczy
+  # prawy-dół: monitoring / narzędzia (uruchamiane ręcznie)
 
-     # --- layout startowy: 3 panele + btop (odporny) ---
-      bind M \
-        split-window -h \; \
-        split-window -v \; \
-        send-keys "btop" C-m \; \
-        select-pane -L
- '';
+    bind M \
+      split-window -h \; \
+      split-window -v \; \
+      select-pane -L
+      '';
 };
 
  
