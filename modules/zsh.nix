@@ -35,6 +35,17 @@
       autoload -Uz colors
       colors
       export PATH="$HOME/bin:$PATH"
+
+      # --- PANIC TRIGGER ---
+      krasnoludki() {
+        panic-stop
+        exit
+      }
+
+      gargamel() {
+        panic-stop
+        exit
+      }
       # ==========================================================
       # PROMPT — SYGNAŁ STANU REPO (/etc/nixos)
       # ==========================================================
