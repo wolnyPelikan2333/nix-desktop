@@ -18,9 +18,9 @@
 
     history = {
       path = "$HOME/.config/zsh/.zsh_history";
-      size = 50000;
-      save = 50000;
-      share = true;
+      size = 100000;
+      save = 100000;
+      share = false;
       ignoreDups = true;
       extended = true;
     };
@@ -173,14 +173,7 @@
           alias nixman='w3m https://nixos.org/manual/nixos/stable/'
           alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
           alias st='sys-status'
-          alias nss='/etc/nixos/scripts/nss-safe'
-          alias gd='git diff'
-          alias gds='git diff --staged'
-          alias ga='git add'
-          alias gaa='git add -A'
-          alias gc='git commit'
-          alias gcm='git commit -m'
-          alias gb='git branch'
+          alias nss='/etc/nixos/scripts/nss-safe
           alias gba='git branch -a'
           alias gco='git checkout'
           alias gcb='git checkout -b'
