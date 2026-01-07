@@ -106,6 +106,12 @@
   enable = true;
 
   extraConfig = ''
+    
+    # --- ergonomiczny prefix ---
+    unbind C-b
+    set -g prefix C-a
+    bind C-a send-prefix
+
     # === RATUNKOWY RUCH PRZESTRZENNY ===
     # Ctrl + strzałki → zawsze panele tmuxa
     bind -n C-Left  select-pane -L
