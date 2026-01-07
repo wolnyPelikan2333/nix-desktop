@@ -71,6 +71,92 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+📅 SESJA — stan docelowy tmux + zsh + alacritty
+
+Data: 07-01-2026
+Godzina: 19:37
+
+✅ Stan końcowy (docelowy)
+
+Architektura:
+
+Alacritty → tylko emulator okna
+
+tmux → sesje, zakładki (okna), panele
+
+zsh → shell, aliasy, historia (kontrolowana deklaratywnie)
+
+🧩 tmux
+
+Prefix: Ctrl + a
+
+Jedna główna sesja: main
+
+Automatyczne dołączanie do sesji przy starcie terminala
+
+Layout roboczy:
+
+3 panele (lewy + prawy góra/dół)
+
+monitoring uruchamiany ręcznie (btop)
+
+Zamknięcie Alacritty nie niszczy stanu pracy
+
+Otwarcie nowego Alacritty = powrót do istniejącej sesji
+
+Kluczowe skróty:
+
+Nowa zakładka: Ctrl + a c
+
+Split pionowy: Ctrl + a %
+
+Split poziomy: Ctrl + a "
+
+Zamknij panel: Ctrl + a x
+
+Zamknij zakładkę: Ctrl + a &
+
+🐚 zsh
+
+Historia zarządzana deklaratywnie (home-manager)
+
+share = false — zapobieganie korupcji historii (tmux + hibernacja)
+
+Alias nss poprawiony (błąd: niedomknięty ')
+
+Wszystkie zmiany wprowadzane w źródłach (.nix), nie w wygenerowanych plikach
+
+🖥️ Alacritty
+
+Brak paneli / zakładek (świadomy wybór)
+
+Pełni rolę ramy dla tmuxa
+
+Zamknięcie / otwarcie okna nie resetuje środowiska
+
+🧠 Kluczowe wnioski
+
+NixOS nie maskuje niespójności — wymusza ich rozwiązanie
+
+Jeden brakujący znak (') może zablokować cały system → i bardzo dobrze
+
+System jest budowany, nie „naprawiany”
+
+Źródła prawdy są jawne i rozdzielone:
+
+polityka → /etc/nixos/modules
+
+ergonomia użytkownika → /etc/nixos/home
+
+🎯 Stan na koniec sesji
+
+system stabilny
+
+workflow spójny
+
+brak obejść i hacków
+
+pełna kontrola nad stanem pracy
 
 ## 📅 2026-01-07 19:21
 
@@ -78,13 +164,11 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 - Risk: NORMAL
 - Changes:
 
-
 ## 📅 2026-01-07 18:53
 
 - Mode: commit
 - Risk: NORMAL
 - Changes:
-
 
 ## 📅 2026-01-07 16:54
 
@@ -92,13 +176,11 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 - Risk: NORMAL
 - Changes:
 
-
 ## 📅 2026-01-07 16:44
 
 - Mode: commit
 - Risk: NORMAL
 - Changes:
-
 
 ## 📅 2026-01-07 16:38
 
@@ -106,13 +188,11 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 - Risk: NORMAL
 - Changes:
 
-
 ## 📅 2026-01-07 15:42
 
 - Mode: commit
 - Risk: NORMAL
 - Changes:
-
 
 ## 📅 2026-01-07 15:07
 
