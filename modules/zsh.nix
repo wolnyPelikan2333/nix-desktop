@@ -169,19 +169,19 @@
       # ----------------------------------------------------------
       # ALIASY
       # ----------------------------------------------------------
-          alias w='w3m'
-          alias nixman='w3m https://nixos.org/manual/nixos/stable/'
-          alias nixerr='less /etc/nixos/docs/ściągi/nix/nix-build-errors.md'
-          alias st='sys-status'
-          alias nss='/etc/nixos/scripts/nss-safe
-          alias gba='git branch -a'
-          alias gco='git checkout'
-          alias gcb='git checkout -b'
-          alias grh='git reset --hard'
-          alias grs='git restore --staged'
-          alias gr='git restore'
-          alias gp='git push'
-          alias lab='cd /home/michal/lab/'
+          alias w="w3m"
+          alias nixman="w3m https://nixos.org/manual/nixos/stable/"
+          alias nixerr="less /etc/nixos/docs/ściągi/nix/nix-build-errors.md"
+          alias st="sys-status"
+          alias nss="/etc/nixos/scripts/nss-safe"
+          alias gba="git branch -a"
+          alias gco="git checkout"
+          alias gcb="git checkout -b"
+          alias grh="git reset --hard"
+          alias grs="git restore --staged"
+          alias gr="git restore"
+          alias gp="git push"
+          alias lab="cd /home/michal/lab/"
     '';
   };
 }
