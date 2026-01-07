@@ -112,6 +112,17 @@
     bind -n C-Right select-pane -R
     bind -n C-Up    select-pane -U
     bind -n C-Down  select-pane -D
+
+    # --- layout startowy: 3 panele ---
+    # lewy: główny
+    # prawy-góra: pomocniczy
+    # prawy-dół: monitoring (btop)
+
+    bind M \
+      split-window -h \; \
+      split-window -v -t 1 \; \
+      select-pane -t 0 \; \
+      send-keys -t 2 "btop" C-m
   '';
 };
 
