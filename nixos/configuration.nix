@@ -185,6 +185,7 @@
     xclip
     lm_sensors
     btop 
+    tmuxp
   ];
   # automatyczne ładowanie modułów czujników
   hardware.sensor.iio.enable = true;
