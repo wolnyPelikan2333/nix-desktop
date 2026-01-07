@@ -1,0 +1,44 @@
+TMUX — minimum operatorskie (Ctrl + a)
+🧠 Podstawy
+
+Prefix: Ctrl + a
+(najpierw prefix, potem klawisz)
+
+🧱 Panele (splity)
+➗ Podział ekranu
+
+Split pionowy (lewo / prawo)
+Ctrl + a %
+
+Split poziomy (góra / dół)
+Ctrl + a "
+
+🔀 Przełączanie paneli
+
+lewo / dół / góra / prawo
+Ctrl + a h / j / k / l
+
+❌ Zamknięcie panelu
+
+z potwierdzeniem
+Ctrl + a x
+
+bez pytania (zamyka shell)
+exit lub Ctrl + d
+
+📂 Zakładki (okna)
+➕ Nowa zakładka
+
+Ctrl + a c
+
+🔁 Przełączanie
+
+następna: Ctrl + a n
+
+poprzednia: Ctrl + a p
+
+konkretna: Ctrl + a 0–9
+
+❌ Zamknięcie zakładki
+
+Ctrl + a & (potwierdź y)
