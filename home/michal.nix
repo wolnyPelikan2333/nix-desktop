@@ -102,9 +102,10 @@
  };
 };
 
-   programs.tmux = {
+ programs.tmux = {
   enable = true;
-
+ 
+    
   extraConfig = ''
     
     # --- ergonomiczny prefix ---
@@ -120,27 +121,27 @@
     bind -n C-Down  select-pane -D
 
     
-  # --- layout startowy: 3 panele (bez autostartu programów) ---
-  # lewy: główny
-  # prawy-góra: pomocniczy
-  # prawy-dół: monitoring / narzędzia (uruchamiane ręcznie)
+    # --- layout startowy: 3 panele (bez autostartu programów) ---
+    # lewy: główny
+    # prawy-góra: pomocniczy
+    # prawy-dół: monitoring / narzędzia (uruchamiane ręcznie)
 
     bind M \
       split-window -h \; \
       split-window -v \; \
       select-pane -L
-      '';
+  '';
 };
 
  
-  programs.home-manager.enable = true;
+      programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
-   home-manager
-   zellij
-   kitty
-   jetbrains-mono
-   tmux
+      home.packages = with pkgs; [
+      home-manager
+      zellij
+      kitty
+      jetbrains-mono
+      tmux
   ];
   
 

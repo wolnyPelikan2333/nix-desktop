@@ -5,6 +5,15 @@
     enable = true;
     enableCompletion = true;
 
+
+    history = {
+      path = "$HOME/.config/zsh/.zsh_history";
+      size = 100000;
+      save = 100000;
+      ignoreDups = true;
+      share = false;   # kluczowe przy tmux + hibernacji
+    };
+
     initContent = lib.mkAfter ''
       # sen — sudo nvim helper
       sen() {
