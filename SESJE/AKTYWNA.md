@@ -71,6 +71,13 @@ Trudność w rozróżnieniu: terminal vs Neovim vs rejestryrawiać
 
 # 📅 SESJE (od najnowszej)
 
+
+## 📅 2026-01-08 00:17
+
+- Mode: commit
+- Risk: NORMAL
+- Changes:
+
 📅 SESJA — stan docelowy tmux + zsh + alacritty
 
 Data: 07-01-2026
